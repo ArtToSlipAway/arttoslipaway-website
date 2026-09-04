@@ -1,0 +1,23 @@
+{# Human-readable labels; unknown legacy/free-text values remain autoescaped. #}
+{% macro label(field, value) -%}
+    {%- set labels = {
+        'status': {'new': 'Новая', 'in_work': 'В работе', 'waiting': 'Ждёт ответа',
+                   'done': 'Завершена', 'declined': 'Отклонена', 'rejected': 'Отклонена'},
+        'city': {'spb': 'Санкт-Петербург', 'smolensk': 'Смоленск',
+                 'moscow': 'Москва', 'other': 'Другой город'},
+        'format': {'tattoo': 'Авторская татуировка', 'free_sketch': 'Свободный эскиз',
+                   'painting': 'Картина', 'skate': 'Картина на скейтборде',
+                   'merch': 'Мерч', 'consultation': 'Консультация',
+                   'new_tattoo': 'Новая авторская татуировка', 'coverup': 'Перекрытие старой работы',
+                   'rework': 'Доработка татуировки', 'one_session': 'Работа за один сеанс',
+                   'large_project': 'Крупный проект', 'not_sure': 'Нужно обсудить'},
+        'style': {'japanese': 'Японская / ирезуми', 'engraving': 'Гравюра',
+                  'graphics': 'Графика', 'traditional': 'Traditional / old school',
+                  'dotwork': 'Dotwork', 'not_sure': 'По рекомендации мастера', 'custom': 'Свой вариант'},
+        'body': {'arm': 'Рука', 'leg': 'Нога', 'back': 'Спина', 'chest': 'Грудь',
+                 'neck': 'Шея', 'ribs': 'Рёбра', 'other': 'Другое'},
+        'size': {'up_to_10': 'До 10 см', '10_20': '10–20 см', '20_40': '20–40 см',
+                 'large': 'Крупный проект', 'not_sure': 'Нужно обсудить'}
+    } -%}
+    {{- labels.get(field, {}).get(value, value or '—') -}}
+{%- endmacro %}

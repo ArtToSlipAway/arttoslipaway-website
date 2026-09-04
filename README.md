@@ -9,7 +9,7 @@
 ключи, пароли и загруженные клиентами файлы не публикуются. Демоверсия содержит
 вымышленные данные и SVG-иллюстрации, **не реальные выполненные работы мастера**.
 
-![Главная страница демоверсии](docs/screenshots/home-desktop.png)
+![Главная страница демоверсии](docs/screenshots/home-desktop.jpg)
 
 ## Возможности
 
@@ -148,10 +148,10 @@ HTTP-проверки проходят через реальную PostgreSQL: �
 
 | Мобильная главная | Страница работы |
 | --- | --- |
-| ![Мобильная версия](docs/screenshots/home-mobile.png) | ![Проект](docs/screenshots/project.png) |
+| ![Мобильная версия](docs/screenshots/home-mobile.jpg) | ![Проект](docs/screenshots/project.jpg) |
 
-![Форма заявки](docs/screenshots/request.png)
-![CRM с вымышленными данными](docs/screenshots/admin-crm.png)
+![Форма заявки](docs/screenshots/request.jpg)
+![CRM с вымышленными данными](docs/screenshots/admin-crm.jpg)
 
 ## Безопасность и переход со старой версии
 
