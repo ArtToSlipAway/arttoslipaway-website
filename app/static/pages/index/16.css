@@ -1,0 +1,42 @@
+/* ATS_PRODUCTS_BOARD_V1 */
+
+        .main-card--products {
+            cursor: default;
+        }
+
+        .main-card--products .main-body--products {
+            justify-content: center;
+            align-items: stretch;
+            padding-top: clamp(52px, 9vh, 110px);
+            padding-bottom: clamp(52px, 9vh, 110px);
+        }
+
+        .main-card--products .subgrid--products {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: clamp(14px, 2vh, 24px);
+            width: 100%;
+            margin: auto 0;
+        }
+
+        .main-card--products .subcard--product {
+            min-height: 48px;
+            padding: 12px 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            line-height: 1.18;
+            font-size: clamp(14px, 1.12vw, 18px);
+        }
+
+        @media (max-width: 760px) {
+            .main-card--products .main-body--products {
+                padding-top: 52px;
+                padding-bottom: 52px;
+            }
+
+            .main-card--products .subcard--product {
+                font-size: 15px;
+            }
+        }

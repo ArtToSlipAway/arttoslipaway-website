@@ -1,0 +1,143 @@
+/*
+     * Карточки под вертикальную форму постеров.
+     */
+
+    .tattoo-style-sketches
+    .japanese-free-sketches__grid {
+        display: grid !important;
+
+        grid-template-columns:
+            repeat(
+                auto-fit,
+                minmax(280px, 420px)
+            ) !important;
+
+        justify-content: start !important;
+        align-items: start !important;
+
+        gap: 24px !important;
+    }
+
+    .tattoo-style-sketches
+    .japanese-free-sketch-card {
+        box-sizing: border-box !important;
+
+        width: 100% !important;
+        max-width: 420px !important;
+
+        margin: 0 !important;
+    }
+
+    /*
+     * Область изображения получает пропорцию,
+     * близкую к загруженным постерам рукавов.
+     */
+
+    .tattoo-style-sketches
+    .japanese-free-sketch-card__viewer {
+        position: relative !important;
+
+        width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+
+        aspect-ratio: 2 / 3 !important;
+
+        overflow: hidden !important;
+
+        background: #393737 !important;
+        background-color: #393737 !important;
+    }
+
+    /*
+     * Пока показан постер, фон области совпадает
+     * с фоном самого изображения — чёрных полос нет.
+     */
+
+    .tattoo-style-sketches
+    .japanese-free-sketch-card__viewer:not(.is-3d-open)
+    .japanese-free-sketch-model {
+        width: 100% !important;
+        height: 100% !important;
+
+        min-height: 0 !important;
+
+        background: #393737 !important;
+        background-color: #393737 !important;
+
+        --poster-color: #393737;
+    }
+
+    .tattoo-style-sketches
+    .japanese-free-sketch-model::part(default-poster) {
+        background-color: #393737 !important;
+        background-size: contain !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+    }
+
+    /*
+     * После открытия 3D возвращается чёрный фон.
+     */
+
+    .tattoo-style-sketches
+    .japanese-free-sketch-card__viewer.is-3d-open {
+        background: #070707 !important;
+        background-color: #070707 !important;
+    }
+
+    .tattoo-style-sketches
+    .japanese-free-sketch-card__viewer.is-3d-open
+    .japanese-free-sketch-model {
+        background: #070707 !important;
+        background-color: #070707 !important;
+
+        --poster-color: #070707;
+    }
+
+    /*
+     * Подсказка скрыта на обычной картинке.
+     */
+
+    .tattoo-style-sketches
+    .japanese-free-sketch-card__hint {
+        display: none !important;
+    }
+
+    /*
+     * Подсказка появляется только после того,
+     * как активирован интерактивный 3D-режим.
+     */
+
+    .tattoo-style-sketches
+    .japanese-free-sketch-card__viewer.is-3d-open
+    .japanese-free-sketch-card__hint {
+        display: inline-flex !important;
+    }
+
+    /*
+     * Кнопка остаётся только на постере.
+     */
+
+    .tattoo-style-sketches
+    .japanese-free-sketch-card__viewer.is-3d-open
+    .ats-view-3d-button {
+        display: none !important;
+    }
+
+    @media (max-width: 720px) {
+
+        .tattoo-style-sketches
+        .japanese-free-sketches__grid {
+            grid-template-columns:
+                minmax(0, 1fr) !important;
+
+            gap: 20px !important;
+        }
+
+        .tattoo-style-sketches
+        .japanese-free-sketch-card {
+            width: 100% !important;
+            max-width: none !important;
+        }
+    }

@@ -129,7 +129,7 @@
                 document.createElement('img');
 
             img.src =
-                '/static/images/logo.webp?v=20260815-logo-webp';
+                '/static/demo/logo.svg';
 
             img.alt =
                 'ArtToSlipAway';

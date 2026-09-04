@@ -3,6 +3,7 @@
 .env.*
 !.env.example
 credentials/
+private_files/
 *.pem
 *.key
 google-calendar.json

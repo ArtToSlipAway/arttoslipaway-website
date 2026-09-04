@@ -1,0 +1,58 @@
+/* ATS_CERTIFICATE_ULTRA_SMOOTH_V8 */
+
+/*
+ * Никакого движения контейнера.
+ * Это исключает наложение transform двух уровней.
+ */
+.certificate-page .certificate-model-shell,
+.certificate-page .certificate-model-shell.is-loaded,
+.certificate-page .certificate-model-shell.certificate-party-active {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+}
+
+
+/*
+ * Все старые V4/V6 анимации принудительно отключены.
+ * Модель меняет только прозрачность.
+ */
+.certificate-page
+#certificate-model-viewer {
+    opacity: 0 !important;
+
+    transform: none !important;
+    filter: none !important;
+    animation: none !important;
+
+    transition:
+        opacity 1.6s cubic-bezier(.16, 1, .3, 1)
+        !important;
+
+    will-change: opacity;
+}
+
+
+/*
+ * Единственное визуальное движение модели:
+ * 0 → 1 по opacity.
+ */
+.certificate-page
+#certificate-model-viewer.certificate-model-is-loaded,
+.certificate-page
+.certificate-model-shell.certificate-party-active
+#certificate-model-viewer.certificate-model-is-loaded {
+    opacity: 1 !important;
+
+    transform: none !important;
+    filter: none !important;
+    animation: none !important;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+    .certificate-page
+    #certificate-model-viewer {
+        transition: none !important;
+    }
+}

@@ -12,7 +12,7 @@
     <meta property="og:title" content="{{ project.title }} — ArtToSlipAway">
     <meta property="og:description" content="{{ seo_description|striptags|trim|truncate(160, True, '…') }}">
     <meta property="og:url" content="https://arttoslipaway.art{{ request.url.path }}">
-    <meta property="og:image" content="https://arttoslipaway.art/static/og/og-home.png">
+    <meta property="og:image" content="https://arttoslipaway.art/static/demo/painting.svg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
@@ -297,7 +297,7 @@
             aria-label="ArtToSlipAway — на главную"
         >
             <img
-                src="/static/images/logo.webp?v=20260815-logo-webp"
+                src="/static/demo/logo.svg"
                 alt="ArtToSlipAway"
                 loading="eager"
                 fetchpriority="high"
@@ -381,7 +381,7 @@
 
                     <div class="meta-row">
                         <div class="meta-label">Цена</div>
-                        <div>{{ project.price }}</div>
+                        <div>{{ project.price or "По запросу" }}</div>
                     </div>
                 </div>
 
@@ -395,5 +395,6 @@
     <script defer src="/static/js/site-announcement.js?v=3"></script>
     <script src="/static/tattoo_cursor.js?v=20260722_201404" defer></script>
     <script defer src="/static/site_header_logo.js?v=20260815-logo-exact-1to1-v1"></script>
+{% include "partials/demo_banner.html" %}
 </body>
 </html>

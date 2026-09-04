@@ -1,0 +1,18 @@
+html {
+            min-height: 100%;
+            background-color: #050403;
+            color-scheme: dark;
+        }
+
+        body {
+            min-height: 100vh;
+            min-height: 100dvh;
+            background-color: #050403;
+        }
+
+        @media (max-width: 820px) {
+            html,
+            body {
+                background-color: #050403 !important;
+            }
+        }

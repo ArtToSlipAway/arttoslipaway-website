@@ -1,0 +1,92 @@
+#videoSoundToggle.video-sound-toggle {
+            position: fixed !important;
+            z-index: 5000 !important;
+            right: 24px !important;
+            bottom: 24px !important;
+
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+
+            width: 54px !important;
+            min-width: 54px !important;
+            height: 54px !important;
+            min-height: 54px !important;
+            padding: 0 !important;
+
+            border: 1px solid rgba(215, 182, 71, 0.72) !important;
+            border-radius: 50% !important;
+
+            background: rgba(5, 4, 3, 0.84) !important;
+            color: #d7b647 !important;
+
+            font-size: 0 !important;
+            line-height: 0 !important;
+            letter-spacing: 0 !important;
+            text-indent: 0 !important;
+
+            cursor: pointer !important;
+            -webkit-tap-highlight-color: transparent;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+
+            box-shadow:
+                0 0 0 1px rgba(0, 0, 0, 0.4),
+                0 5px 18px rgba(0, 0, 0, 0.42) !important;
+
+            transition:
+                transform 0.18s ease,
+                border-color 0.18s ease,
+                color 0.18s ease,
+                box-shadow 0.18s ease !important;
+        }
+
+        #videoSoundToggle.video-sound-toggle svg {
+            display: block !important;
+            width: 25px !important;
+            height: 25px !important;
+            pointer-events: none !important;
+        }
+
+        #videoSoundToggle.video-sound-toggle:hover,
+        #videoSoundToggle.video-sound-toggle:focus-visible {
+            background: rgba(8, 6, 3, 0.94) !important;
+            color: #f2d984 !important;
+            border-color: #f2d984 !important;
+            transform: scale(1.06) !important;
+            outline: none !important;
+
+            box-shadow:
+                0 0 12px rgba(201, 163, 58, 0.28),
+                0 5px 18px rgba(0, 0, 0, 0.5) !important;
+        }
+
+        #videoSoundToggle.video-sound-toggle:active {
+            transform: scale(0.94) !important;
+        }
+
+        #videoSoundToggle.video-sound-toggle.is-sound-on {
+            color: #f2d984 !important;
+            border-color: rgba(242, 217, 132, 0.9) !important;
+
+            box-shadow:
+                0 0 15px rgba(201, 163, 58, 0.3),
+                0 5px 18px rgba(0, 0, 0, 0.5) !important;
+        }
+
+        @media (max-width: 720px) {
+            #videoSoundToggle.video-sound-toggle {
+                right: 14px !important;
+                bottom: calc(92px + env(safe-area-inset-bottom)) !important;
+
+                width: 48px !important;
+                min-width: 48px !important;
+                height: 48px !important;
+                min-height: 48px !important;
+            }
+
+            #videoSoundToggle.video-sound-toggle svg {
+                width: 23px !important;
+                height: 23px !important;
+            }
+        }

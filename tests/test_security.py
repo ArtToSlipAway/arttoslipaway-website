@@ -74,9 +74,20 @@ class SecurityTests(unittest.TestCase):
     def test_templates_compile(self):
         directory = Path(__file__).resolve().parents[1] / "app" / "templates"
         environment = Environment(loader=FileSystemLoader(directory))
-        for template in directory.glob("*.html"):
+        for template in directory.rglob("*.html"):
             with self.subTest(template=template.name):
-                environment.get_template(template.name)
+                environment.get_template(template.relative_to(directory).as_posix())
+
+    def test_client_tokens_are_not_tracked(self):
+        from app.routes_stats import should_track_request
+        request = Request({"type": "http", "method": "GET", "path": "/client/test-token/files/1", "headers": []})
+        self.assertFalse(should_track_request(request))
+
+    def test_statistics_require_independent_secret(self):
+        from app.routes_stats import hash_ip
+        with patch.dict(os.environ, {"STATS_IP_HASH_SECRET": ""}):
+            with self.assertRaises(RuntimeError):
+                hash_ip("127.0.0.1")
 
 
 if __name__ == "__main__":

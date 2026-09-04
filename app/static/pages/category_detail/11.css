@@ -1,0 +1,138 @@
+html.ats-merch-page
+    .ats-merch-catalog {
+        box-sizing: border-box;
+
+        width: 100%;
+        margin: 44px 0 72px;
+        padding: 0;
+    }
+
+    html.ats-merch-page
+    .ats-merch-grid {
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 24px;
+
+        width: 100%;
+    }
+
+    html.ats-merch-page
+    .ats-merch-card {
+        display: flex;
+        flex-direction: column;
+
+        min-width: 0;
+        overflow: hidden;
+
+        border:
+            1px solid rgba(205, 166, 53, 0.48);
+
+        border-radius: 18px;
+
+        background:
+            linear-gradient(
+                180deg,
+                rgba(17, 17, 17, 0.96),
+                rgba(7, 7, 7, 0.98)
+            );
+
+        box-shadow:
+            0 18px 46px rgba(0, 0, 0, 0.28);
+    }
+
+    html.ats-merch-page
+    .ats-merch-card__media {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 100%;
+        aspect-ratio: 4 / 3;
+
+        overflow: hidden;
+
+        border-bottom:
+            1px solid rgba(205, 166, 53, 0.30);
+
+        background:
+            radial-gradient(
+                circle at 50% 45%,
+                rgba(205, 166, 53, 0.055),
+                transparent 46%
+            ),
+            #1d1d1d;
+
+        color: rgba(232, 221, 198, 0.38);
+
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+        text-align: center;
+    }
+
+    html.ats-merch-page
+    .ats-merch-card__body {
+        display: flex;
+        align-items: center;
+
+        min-height: 82px;
+        padding: 18px 20px;
+    }
+
+    html.ats-merch-page
+    .ats-merch-card__title {
+        margin: 0;
+
+        color: #e8c968;
+
+        font-family: Georgia, serif;
+        font-size: clamp(22px, 2vw, 29px);
+        font-weight: 500;
+        line-height: 1.12;
+    }
+
+    /*
+     * На странице мерча не показываем
+     * технические 3D-элементы.
+     */
+
+    html.ats-merch-page
+    .ats-view-3d-button,
+    html.ats-merch-page
+    .ats-model-poster-gate,
+    html.ats-merch-page
+    .ats-original-model-poster {
+        display: none !important;
+    }
+
+    @media (max-width: 760px) {
+
+        html.ats-merch-page
+        .ats-merch-catalog {
+            margin-top: 34px;
+            margin-bottom: 52px;
+        }
+
+        html.ats-merch-page
+        .ats-merch-grid {
+            grid-template-columns:
+                minmax(0, 1fr);
+
+            gap: 20px;
+        }
+
+        html.ats-merch-page
+        .ats-merch-card__media {
+            aspect-ratio: 5 / 4;
+        }
+
+        html.ats-merch-page
+        .ats-merch-card__body {
+            min-height: 72px;
+            padding: 16px 18px;
+        }
+    }

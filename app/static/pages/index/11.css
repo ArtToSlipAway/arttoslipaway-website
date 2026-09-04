@@ -1,0 +1,262 @@
+/*
+         * ФУТЕР
+         * Все внутренние элементы выровнены относительно
+         * центральной оси страницы.
+         */
+        .cta-footer {
+            width: calc(100% - 48px) !important;
+            max-width: 1180px !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+
+            grid-template-columns:
+                minmax(0, 1fr)
+                auto
+                minmax(0, 1fr)
+                !important;
+
+            align-items: stretch !important;
+            justify-content: center !important;
+            gap: 24px !important;
+            text-align: center !important;
+        }
+
+        .cta-footer .cta-box {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            text-align: center !important;
+        }
+
+        .cta-footer .cta-title,
+        .cta-footer .cta-text {
+            width: 100% !important;
+            text-align: center !important;
+        }
+
+        .cta-footer .cta-text {
+            max-width: 420px !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+
+        .cta-footer .cta-button {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            min-width: 220px !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+
+        .cta-footer .center-mark {
+            align-self: center !important;
+            justify-self: center !important;
+            margin: 0 auto !important;
+        }
+
+        .cta-footer .socials {
+            width: 100% !important;
+            justify-content: center !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+
+        .copyright {
+            width: 100% !important;
+            max-width: 1180px !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            text-align: center !important;
+        }
+
+        .site-legal-links {
+            width: calc(100% - 40px) !important;
+            max-width: 1180px !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            flex-wrap: wrap !important;
+
+            gap: 14px 30px !important;
+            padding-left: 20px !important;
+            padding-right: 20px !important;
+            text-align: center !important;
+        }
+
+        .site-legal-links a {
+            text-align: center !important;
+        }
+
+        /*
+         * ПК
+         * Логотип возвращается в правый край шапки.
+         * Навигация остаётся с противоположной стороны.
+         */
+        @media (min-width: 981px) {
+            header {
+                width: calc(100% - 72px) !important;
+                max-width: 1280px !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+
+                display: grid !important;
+                grid-template-columns:
+                    minmax(0, 1fr)
+                    auto
+                    !important;
+
+                grid-template-areas:
+                    "navigation brand"
+                    !important;
+
+                align-items: center !important;
+                column-gap: 48px !important;
+            }
+
+            header nav {
+                grid-area: navigation !important;
+                justify-self: start !important;
+                margin: 0 !important;
+            }
+
+            header .logo.logo-image {
+                grid-area: brand !important;
+                justify-self: end !important;
+                margin: 0 !important;
+                transform-origin: center center !important;
+            }
+        }
+
+        /*
+         * Планшеты и телефоны
+         * Логотип, меню и весь футер стоят по центральной оси.
+         */
+        @media (max-width: 980px) {
+            header {
+                width: 100% !important;
+                padding-left: 20px !important;
+                padding-right: 20px !important;
+
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                justify-content: center !important;
+
+                gap: 16px !important;
+                text-align: center !important;
+            }
+
+            header .logo.logo-image {
+                display: flex !important;
+                width: 100% !important;
+                margin: 0 auto !important;
+                align-items: center !important;
+                justify-content: center !important;
+                transform-origin: center center !important;
+            }
+
+            header .logo.logo-image img {
+                display: block !important;
+                margin: 0 auto !important;
+                height: 108px !important;
+                width: auto !important;
+                max-width: min(78vw, 300px) !important;
+            }
+
+            header nav {
+                display: flex !important;
+                width: 100% !important;
+                margin: 0 auto !important;
+                align-items: center !important;
+                justify-content: center !important;
+                flex-wrap: wrap !important;
+                gap: 18px 28px !important;
+                text-align: center !important;
+            }
+
+            .cta-footer {
+                width: calc(100% - 28px) !important;
+                grid-template-columns: 1fr !important;
+                gap: 0 !important;
+            }
+
+            .cta-footer .cta-box {
+                width: 100% !important;
+                padding-left: 20px !important;
+                padding-right: 20px !important;
+            }
+
+            .cta-footer .center-mark {
+                padding: 22px 0 !important;
+            }
+
+            .cta-footer .cta-button {
+                width: min(100%, 420px) !important;
+                min-width: 0 !important;
+            }
+
+            .copyright {
+                padding-left: 20px !important;
+                padding-right: 20px !important;
+            }
+
+            .site-legal-links {
+                flex-direction: column !important;
+                gap: 12px !important;
+                padding-top: 22px !important;
+                padding-bottom: 140px !important;
+            }
+
+            /*
+             * Кнопка звука больше не перекрывает
+             * юридические ссылки в футере.
+             */
+            .video-sound-toggle {
+                left: 50% !important;
+                right: auto !important;
+                bottom: calc(
+                    72px + env(safe-area-inset-bottom)
+                ) !important;
+                transform: translateX(-50%) !important;
+                white-space: nowrap !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cta-footer {
+                width: calc(100% - 16px) !important;
+            }
+
+            .cta-footer .cta-box {
+                padding: 30px 16px !important;
+            }
+
+            .cta-footer .cta-title {
+                font-size: clamp(
+                    23px,
+                    7vw,
+                    34px
+                ) !important;
+                line-height: 1.15 !important;
+            }
+
+            .cta-footer .cta-text {
+                font-size: 16px !important;
+                line-height: 1.45 !important;
+            }
+
+            .cta-footer .socials {
+                gap: 16px !important;
+            }
+
+            .site-legal-links {
+                width: 100% !important;
+                padding-left: 16px !important;
+                padding-right: 16px !important;
+            }
+        }

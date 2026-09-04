@@ -1,0 +1,22 @@
+.site-legal-links {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding: 20px 16px 28px;
+    color: rgba(232, 221, 198, 0.58);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.site-legal-links a {
+    color: rgba(232, 221, 198, 0.58);
+    text-decoration: none;
+}
+
+.site-legal-links a:hover {
+    color: #f2d984;
+}

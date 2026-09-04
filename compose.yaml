@@ -29,8 +29,15 @@ services:
         condition: service_healthy
     ports:
       - "127.0.0.1:8000:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health/db', timeout=3)"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
     volumes:
       - ./app/uploads:/app/app/uploads
+      - private_files:/app/private_files
 
 volumes:
   postgres_data:
+  private_files:

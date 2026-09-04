@@ -1,0 +1,159 @@
+.home-boards-restore {
+            position: relative;
+            z-index: 25;
+            max-width: 1180px;
+            margin: 52px auto 44px;
+            padding: 0 24px;
+        }
+
+        .home-boards-restore__head {
+            text-align: center;
+            margin-bottom: 22px;
+        }
+
+        .home-boards-restore__kicker {
+            color: rgba(201, 163, 58, 0.78);
+            font-size: 12px;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .home-boards-restore__title {
+            margin: 0;
+            color: #c9a33a;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(30px, 4vw, 52px);
+            line-height: 1.05;
+            letter-spacing: 0.11em;
+            text-transform: uppercase;
+        }
+
+        .home-boards-restore .home-card-carousel {
+            display: flex !important;
+            gap: 24px;
+            overflow-x: auto !important;
+            overflow-y: visible !important;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            padding: 34px 10px 42px;
+            min-height: 570px;
+        }
+
+        .home-boards-restore .main-card {
+            flex: 0 0 330px !important;
+            min-width: 330px !important;
+            max-width: 330px !important;
+            min-height: 520px !important;
+            scroll-snap-align: center;
+            display: flex !important;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            text-align: center;
+            opacity: 0.82;
+        }
+
+        .home-boards-restore .main-card.is-active {
+            opacity: 1;
+        }
+
+        .home-boards-restore .deck-shell {
+            width: 176px !important;
+            height: 340px !important;
+            display: block !important;
+            position: relative !important;
+            overflow: hidden !important;
+            border-radius: 74px / 34px !important;
+            border: 1px solid rgba(242, 217, 132, 0.42);
+            box-shadow:
+                0 20px 46px rgba(0,0,0,0.55),
+                0 0 28px rgba(201,163,58,0.18);
+            text-decoration: none;
+            background: rgba(0,0,0,0.4);
+        }
+
+        .home-boards-restore .deck-face {
+            position: absolute !important;
+            inset: 0 !important;
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+            display: block !important;
+            transform: none !important;
+            opacity: 1 !important;
+        }
+
+        .home-boards-restore .deck-grip,
+        .home-boards-restore .deck-glow,
+        .home-boards-restore .deck-aura,
+        .home-boards-restore .deck-cast-shadow {
+            pointer-events: none;
+        }
+
+        .home-boards-restore .main-title {
+            margin: 18px 0 8px !important;
+            color: #f2d984 !important;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 24px !important;
+            line-height: 1.1 !important;
+        }
+
+        .home-boards-restore .main-card p {
+            color: rgba(232, 221, 198, 0.74) !important;
+            font-size: 13px !important;
+            line-height: 1.45 !important;
+            margin: 0 0 14px !important;
+        }
+
+        .home-boards-restore .main-card .button {
+            margin-top: auto;
+            display: inline-flex !important;
+            border: 1px solid rgba(201, 163, 58, 0.54);
+            color: #c9a33a !important;
+            padding: 10px 13px;
+            text-decoration: none !important;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-size: 11px !important;
+            background: rgba(0,0,0,0.24);
+        }
+
+        .home-boards-restore .main-card .button:hover {
+            background: #c9a33a;
+            color: #080808 !important;
+        }
+
+        .home-boards-restore .home-carousel-arrows {
+            display: flex !important;
+            justify-content: center;
+            gap: 10px;
+            margin-top: -20px;
+        }
+
+        .home-boards-restore .home-carousel-arrow {
+            width: 44px;
+            height: 44px;
+            border: 1px solid rgba(201, 163, 58, 0.5);
+            background: rgba(0,0,0,0.34);
+            color: #c9a33a;
+            cursor: pointer;
+            font-size: 23px;
+        }
+
+        @media (max-width: 720px) {
+            .home-boards-restore {
+                padding: 0 14px;
+            }
+
+            .home-boards-restore .main-card {
+                flex-basis: 280px !important;
+                min-width: 280px !important;
+                max-width: 280px !important;
+            }
+
+            .home-boards-restore .deck-shell {
+                width: 150px !important;
+                height: 292px !important;
+            }
+        }

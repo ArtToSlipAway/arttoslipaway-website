@@ -1,0 +1,97 @@
+.ats-mobile-scroll-logo {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .ats-mobile-scroll-logo {
+                position: fixed;
+                top: calc(env(safe-area-inset-top, 0px) + 8px);
+                left: 50%;
+
+                display: block;
+                width: 66px;
+                height: auto;
+
+                margin: 0;
+                padding: 0;
+                border: 0;
+                background: transparent;
+
+                opacity: 0;
+                pointer-events: none;
+
+                transform:
+                    translate3d(-50%, -6px, 0)
+                    scale(0.92);
+
+                transform-origin: center center;
+
+                filter:
+                    brightness(0.42)
+                    saturate(0.70);
+
+                z-index: 2147482000;
+
+                -webkit-tap-highlight-color: transparent;
+                touch-action: manipulation;
+
+                will-change:
+                    width,
+                    opacity,
+                    transform,
+                    filter;
+            }
+
+            .ats-mobile-scroll-logo img {
+                display: block;
+                width: 100%;
+                height: auto;
+                max-width: none;
+
+                margin: 0;
+                padding: 0;
+
+                object-fit: contain;
+
+                user-select: none;
+                -webkit-user-drag: none;
+            }
+
+            .ats-mobile-scroll-logo.is-touch img {
+                filter:
+                    drop-shadow(
+                        0 0 9px
+                        rgba(242, 217, 132, 0.42)
+                    );
+            }
+
+            .ats-mobile-scroll-logo.is-spinning img {
+                animation:
+                    atsMobileScrollLogoSpinV1
+                    0.62s
+                    cubic-bezier(.22, .75, .25, 1)
+                    both;
+            }
+
+            @keyframes atsMobileScrollLogoSpinV1 {
+                0% {
+                    transform: rotate(0deg);
+                }
+
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+        }
+
+        @media (min-width: 769px) {
+            .ats-mobile-scroll-logo {
+                display: none !important;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ats-mobile-scroll-logo.is-spinning img {
+                animation-duration: 0.01ms;
+            }
+        }

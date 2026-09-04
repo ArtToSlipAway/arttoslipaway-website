@@ -1,0 +1,140 @@
+/*
+     * Окно карточки без внутренних отступов,
+     * полос и технического фона model-viewer.
+     */
+
+    .tattoo-style-sketches
+    .japanese-free-sketch-card__viewer {
+        position: relative !important;
+
+        display: block !important;
+        box-sizing: border-box !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+        gap: 0 !important;
+
+        overflow: hidden !important;
+
+        border-top: 0 !important;
+        border-right: 0 !important;
+        border-left: 0 !important;
+        border-bottom:
+            1px solid rgba(205, 166, 53, 0.45) !important;
+
+        background: #070707 !important;
+        background-color: #070707 !important;
+
+        line-height: 0 !important;
+        font-size: 0 !important;
+    }
+
+    /*
+     * Обычное изображение полностью перекрывает
+     * внутренний poster model-viewer.
+     */
+
+    .tattoo-style-sketches
+    .ats-clean-model-poster {
+        position: absolute !important;
+        inset: -2% !important;
+        z-index: 20 !important;
+
+        display: block !important;
+
+        width: 104% !important;
+        height: 104% !important;
+        max-width: none !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        border: 0 !important;
+        outline: 0 !important;
+
+        object-fit: cover !important;
+        object-position: center center !important;
+
+        background: #070707 !important;
+
+        filter: none !important;
+        opacity: 1 !important;
+
+        pointer-events: none !important;
+
+        transition:
+            opacity 140ms ease,
+            visibility 140ms ease;
+    }
+
+    /*
+     * Скрываем картинку только тогда,
+     * когда живая модель уже открыта.
+     */
+
+    .tattoo-style-sketches
+    .japanese-free-sketch-card__viewer.is-3d-open
+    .ats-clean-model-poster {
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+
+    /*
+     * Model-viewer занимает окно точно от края до края.
+     */
+
+    .tattoo-style-sketches
+    .japanese-free-sketch-model {
+        position: absolute !important;
+        inset: 0 !important;
+        z-index: 5 !important;
+
+        display: block !important;
+
+        width: 100% !important;
+        height: 100% !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        border: 0 !important;
+        outline: 0 !important;
+
+        background: #070707 !important;
+        background-color: #070707 !important;
+
+        --poster-color: #070707;
+    }
+
+    /*
+     * Кнопка остаётся поверх чистого изображения.
+     */
+
+    .tattoo-style-sketches
+    .ats-view-3d-button {
+        z-index: 40 !important;
+    }
+
+    /*
+     * Подсказка остаётся выше модели,
+     * но появляется только в активном 3D.
+     */
+
+    .tattoo-style-sketches
+    .japanese-free-sketch-card__hint {
+        z-index: 45 !important;
+    }
+
+    /*
+     * Убираем любые внутренние технические полосы.
+     */
+
+    .tattoo-style-sketches
+    .japanese-free-sketch-model::part(default-progress-bar),
+    .tattoo-style-sketches
+    .japanese-free-sketch-model::part(default-progress-mask) {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+        opacity: 0 !important;
+    }

@@ -1,0 +1,78 @@
+.japanese-free-sketch-card__viewer {
+        position: relative !important;
+    }
+
+    .ats-view-3d-button {
+        position: absolute;
+        left: 18px;
+        bottom: 18px;
+        z-index: 40;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        min-height: 42px;
+        padding: 0 18px;
+
+        border: 1px solid rgba(218, 178, 62, 0.88);
+        border-radius: 999px;
+
+        background: rgba(5, 5, 5, 0.92) !important;
+        background-color: rgba(5, 5, 5, 0.92) !important;
+
+        color: #e3bd4e !important;
+
+        box-shadow:
+            0 10px 28px rgba(0, 0, 0, 0.55),
+            0 0 18px rgba(218, 178, 62, 0.12);
+
+        font-family: Arial, sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        line-height: 1;
+        text-transform: uppercase;
+
+        cursor: pointer;
+        transition:
+            border-color 160ms ease,
+            color 160ms ease,
+            transform 160ms ease;
+    }
+
+    .ats-view-3d-button:hover,
+    .ats-view-3d-button:focus,
+    .ats-view-3d-button:active {
+        background: rgba(5, 5, 5, 0.96) !important;
+        background-color: rgba(5, 5, 5, 0.96) !important;
+
+        border-color: #f0cc67;
+        color: #f0cc67 !important;
+
+        transform: translateY(-1px);
+        outline: none;
+    }
+
+    .ats-view-3d-button:disabled {
+        cursor: wait;
+        opacity: 0.75;
+        transform: none;
+    }
+
+    .japanese-free-sketch-card__viewer.is-3d-open
+    .ats-view-3d-button {
+        display: none !important;
+    }
+
+    @media (max-width: 720px) {
+        .ats-view-3d-button {
+            left: 12px;
+            bottom: 12px;
+
+            min-height: 38px;
+            padding: 0 15px;
+
+            font-size: 10px;
+        }
+    }

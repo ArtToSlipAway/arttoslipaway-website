@@ -1,0 +1,10 @@
+/* ATS_CERTIFICATE_HIDE_PROGRESS_V1 */
+
+.certificate-page
+#certificate-model-viewer::part(default-progress-bar) {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    opacity: 0 !important;
+    background: transparent !important;
+}

@@ -1,0 +1,38 @@
+name: Verify portfolio demo
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  docker-integration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Create isolated demo configuration
+        run: python3 -m scripts.setup_demo
+      - name: Build and start application with an empty PostgreSQL
+        run: docker compose up -d --build --wait --wait-timeout 120
+      - name: Empty database smoke test
+        run: |
+          curl --fail --silent http://127.0.0.1:8000/ > /dev/null
+          curl --fail --silent http://127.0.0.1:8000/request > /dev/null
+      - name: Unit tests
+        run: docker compose exec -T web python -m unittest discover -s tests -v
+      - name: Seed synthetic data
+        run: docker compose exec -T web python -m scripts.seed_demo
+      - name: HTTP integration and authorization tests
+        run: docker compose exec -T web python -m scripts.verify_demo
+      - name: Application diagnostics on failure
+        if: failure()
+        run: docker compose logs --tail=60 web
+      - name: Remove this runner's disposable test stack
+        if: always()
+        run: docker compose down --volumes

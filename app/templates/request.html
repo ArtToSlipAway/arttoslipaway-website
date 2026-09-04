@@ -11,7 +11,7 @@
     <meta property="og:title" content="Заявка на проект — ArtToSlipAway">
     <meta property="og:description" content="Оставьте заявку на татуировку, картину, подарочный сертификат или авторский проект ArtToSlipAway.">
     <meta property="og:url" content="https://arttoslipaway.art{{ request.url.path }}">
-    <meta property="og:image" content="https://arttoslipaway.art/static/og/og-home.png">
+    <meta property="og:image" content="https://arttoslipaway.art/static/demo/painting.svg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
@@ -1641,7 +1641,7 @@
             aria-label="ArtToSlipAway — на главную"
         >
             <img
-                src="/static/images/logo.webp?v=20260815-logo-webp"
+                src="/static/demo/logo.svg"
                 alt="ArtToSlipAway"
                 loading="eager"
                 fetchpriority="high"
@@ -2639,5 +2639,6 @@
 
     <script src="/static/tattoo_cursor.js?v=20260722_201404" defer></script>
     <script defer src="/static/site_header_logo.js?v=20260815-logo-exact-1to1-v1"></script>
+{% include "partials/demo_banner.html" %}
 </body>
 </html>

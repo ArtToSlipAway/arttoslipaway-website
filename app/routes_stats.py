@@ -12,6 +12,8 @@ from starlette.background import BackgroundTask, BackgroundTasks
 
 
 IGNORED_PREFIXES = (
+    "/client/",  # Bearer tokens must never enter analytics records.
+    "/health",
     "/admin",
     "/static",
     "/uploads",
@@ -71,12 +73,9 @@ def hash_ip(ip: str) -> str:
     if not ip:
         return None
 
-    secret = (
-        os.getenv("STATS_IP_HASH_SECRET")
-        or os.getenv("ADMIN_SESSION_SECRET")
-        or os.getenv("DB_PASSWORD")
-        or "arttoslipaway-stats"
-    )
+    secret = os.getenv("STATS_IP_HASH_SECRET", "").strip()
+    if not secret:
+        raise RuntimeError("STATS_IP_HASH_SECRET must be configured")
 
     return hashlib.sha256(f"{secret}|{ip}".encode("utf-8")).hexdigest()
 

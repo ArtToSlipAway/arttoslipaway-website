@@ -1,0 +1,11 @@
+/* WORK_CITIES_CLEAN_SPACING_V1 */
+
+        .work-cities > .section-title {
+            margin-bottom: 42px !important;
+        }
+
+        @media (max-width: 600px) {
+            .work-cities > .section-title {
+                margin-bottom: 30px !important;
+            }
+        }

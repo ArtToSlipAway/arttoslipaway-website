@@ -1,0 +1,55 @@
+html.ats-other-tattoo-style-page
+    .tattoo-style-completed {
+        margin-top: 28px !important;
+    }
+
+    html.ats-other-tattoo-style-page
+    .tattoo-style-sketches {
+        margin-top: 64px !important;
+        margin-bottom: 36px !important;
+    }
+
+    html.ats-other-tattoo-style-page
+    .tattoo-style-empty {
+        box-sizing: border-box !important;
+
+        display: flex !important;
+        align-items: center !important;
+
+        width: 100% !important;
+        min-height: 72px !important;
+
+        padding: 20px 24px !important;
+
+        border:
+            1px solid rgba(205, 166, 53, 0.38) !important;
+
+        background:
+            rgba(14, 14, 14, 0.72) !important;
+
+        color:
+            rgba(232, 221, 198, 0.58) !important;
+    }
+
+    html.ats-other-tattoo-style-page
+    .ats-view-3d-button,
+    html.ats-other-tattoo-style-page
+    .ats-model-poster-gate,
+    html.ats-other-tattoo-style-page
+    .ats-original-model-poster {
+        display: none !important;
+    }
+
+    @media (max-width: 720px) {
+
+        html.ats-other-tattoo-style-page
+        .tattoo-style-sketches {
+            margin-top: 48px !important;
+        }
+
+        html.ats-other-tattoo-style-page
+        .tattoo-style-empty {
+            min-height: 64px !important;
+            padding: 18px !important;
+        }
+    }

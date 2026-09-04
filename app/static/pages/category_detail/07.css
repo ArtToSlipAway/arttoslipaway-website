@@ -1,0 +1,79 @@
+/*
+     * Убираем внутренние полосы сверху и снизу.
+     * Постер слегка увеличивается и полностью
+     * заполняет окно карточки.
+     */
+
+    .tattoo-style-sketches
+    .japanese-free-sketch-card__viewer {
+        overflow: hidden !important;
+        line-height: 0 !important;
+        font-size: 0 !important;
+    }
+
+    .tattoo-style-sketches
+    .japanese-free-sketch-model {
+        display: block !important;
+
+        width: 100% !important;
+        height: 100% !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        border: 0 !important;
+        outline: 0 !important;
+
+        vertical-align: top !important;
+    }
+
+    /*
+     * На неактивном постере используем cover.
+     * Незначительная обрезка по краям убирает
+     * серые полосы, не затрагивая сам рукав.
+     */
+
+    .tattoo-style-sketches
+    .japanese-free-sketch-card__viewer:not(.is-3d-open)
+    .japanese-free-sketch-model::part(default-poster) {
+        inset: -2px !important;
+
+        width: calc(100% + 4px) !important;
+        height: calc(100% + 4px) !important;
+
+        background-size: cover !important;
+        background-position: center center !important;
+        background-repeat: no-repeat !important;
+
+        border: 0 !important;
+        outline: 0 !important;
+
+        transform: scale(1.012) !important;
+        transform-origin: center center !important;
+    }
+
+    /*
+     * Скрываем техническую полосу загрузки.
+     * Кнопка сама показывает состояние загрузки.
+     */
+
+    .tattoo-style-sketches
+    .japanese-free-sketch-model::part(default-progress-bar),
+    .tattoo-style-sketches
+    .japanese-free-sketch-model::part(default-progress-mask) {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+        opacity: 0 !important;
+    }
+
+    /*
+     * После активации 3D никаких масштабирований
+     * к живой модели не применяется.
+     */
+
+    .tattoo-style-sketches
+    .japanese-free-sketch-card__viewer.is-3d-open
+    .japanese-free-sketch-model {
+        transform: none !important;
+    }

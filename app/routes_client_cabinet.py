@@ -5,6 +5,7 @@ from datetime import datetime, timedelta, timezone
 import psycopg2.extras
 from fastapi import Depends, HTTPException, Request, status
 from fastapi.responses import HTMLResponse
+from app.config import site_base_url
 
 
 def _hash_token(token: str) -> str:
@@ -77,7 +78,7 @@ def register_client_cabinet_routes(app, templates, get_db_connection, verify_adm
             files = []
             for row in cursor.fetchall():
                 item = dict(row)
-                item["public_path"] = _public_file_path(item.get("file_path"))
+                item["public_path"] = f"/client/{token}/files/{item['id']}"
                 files.append(item)
 
             connection.commit()
@@ -88,8 +89,10 @@ def register_client_cabinet_routes(app, templates, get_db_connection, verify_adm
                 context={
                     "lead": dict(lead),
                     "files": files,
-                    "site_url": "https://arttoslipaway.art",
+                    "site_url": site_base_url(),
                 },
+                headers={"Cache-Control": "no-store", "Referrer-Policy": "no-referrer",
+                         "X-Robots-Tag": "noindex, nofollow"},
             )
 
         except HTTPException:
@@ -144,7 +147,7 @@ def register_client_cabinet_routes(app, templates, get_db_connection, verify_adm
             token_row = cursor.fetchone()
             connection.commit()
 
-            client_url = f"https://arttoslipaway.art/client/{token}"
+            client_url = f"{site_base_url()}/client/{token}"
 
             return templates.TemplateResponse(
                 request=request,

@@ -1,0 +1,27 @@
+/*
+     * Ссылки внутри всех трёх досок доступны всегда.
+     * Остальная поверхность боковой доски продолжает
+     * переключать карусель.
+     */
+    .home-card-carousel
+    .main-card
+    a.subcard,
+
+    .home-card-carousel
+    .main-card
+    a.button {
+        position: relative !important;
+        z-index: 60 !important;
+        pointer-events: auto !important;
+        cursor: pointer !important;
+    }
+
+    .home-card-carousel
+    .main-card:not(.is-active)
+    a.subcard,
+
+    .home-card-carousel
+    .main-card:not(.is-active)
+    a.button {
+        pointer-events: auto !important;
+    }

@@ -1,0 +1,46 @@
+/*
+     * Меняем только строку свободных дат.
+     * Разметку городов и синхронизацию не трогаем.
+     */
+
+    .work-cities .dates-title,
+    .work-cities .dates-list {
+        display: inline !important;
+
+        font-family: Georgia, "Times New Roman", serif !important;
+        font-size: 13px !important;
+        font-style: normal !important;
+        font-weight: 400 !important;
+        line-height: 1 !important;
+
+        font-variant-numeric: lining-nums proportional-nums !important;
+        font-feature-settings: "lnum" 1, "pnum" 1 !important;
+
+        letter-spacing: 0.025em !important;
+        vertical-align: baseline !important;
+        white-space: nowrap !important;
+    }
+
+    .work-cities .dates-title {
+        margin-right: 5px !important;
+    }
+
+    .work-cities .dates-title + br {
+        display: none !important;
+    }
+
+    .work-cities .city-item:has(.dates-list) {
+        white-space: nowrap !important;
+    }
+
+    @media (max-width: 720px) {
+        .work-cities .dates-title,
+        .work-cities .dates-list {
+            font-size: 11px !important;
+            letter-spacing: 0 !important;
+        }
+
+        .work-cities .dates-title {
+            margin-right: 3px !important;
+        }
+    }

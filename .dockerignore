@@ -3,6 +3,7 @@
 .env.*
 !.env.example
 credentials
+private_files
 app/uploads
 backups
 *.dump

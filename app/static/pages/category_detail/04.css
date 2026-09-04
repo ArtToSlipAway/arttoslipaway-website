@@ -1,0 +1,50 @@
+.japanese-free-sketch-card__viewer,
+    .japanese-free-sketch-card__viewer:hover,
+    .japanese-free-sketch-card__viewer:focus,
+    .japanese-free-sketch-card__viewer:focus-within,
+    .japanese-free-sketch-card__viewer:active {
+        background: #070707 !important;
+        background-color: #070707 !important;
+    }
+
+    .japanese-free-sketch-model,
+    .japanese-free-sketch-model:hover,
+    .japanese-free-sketch-model:focus,
+    .japanese-free-sketch-model:active {
+        display: block !important;
+
+        width: 100% !important;
+        height: 100% !important;
+
+        border: 0 !important;
+        outline: 0 !important;
+
+        background: #070707 !important;
+        background-color: #070707 !important;
+
+        filter: none !important;
+        opacity: 1 !important;
+
+        --poster-color: #070707;
+        --progress-bar-color: #d7af38;
+    }
+
+    .japanese-free-sketch-model::part(default-poster) {
+        background-color: #070707 !important;
+        background-size: contain !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+    }
+
+    .japanese-free-sketch-card__viewer button,
+    .japanese-free-sketch-card__viewer button:hover,
+    .japanese-free-sketch-card__viewer button:focus,
+    .japanese-free-sketch-card__viewer button:active {
+        background: transparent !important;
+        background-color: transparent !important;
+    }
+
+    .ats-model-poster-gate,
+    .ats-original-model-poster {
+        display: none !important;
+    }

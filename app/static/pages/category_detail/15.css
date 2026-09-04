@@ -1,0 +1,160 @@
+/* ATS_CERTIFICATE_COMPACT_V2 */
+
+        .certificate-page {
+            background:
+                radial-gradient(
+                    circle at 68% 31%,
+                    rgba(201, 163, 58, 0.10),
+                    transparent 31%
+                ),
+                radial-gradient(
+                    circle at 28% 72%,
+                    rgba(91, 42, 26, 0.055),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    180deg,
+                    #0b0b0a 0%,
+                    #080807 48%,
+                    #0b0907 100%
+                ) !important;
+        }
+
+        .certificate-page header {
+            min-height: 82px;
+        }
+
+        .certificate-page .certificate-logo img {
+            height: 82px !important;
+            max-width: 270px !important;
+        }
+
+        .certificate-page main {
+            width: min(1240px, calc(100% - 64px));
+        }
+
+        .certificate-page .back {
+            margin-top: 18px;
+        }
+
+        .certificate-page .hero {
+            min-height: 0 !important;
+
+            grid-template-columns:
+                minmax(0, 0.9fr)
+                minmax(440px, 1.1fr) !important;
+
+            gap: clamp(28px, 4vw, 64px);
+
+            padding:
+                24px 0
+                22px !important;
+        }
+
+        .certificate-page .hero h1 {
+            margin-bottom: 24px;
+
+            font-size:
+                clamp(50px, 5vw, 78px);
+        }
+
+        .certificate-page .description {
+            margin-bottom: 28px;
+        }
+
+        .certificate-page .image-wrap {
+            min-height: 520px !important;
+        }
+
+        .certificate-page .certificate-model-shell {
+            min-height: 520px !important;
+
+            height:
+                clamp(
+                    520px,
+                    49vw,
+                    650px
+                ) !important;
+        }
+
+        .certificate-model-shell::before {
+            width: 62%;
+            height: 58%;
+        }
+
+        .certificate-model-hint {
+            bottom: 0;
+        }
+
+        .certificate-info {
+            max-width: 820px;
+
+            margin:
+                8px auto
+                82px !important;
+
+            padding:
+                48px 20px
+                0 !important;
+        }
+
+        .certificate-info h2 {
+            margin-bottom: 38px !important;
+        }
+
+        .certificate-info-item {
+            padding-bottom: 27px !important;
+
+            font-size:
+                clamp(19px, 1.7vw, 25px) !important;
+        }
+
+        .certificate-info-item:not(:last-child) {
+            margin-bottom: 20px !important;
+        }
+
+        .certificate-info-cta {
+            margin-top: 28px !important;
+        }
+
+        @media (max-width: 820px) {
+
+            .certificate-page main {
+                width: min(100% - 28px, 720px);
+            }
+
+            .certificate-page .hero {
+                gap: 0;
+
+                padding:
+                    22px 0
+                    32px !important;
+            }
+
+            .certificate-page .hero h1 {
+                font-size:
+                    clamp(42px, 12vw, 60px);
+            }
+
+            .certificate-page .image-wrap {
+                min-height: 430px !important;
+            }
+
+            .certificate-page
+            .certificate-model-shell {
+                min-height: 430px !important;
+
+                height:
+                    clamp(
+                        430px,
+                        112vw,
+                        560px
+                    ) !important;
+            }
+
+            .certificate-info {
+                margin-bottom: 70px !important;
+
+                padding-top: 42px !important;
+            }
+        }

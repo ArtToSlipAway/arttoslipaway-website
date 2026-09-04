@@ -1,0 +1,39 @@
+/* ATS_MOBILE_RESTORED_BOARDS_GAP_FIX_V4 */
+        @media (max-width: 900px) {
+            .home-boards-restore {
+                height: auto !important;
+                min-height: 0 !important;
+                margin: 0 auto !important;
+                padding: 0 14px !important;
+            }
+
+            .home-boards-restore .home-card-carousel {
+                height: auto !important;
+                min-height: 0 !important;
+                padding: 18px 10px !important;
+                margin-bottom: 0 !important;
+                align-items: flex-start !important;
+            }
+
+            .home-boards-restore .home-card-carousel .main-card {
+                box-sizing: border-box !important;
+                height: auto !important;
+                min-height: 0 !important;
+                padding: 0 !important;
+                margin: 0 12px !important;
+                justify-content: flex-start !important;
+            }
+
+            .home-boards-restore .main-card .button {
+                margin-top: 12px !important;
+            }
+
+            .home-boards-restore .home-carousel-arrows {
+                margin: 8px auto 18px !important;
+            }
+
+            .home-boards-restore + .work-cities {
+                margin-top: 0 !important;
+                padding-top: 18px !important;
+            }
+        }
