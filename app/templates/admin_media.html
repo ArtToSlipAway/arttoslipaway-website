@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }} — ArtToSlipAway Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+        <meta name="theme-color" content="#020202">
+<style>
+        :root {
+            --gold: #c9a33a;
+            --gold-light: #f2d984;
+            --text: #e8ddc6;
+            --muted: #9f947c;
+            --border: rgba(201, 163, 58, 0.34);
+            --danger: #c05a4a;
+            --ok: #7daa63;
+            --blue: #7ca0c9;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at center top, rgba(201, 163, 58, 0.10), transparent 34%),
+                linear-gradient(180deg, #090909, #020202);
+            color: var(--text);
+            font-family: Arial, sans-serif;
+        }
+
+        a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: var(--gold-light);
+        }
+
+        header {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 26px 22px 12px;
+            display: flex;
+            justify-content: space-between;
+            gap: 18px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .brand {
+            color: var(--gold);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 22px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        nav {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        main {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 20px 22px 70px;
+        }
+
+        h1 {
+            font-family: Georgia, "Times New Roman", serif;
+            color: var(--gold);
+            font-size: clamp(34px, 4.2vw, 58px);
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin: 12px 0 8px;
+        }
+
+        h2 {
+            color: var(--gold-light);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 28px;
+            font-weight: 400;
+            margin: 0 0 18px;
+        }
+
+        .hint {
+            color: var(--muted);
+            margin-bottom: 26px;
+            line-height: 1.5;
+        }
+
+        .mini-hint {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.35;
+            margin-top: -2px;
+        }
+
+        .panel {
+            border: 1px solid var(--border);
+            background:
+                linear-gradient(180deg, rgba(0,0,0,0.58), rgba(0,0,0,0.82)),
+                radial-gradient(circle at left top, rgba(201, 163, 58, 0.06), transparent 36%);
+            padding: 22px;
+            margin-bottom: 22px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .field.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            color: var(--gold);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        input,
+        select,
+        textarea,
+        button {
+            width: 100%;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        input,
+        select,
+        textarea {
+            border: 1px solid rgba(201, 163, 58, 0.32);
+            background: rgba(0,0,0,0.56);
+            color: var(--text);
+            padding: 10px;
+            outline: none;
+        }
+
+        textarea {
+            min-height: 76px;
+            resize: vertical;
+        }
+
+        button {
+            border: 1px solid var(--gold);
+            background: var(--gold);
+            color: #111;
+            padding: 11px 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: var(--gold-light);
+            border-color: var(--gold-light);
+        }
+
+        button.danger {
+            border-color: var(--danger);
+            background: transparent;
+            color: var(--danger);
+        }
+
+        button.danger:hover {
+            background: var(--danger);
+            color: #111;
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .media-card {
+            border: 1px solid rgba(201, 163, 58, 0.22);
+            background: rgba(0,0,0,0.34);
+            padding: 14px;
+            min-height: 220px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .preview {
+            width: 100%;
+            aspect-ratio: 1 / 0.72;
+            border: 1px solid rgba(201, 163, 58, 0.18);
+            background: rgba(0,0,0,0.48);
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            color: var(--muted);
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .preview img,
+        .preview video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .media-title {
+            color: var(--gold-light);
+            font-size: 18px;
+            word-break: break-word;
+        }
+
+        .media-meta {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.45;
+            word-break: break-word;
+        }
+
+        .badge-row {
+            display: flex;
+            gap: 7px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: inline-flex;
+            border: 1px solid rgba(201, 163, 58, 0.28);
+            color: var(--gold);
+            padding: 5px 7px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.055em;
+        }
+
+        .badge.off {
+            color: var(--muted);
+        }
+
+        .actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        @media (max-width: 1100px) {
+            .media-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .form-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 760px) {
+            .media-grid,
+            .form-grid,
+            .actions {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="/static/admin.css?v=9">
+</head>
+
+<body class="admin-page">
+    <header>
+        <a class="brand" href="/admin">ArtToSlipAway Admin</a>
+
+        <nav class="admin-nav">
+            <a href="/admin">Панель</a>
+            <a href="/admin/leads">Заявки</a>
+            <a href="/admin/projects">Проекты</a>
+            <a href="/admin/categories">Категории</a>
+            <a href="/admin/city-slots">Даты</a>
+            <a href="/admin/carousel">Карусель</a>
+            <a href="/admin/media">Медиа</a>
+            <a href="/admin/upload-check">Файлы</a>
+            <a href="/admin/legal">Право</a>
+            <a href="/admin/visual">Визуал</a>
+            <a href="/admin/logout">Выход</a>
+            <a href="/">Сайт</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Медиа-библиотека</h1>
+
+        <div class="hint">
+            Единое хранилище медиа. Сюда грузим картинки, видео и 3D-модели.
+            Файл можно сразу привязать к проекту, свободному эскизу, портфолио или визуальному блоку сайта.
+        </div>
+
+        <section class="panel">
+            <h2>Загрузить файл</h2>
+
+            <form action="/admin/media/upload" method="post" enctype="multipart/form-data">
+                <div class="form-grid">
+                    <div class="field">
+                        <label>Тип файла</label>
+                        <select name="media_type">
+                            <option value="auto">Определить автоматически</option>
+                            <option value="image">Картинка</option>
+                            <option value="video">Видео</option>
+                            <option value="model">3D-модель</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Куда относится</label>
+                        <select name="owner_type" id="ownerType">
+                            <option value="general">Общий файл</option>
+                            <option value="visual">Визуал сайта</option>
+                            <option value="project">Проект / портфолио</option>
+                            <option value="free_sketch">Свободный эскиз</option>
+                            <option value="portfolio">Портфолио</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Проект</label>
+                        <select name="owner_id">
+                            <option value="">Не привязывать</option>
+                            {% for project in projects %}
+                                <option value="{{ project.id }}">
+                                    #{{ project.id }} — {{ project.title }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Блок</label>
+                        <select name="block_key">
+                            <option value="">Без блока</option>
+                            <option value="home_background">Фон главной</option>
+                            <option value="home_logo">Логотип</option>
+                            <option value="project_gallery">Галерея проекта</option>
+                            <option value="portfolio_gallery">Портфолио</option>
+                            <option value="free_sketch_gallery">Свободные эскизы</option>
+                            <option value="footer_city">Города в футере</option>
+                            <option value="poster">Постер</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Название</label>
+                        <input name="title" placeholder="Например: видео рукава / модель маски">
+                    </div>
+
+                    <div class="field">
+                        <label>Порядок показа</label>
+                        <input name="sort_order" type="number" value="100">
+                        <div class="mini-hint">Меньше число — выше в галерее. Обычно можно оставить 100.</div>
+                    </div>
+
+                    <div class="field">
+                        <label>Файл</label>
+                        <input name="file" type="file" required accept=".jpg,.jpeg,.png,.webp,.gif,.mp4,.webm,.mov,.glb,.gltf,.obj,.stl,.usdz">
+                    </div>
+
+                    <div class="field">
+                        <label>Постер</label>
+                        <input name="poster_file" type="file" accept=".jpg,.jpeg,.png,.webp">
+                    </div>
+
+                    <div class="field full">
+                        <label>Alt / описание</label>
+                        <textarea name="alt_text" placeholder="Короткое описание файла для админки и будущего SEO"></textarea>
+                    </div>
+
+                    <div class="field full">
+                        <button type="submit">Загрузить медиа</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <section class="panel">
+            <h2>Загруженные файлы</h2>
+
+            {% if not media_files %}
+                <div class="hint">Файлов пока нет.</div>
+            {% else %}
+                <div class="media-grid">
+                    {% for file in media_files %}
+                        <article class="media-card">
+                            <div class="preview">
+                                {% if file.media_type == "image" %}
+                                    <a href="{{ file.file_path }}" target="_blank">
+                                        <img src="{{ file.file_path }}" alt="{{ file.alt_text or file.title or '' }}">
+                                    </a>
+                                {% elif file.media_type == "video" %}
+                                    <video controls muted preload="metadata" {% if file.poster_path %}poster="{{ file.poster_path }}"{% endif %}>
+                                        <source src="{{ file.file_path }}">
+                                    </video>
+                                {% elif file.media_type == "model" %}
+                                    {% if file.poster_path %}
+                                        <a href="{{ file.file_path }}" target="_blank">
+                                            <img src="{{ file.poster_path }}" alt="{{ file.title or '3D модель' }}">
+                                        </a>
+                                    {% else %}
+                                        <a href="{{ file.file_path }}" target="_blank">
+                                            3D-модель<br>{{ file.original_filename }}
+                                        </a>
+                                    {% endif %}
+                                {% else %}
+                                    <a href="{{ file.file_path }}" target="_blank">Открыть файл</a>
+                                {% endif %}
+                            </div>
+
+                            <div class="media-title">
+                                {{ file.title or file.original_filename or ("Файл #" ~ file.id) }}
+                            </div>
+
+                            <div class="badge-row">
+                                <span class="badge">{{ file.media_type }}</span>
+                                <span class="badge {% if not file.is_active %}off{% endif %}">
+                                    {% if file.is_active %}активен{% else %}скрыт{% endif %}
+                                </span>
+                            </div>
+
+                            <div class="media-meta">
+                                ID: {{ file.id }}<br>
+                                Блок: {{ file.block_key or "—" }}<br>
+                                Владелец: {{ file.owner_type or "—" }} / {{ file.owner_id or "—" }}<br>
+                                Размер: {{ (file.file_size // 1024) if file.file_size else 0 }} КБ<br>
+                                Порядок показа: {{ file.sort_order }}<br>
+                                Путь: <a href="{{ file.file_path }}" target="_blank">{{ file.file_path }}</a>
+                            </div>
+
+                            <div class="actions">
+                                <form action="/admin/media/{{ file.id }}/toggle" method="post">
+                                    <button type="submit">
+                                        {% if file.is_active %}
+                                            Скрыть
+                                        {% else %}
+                                            Показать
+                                        {% endif %}
+                                    </button>
+                                </form>
+
+
+                                    <a href="/admin/media/{{ file.id }}/edit"
+                                       style="display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 14px;border:1px solid rgba(201,163,58,.75);color:#c9a33a;text-decoration:none;text-transform:uppercase;letter-spacing:.06em;font-size:13px;font-weight:700;margin-right:8px;">
+                                        Редактировать
+                                    </a>
+
+<form action="/admin/media/{{ file.id }}/delete" method="post" onsubmit="return confirm('Удалить файл из базы и с сервера?');">
+                                    <button class="danger" type="submit">Удалить</button>
+                                </form>
+                            </div>
+                        </article>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </section>
+    </main>
+    <script src="/static/admin_ui.js?v=1"></script>
+
+    <script defer src="/static/js/admin-static-nav.js?v=3"></script>
+</body>
+</html>

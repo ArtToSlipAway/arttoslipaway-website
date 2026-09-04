@@ -1,0 +1,119 @@
+/* ATS_GLOBAL_PUBLIC_HEADER_LOGO_V1 */
+
+.ats-site-header-logo {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+
+    width: auto !important;
+    min-width: 0 !important;
+    height: auto !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    line-height: 0 !important;
+    text-decoration: none !important;
+
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+.ats-site-header-logo img {
+    display: block !important;
+
+    width: auto !important;
+    height: 72px !important;
+    max-width: 340px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    object-fit: contain !important;
+
+    filter:
+        drop-shadow(
+            0 0 8px
+            rgba(201, 163, 58, 0.28)
+        )
+        drop-shadow(
+            0 0 18px
+            rgba(201, 163, 58, 0.12)
+        );
+
+    transform: translateZ(0);
+
+    transition:
+        transform 180ms ease,
+        filter 180ms ease;
+}
+
+.ats-site-header-logo:hover img,
+.ats-site-header-logo:focus-visible img {
+    transform:
+        translateY(-1px)
+        translateZ(0);
+
+    filter:
+        drop-shadow(
+            0 0 10px
+            rgba(242, 217, 132, 0.65)
+        )
+        drop-shadow(
+            0 0 25px
+            rgba(201, 163, 58, 0.30)
+        );
+}
+
+@media (max-width: 768px) {
+    .ats-site-header-logo img {
+        height: 52px !important;
+        max-width: 230px !important;
+    }
+}
+
+
+/* ATS_HEADER_LOGO_EXACT_MOBILE_SCROLL_MOTION_V1 */
+
+.ats-site-header-logo img,
+header .logo.logo-image img {
+    transform-origin:
+        center center;
+}
+
+.ats-site-header-logo.is-touch img,
+header .logo.logo-image.is-touch img {
+    filter:
+        drop-shadow(
+            0 0 9px
+            rgba(242, 217, 132, 0.42)
+        ) !important;
+}
+
+.ats-site-header-logo.is-spinning img,
+header .logo.logo-image.is-spinning img {
+    animation:
+        atsHeaderLogoExactSpinV1
+        0.62s
+        cubic-bezier(.22, .75, .25, 1)
+        both !important;
+}
+
+@keyframes atsHeaderLogoExactSpinV1 {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ats-site-header-logo.is-spinning img,
+    header .logo.logo-image.is-spinning img {
+        animation-duration:
+            0.01ms !important;
+    }
+}

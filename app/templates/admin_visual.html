@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Визуал сайта — ArtToSlipAway</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+        <meta name="theme-color" content="#020202">
+<style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #111;
+            color: #f2f2f2;
+        }
+
+        header {
+            padding: 24px 40px;
+            border-bottom: 1px solid #222;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        a {
+            color: #f2f2f2;
+            text-decoration: none;
+        }
+
+        main {
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 42px;
+            margin: 0 0 28px;
+        }
+
+        form {
+            display: grid;
+            gap: 28px;
+        }
+
+        .block {
+            border: 1px solid #2a2a2a;
+            background: #161616;
+            border-radius: 24px;
+            padding: 24px;
+        }
+
+        h2 {
+            margin: 0 0 18px;
+            font-size: 26px;
+        }
+
+        label {
+            display: grid;
+            gap: 8px;
+            color: #aaa;
+            font-size: 14px;
+            margin-bottom: 18px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 13px 14px;
+            border-radius: 14px;
+            border: 1px solid #444;
+            background: #111;
+            color: #f2f2f2;
+            font-size: 16px;
+        }
+
+        textarea {
+            min-height: 112px;
+            resize: vertical;
+            line-height: 1.5;
+        }
+
+        .hint {
+            color: #777;
+            font-size: 13px;
+            line-height: 1.45;
+        }
+
+        .preview {
+            border: 1px solid #333;
+            border-radius: 18px;
+            overflow: hidden;
+            background: #111;
+            margin-top: 14px;
+            max-width: 520px;
+        }
+
+        .preview img {
+            width: 100%;
+            display: block;
+        }
+
+        button {
+            width: fit-content;
+            border: none;
+            background: #d4af37;
+            color: #111;
+            padding: 14px 22px;
+            border-radius: 999px;
+            font-weight: 800;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+
+    <link rel="stylesheet" href="/static/admin.css?v=9">
+</head>
+
+<body class="admin-page">
+    <header>
+        <a class="brand" href="/admin">ArtToSlipAway Admin</a>
+<nav class="admin-nav">
+            <a href="/admin">Панель</a>
+            <a href="/admin/leads">Заявки</a>
+            <a href="/admin/projects">Проекты</a>
+            <a href="/admin/categories">Категории</a>
+            <a href="/admin/city-slots">Даты</a>
+            <a href="/admin/carousel">Карусель</a>
+            <a href="/admin/media">Медиа</a>
+            <a href="/admin/upload-check">Файлы</a>
+            <a href="/admin/legal">Право</a>
+            <a href="/admin/visual">Визуал</a>
+            <a href="/admin/logout">Выход</a>
+            <a href="/">Сайт</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Визуал сайта</h1>
+
+        <form method="post" action="/admin/visual" enctype="multipart/form-data">
+            <section class="block">
+                <h2>Фон главной страницы</h2>
+
+                <label>
+                    Ссылка на фон
+                    <input type="text" name="home_background_url" value="{{ settings.home_background_url or '' }}">
+                </label>
+
+                <label>
+                    Загрузить новый фон
+                    <input type="file" name="home_background_file" accept="image/*">
+                </label>
+
+                <div class="hint">
+                    Лучше использовать тёмное горизонтальное изображение 1920×1080 или больше.
+                    Поверх него будет тёмное затемнение, чтобы текст читался.
+                </div>
+
+                {% if settings.home_background_url %}
+                    <div class="preview">
+                        <img src="{{ settings.home_background_url }}" alt="Фон главной">
+                    </div>
+                {% endif %}
+            </section>
+
+            <section class="block">
+                <h2>Курсор</h2>
+
+                <label>
+                    Ссылка на изображение курсора
+                    <input type="text" name="custom_cursor_url" value="{{ settings.custom_cursor_url or '' }}">
+                </label>
+
+                <label>
+                    Загрузить курсор
+                    <input type="file" name="custom_cursor_file" accept="image/*">
+                </label>
+
+                <div class="hint">
+                    Для курсора лучше использовать маленький PNG: 32×32 или 64×64.
+                    Например силуэт тату-машинки на прозрачном фоне.
+                </div>
+
+                {% if settings.custom_cursor_url %}
+                    <div class="preview" style="max-width:160px;">
+                        <img src="{{ settings.custom_cursor_url }}" alt="Курсор">
+                    </div>
+                {% endif %}
+            </section>
+
+            <section class="block">
+                <h2>Текст портфолио</h2>
+
+                <div class="hint" style="margin-bottom:18px;">
+                    Здесь загружается фотография и редактируется вступительный текст страницы «Портфолио».
+                </div>
+
+                <label>
+                    Ссылка на фотографию
+                    <input type="text" name="portfolio_photo_url" value="{{ settings.get('portfolio_photo_url') or '' }}">
+                </label>
+
+                <label>
+                    Загрузить фотографию
+                    <input type="file" name="portfolio_photo_file" accept="image/jpeg,image/png,image/webp">
+                </label>
+
+                <div class="hint" style="margin-bottom:18px;">
+                    Лучше использовать вертикальный портрет в пропорции 4:5. Фотография появится справа от главного текста.
+                </div>
+
+                {% if settings.get('portfolio_photo_url') %}
+                    <div class="preview" style="max-width:280px; margin-bottom:22px;">
+                        <img src="{{ settings.get('portfolio_photo_url') }}" alt="Фотография для портфолио">
+                    </div>
+                {% endif %}
+
+                <label>
+                    Главный абзац
+                    <textarea name="portfolio_lead">{{ settings.get('portfolio_lead') or 'Я занимаюсь художественной татуировкой более пяти лет и продолжаю развивать собственный узнаваемый стиль.' }}</textarea>
+                </label>
+
+                <label>
+                    Левый верхний абзац
+                    <textarea name="portfolio_text_1">{{ settings.get('portfolio_text_1') or 'Создаю авторские татуировки, а также картины на скейтбордах и холстах. В каждой работе уделяю особое внимание композиции, технике и деталям.' }}</textarea>
+                </label>
+
+                <label>
+                    Правый верхний абзац
+                    <textarea name="portfolio_text_2">{{ settings.get('portfolio_text_2') or 'Работаю в направлениях олд-скул, японская и неояпонская татуировка, гравюра и дотворк — от канонической классики до сложных сюжетных композиций.' }}</textarea>
+                </label>
+
+                <label>
+                    Левый нижний абзац
+                    <textarea name="portfolio_text_3">{{ settings.get('portfolio_text_3') or 'Для меня важен не только результат, но и сам процесс. Каждая татуировка — это совместное творчество, в котором идея клиента и мой опыт соединяются в единую историю.' }}</textarea>
+                </label>
+
+                <label>
+                    Правый нижний абзац
+                    <textarea name="portfolio_text_4">{{ settings.get('portfolio_text_4') or 'Мне важно, чтобы человек получал удовольствие от каждого этапа: от первых набросков до полностью зажившей работы.' }}</textarea>
+                </label>
+
+                <label>
+                    Финальная фраза
+                    <textarea name="portfolio_closing">{{ settings.get('portfolio_closing') or 'Готов создать татуировку, которая будет выглядеть выразительно и технически грамотно, сохраняя индивидуальность и становясь органичной частью вашего образа.' }}</textarea>
+                </label>
+            </section>
+
+            <button type="submit">Сохранить настройки</button>
+        </form>
+    </main>
+    <script src="/static/admin_ui.js?v=1"></script>
+
+    <script defer src="/static/js/admin-static-nav.js?v=3"></script>
+</body>
+</html>

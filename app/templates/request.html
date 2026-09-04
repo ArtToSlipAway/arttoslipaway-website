@@ -1,0 +1,2643 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }} — ArtToSlipAway</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <link rel="canonical" href="https://arttoslipaway.art{{ request.url.path }}">
+    <meta name="description" content="Оставьте заявку на татуировку, картину, подарочный сертификат или авторский проект ArtToSlipAway. Обсудим идею, формат, стоимость и сроки.">
+    <meta property="og:site_name" content="ArtToSlipAway">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Заявка на проект — ArtToSlipAway">
+    <meta property="og:description" content="Оставьте заявку на татуировку, картину, подарочный сертификат или авторский проект ArtToSlipAway.">
+    <meta property="og:url" content="https://arttoslipaway.art{{ request.url.path }}">
+    <meta property="og:image" content="https://arttoslipaway.art/static/og/og-home.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#050403">
+    <meta
+        name="theme-color"
+        media="(prefers-color-scheme: dark)"
+        content="#050403"
+    >
+    <meta name="color-scheme" content="dark">
+    <meta
+        name="apple-mobile-web-app-status-bar-style"
+        content="black-translucent"
+    >
+
+    <!-- ATS_IOS_BROWSER_CHROME_DARK_V2 -->
+    <style id="atsIosBrowserChromeDarkV2">
+        html {
+            min-height: 100%;
+            background-color: #050403;
+            color-scheme: dark;
+        }
+
+        body {
+            min-height: 100vh;
+            min-height: 100dvh;
+            background-color: #050403;
+        }
+
+        @media (max-width: 820px) {
+            html,
+            body {
+                background-color: #050403 !important;
+            }
+        }
+    </style>
+
+
+    <style>
+        :root {
+            --gold: #c9a33a;
+            --gold-light: #f2d984;
+            --bg: #070707;
+            --panel: rgba(7, 7, 7, 0.78);
+            --border: rgba(201, 163, 58, 0.42);
+            --text: #e8ddc6;
+            --muted: #a99d82;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Georgia, "Times New Roman", serif;
+            background:
+                radial-gradient(circle at center top, rgba(201, 163, 58, 0.12), transparent 34%),
+                linear-gradient(180deg, #090909, #020202);
+            color: var(--text);
+        }
+
+        a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        header {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 28px 24px 10px;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .logo {
+            color: var(--gold);
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            font-size: 18px;
+        }
+
+        nav {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        main {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 34px 24px 70px;
+        }
+
+        .hero {
+            max-width: 780px;
+            margin-bottom: 28px;
+        }
+
+        h1 {
+            color: var(--gold);
+            font-size: clamp(34px, 5vw, 68px);
+            line-height: 0.96;
+            margin: 0 0 18px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 400;
+            text-shadow: 0 0 18px rgba(201, 163, 58, 0.18);
+        }
+
+        .request-section-title {
+            color: var(--gold);
+            font-size: clamp(28px, 4vw, 48px);
+            line-height: 1;
+            margin: 0 0 18px;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            font-weight: 400;
+            text-shadow: 0 0 18px rgba(201, 163, 58, 0.18);
+        }
+
+        .lead {
+            color: var(--muted);
+            font-size: 18px;
+            line-height: 1.55;
+            max-width: 680px;
+        }
+
+        .selected-project {
+            border: 1px solid var(--border);
+            background: rgba(201, 163, 58, 0.08);
+            padding: 18px 20px;
+            margin: 26px 0;
+        }
+
+        .selected-project strong {
+            color: var(--gold-light);
+        }
+
+        .selected-sketch-card {
+            position: relative;
+            display: grid;
+            grid-template-columns: 132px minmax(0, 1fr) auto;
+            align-items: center;
+            gap: 22px;
+            margin: 26px 0;
+            padding: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(242, 217, 132, 0.62);
+            background:
+                radial-gradient(circle at 12% 20%, rgba(201, 163, 58, 0.17), transparent 36%),
+                linear-gradient(135deg, rgba(24, 20, 11, 0.98), rgba(5, 5, 5, 0.96));
+            box-shadow:
+                0 22px 58px rgba(0, 0, 0, 0.38),
+                inset 0 1px 0 rgba(255, 255, 255, 0.035);
+        }
+
+        .selected-sketch-card::before {
+            content: '';
+            position: absolute;
+            inset: 0 0 auto;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #f2d984, transparent);
+            opacity: 0.72;
+        }
+
+        .selected-sketch-card__preview {
+            width: 132px;
+            height: 132px;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            border: 1px solid rgba(201, 163, 58, 0.38);
+            background:
+                radial-gradient(circle at center, rgba(201, 163, 58, 0.12), transparent 58%),
+                #050505;
+        }
+
+        .selected-sketch-card__preview img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: contain;
+        }
+
+        .selected-sketch-card__placeholder {
+            color: var(--gold-light);
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .selected-sketch-card__status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 9px;
+            color: var(--gold-light);
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.13em;
+            text-transform: uppercase;
+        }
+
+        .selected-sketch-card__check {
+            display: grid;
+            place-items: center;
+            width: 22px;
+            height: 22px;
+            border: 1px solid rgba(242, 217, 132, 0.68);
+            border-radius: 50%;
+            background: rgba(201, 163, 58, 0.14);
+            font-size: 13px;
+        }
+
+        .selected-sketch-card__title {
+            margin: 0 0 7px;
+            color: #f2d984;
+            font-size: clamp(24px, 3vw, 34px);
+            font-weight: 400;
+            line-height: 1.05;
+        }
+
+        .selected-sketch-card__text {
+            max-width: 620px;
+            margin: 0;
+            color: rgba(232, 221, 198, 0.78);
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .selected-sketch-card__action {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            padding: 10px 16px;
+            border: 1px solid rgba(201, 163, 58, 0.52);
+            color: var(--gold-light);
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-align: center;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .selected-sketch-card__action:hover {
+            border-color: var(--gold-light);
+            background: var(--gold-light);
+            color: #111;
+        }
+
+        form {
+            border: 1px solid var(--border);
+            background:
+                linear-gradient(180deg, rgba(0,0,0,0.68), rgba(0,0,0,0.88)),
+                radial-gradient(circle at center top, rgba(201, 163, 58, 0.08), transparent 42%);
+            padding: clamp(22px, 4vw, 42px);
+            box-shadow:
+                0 0 34px rgba(0,0,0,0.42),
+                inset 0 0 32px rgba(201, 163, 58, 0.035);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .field.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            color: var(--gold);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            border: 1px solid rgba(201, 163, 58, 0.36);
+            background: rgba(0, 0, 0, 0.56);
+            color: var(--text);
+            padding: 13px 14px;
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+            outline: none;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--gold-light);
+            box-shadow: 0 0 12px rgba(201, 163, 58, 0.16);
+        }
+
+        .conditional {
+            display: none;
+        }
+
+        .conditional.is-visible {
+            display: flex;
+        }
+
+        .hint {
+            color: var(--muted);
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            line-height: 1.45;
+        }
+
+        .checkbox {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 10px;
+            color: var(--muted);
+            font-family: Arial, sans-serif;
+            line-height: 1.45;
+        }
+
+        .checkbox input {
+            width: auto;
+            margin-top: 3px;
+        }
+
+        .submit-row {
+            grid-column: 1 / -1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        button {
+            border: 1px solid var(--gold);
+            background: var(--gold);
+            color: #111;
+            padding: 15px 24px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.11em;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: var(--gold-light);
+            border-color: var(--gold-light);
+        }
+
+        @media (max-width: 760px) {
+            header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .selected-sketch-card {
+                grid-template-columns: 88px minmax(0, 1fr);
+                gap: 15px;
+                padding: 14px;
+            }
+
+            .selected-sketch-card__preview {
+                width: 88px;
+                height: 104px;
+            }
+
+            .selected-sketch-card__action {
+                grid-column: 1 / -1;
+                width: 100%;
+            }
+        }
+
+        .legal-consent {
+            display: grid;
+            grid-template-columns: 20px 1fr;
+            gap: 10px;
+            align-items: start;
+            margin: 18px 0;
+            color: rgba(232, 221, 198, 0.76);
+            font-size: 13px;
+            line-height: 1.45;
+        }
+
+        .legal-consent input {
+            margin-top: 2px;
+        }
+
+        .legal-consent a {
+            color: #c9a33a;
+            text-decoration: none;
+        }
+
+        .legal-consent a:hover {
+            color: #f2d984;
+        }
+
+
+        /* FREE_SKETCH_CTA_V2_STYLES */
+        .free-sketch-catalog-cta-v2 {
+            grid-column: 1 / -1;
+            padding: 22px;
+            border: 1px solid rgba(190, 145, 34, 0.7);
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(190, 145, 34, 0.10),
+                    rgba(0, 0, 0, 0.35)
+                );
+        }
+
+        .free-sketch-catalog-cta-v2__title {
+            margin-bottom: 9px;
+            color: #d1a735;
+            font-size: 17px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .free-sketch-catalog-cta-v2__text {
+            max-width: 760px;
+            margin-bottom: 17px;
+            color: rgba(232, 222, 198, 0.78);
+            font-size: 15px;
+            line-height: 1.55;
+        }
+
+        .free-sketch-catalog-cta-v2__button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            padding: 12px 21px;
+            border: 1px solid #b78b25;
+            color: #e2b94e;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-decoration: none;
+            transition:
+                background-color 0.2s ease,
+                border-color 0.2s ease,
+                color 0.2s ease;
+        }
+
+        .free-sketch-catalog-cta-v2__button:hover {
+            border-color: #d5aa36;
+            background: #b78b25;
+            color: #080808;
+        }
+
+        @media (max-width: 700px) {
+            .free-sketch-catalog-cta-v2 {
+                padding: 17px;
+            }
+
+            .free-sketch-catalog-cta-v2__button {
+                width: 100%;
+            }
+        }
+
+
+        /* CUSTOM_PROJECT_STYLE_FIELD */
+        .custom-style-wrap {
+            margin-top: 14px;
+        }
+
+        .custom-style-wrap label {
+            display: block;
+            margin-bottom: 8px;
+            color: rgba(214, 172, 58, 0.92);
+            font-size: 13px;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .custom-style-wrap input {
+            width: 100%;
+        }
+
+
+        /* CITY_DATES_FUNNEL_V3 */
+        .city-dates-field {
+            grid-column: 1 / -1;
+            padding: 20px;
+            border: 1px solid rgba(190, 145, 34, 0.48);
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(190, 145, 34, 0.07),
+                    rgba(0, 0, 0, 0.28)
+                );
+        }
+
+        .city-dates-field[hidden] {
+            display: none !important;
+        }
+
+        .city-dates-status {
+            color: rgba(232, 222, 198, 0.78);
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .city-dates-status.is-error {
+            color: #d78a76;
+        }
+
+        .city-dates-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        .city-date-button {
+            min-height: 48px;
+            padding: 11px 17px;
+            border: 1px solid rgba(190, 145, 34, 0.72);
+            background: rgba(0, 0, 0, 0.42);
+            color: #e4c15e;
+            font: inherit;
+            line-height: 1.25;
+            cursor: pointer;
+            transition:
+                background-color 0.18s ease,
+                border-color 0.18s ease,
+                color 0.18s ease,
+                transform 0.18s ease;
+        }
+
+        .city-date-button:hover {
+            border-color: #d8ad38;
+            transform: translateY(-1px);
+        }
+
+        .city-date-button.is-selected {
+            border-color: #d8ad38;
+            background: #b78b25;
+            color: #090909;
+        }
+
+        .city-dates-hint {
+            margin-top: 14px;
+        }
+
+        @media (max-width: 700px) {
+            .city-dates-field {
+                padding: 16px;
+            }
+
+            .city-dates-list {
+                display: grid;
+                grid-template-columns: 1fr;
+            }
+
+            .city-date-button {
+                width: 100%;
+            }
+        }
+
+
+        /* ATS_QUICK_CONTACT_FORM_V1 */
+        .quick-request {
+            margin-bottom: 28px;
+        }
+
+        .quick-request__panel {
+            margin-top: 26px;
+            padding: 28px;
+            border: 1px solid rgba(201, 163, 58, 0.48);
+            background:
+                linear-gradient(180deg, rgba(16, 13, 8, 0.76), rgba(3, 3, 3, 0.94));
+            box-shadow:
+                inset 0 0 32px rgba(201, 163, 58, 0.04),
+                0 18px 44px rgba(0, 0, 0, 0.28);
+        }
+
+        .quick-request__form .form-grid {
+            margin: 0;
+        }
+
+        .quick-request__actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 14px;
+            margin-top: 22px;
+        }
+
+        .quick-request__actions button {
+            margin: 0;
+        }
+
+        .quick-request__secondary {
+            appearance: none;
+            min-height: 48px;
+            padding: 0 22px;
+            border: 1px solid rgba(201, 163, 58, 0.72);
+            background: transparent;
+            color: #d7b647;
+            font: inherit;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition:
+                color 0.2s ease,
+                background 0.2s ease,
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .quick-request__secondary:hover,
+        .quick-request__secondary:focus-visible {
+            color: #111;
+            background: #d7b647;
+            border-color: #d7b647;
+            box-shadow: 0 0 22px rgba(201, 163, 58, 0.32);
+            outline: none;
+        }
+
+        .quick-request__note {
+            margin-top: 14px;
+            color: rgba(232, 220, 190, 0.72);
+            font-size: 13px;
+            line-height: 1.55;
+        }
+
+        .extended-request[hidden] {
+            display: none !important;
+        }
+
+        .extended-request {
+            scroll-margin-top: 24px;
+        }
+
+        @media (max-width: 720px) {
+            .quick-request__panel {
+                padding: 20px 16px;
+            }
+
+            .quick-request__actions {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .quick-request__actions button {
+                width: 100%;
+            }
+        }
+
+    </style>
+
+    <!-- ATS_CITY_CALENDAR_V6 -->
+    <style id="atsCityCalendarV6">
+        .ats-city-calendar {
+            margin-top: 14px;
+        }
+
+        .ats-calendar-shell {
+            padding: 18px;
+            border: 1px solid rgba(201, 163, 58, 0.42);
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(18, 14, 7, 0.82),
+                    rgba(3, 3, 3, 0.96)
+                );
+        }
+
+        .ats-calendar-toolbar {
+            display: grid;
+            grid-template-columns: 44px 1fr 44px;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .ats-calendar-month {
+            color: #d7b647;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 20px;
+            letter-spacing: 0.06em;
+            text-align: center;
+        }
+
+        .ats-calendar-nav {
+            width: 44px;
+            height: 44px;
+            padding: 0;
+            border: 1px solid rgba(201, 163, 58, 0.56);
+            background: rgba(0, 0, 0, 0.46);
+            color: #d7b647;
+            font-size: 26px;
+            cursor: pointer;
+        }
+
+        .ats-calendar-nav:disabled {
+            opacity: 0.24;
+            cursor: default;
+        }
+
+        .ats-calendar-weekdays,
+        .ats-calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, minmax(0, 1fr));
+            gap: 6px;
+        }
+
+        .ats-calendar-weekdays {
+            margin-bottom: 6px;
+            color: rgba(232, 220, 190, 0.54);
+            font-size: 11px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .ats-calendar-day {
+            min-width: 0;
+            min-height: 46px;
+            padding: 4px;
+            border: 1px solid rgba(201, 163, 58, 0.16);
+            background: rgba(0, 0, 0, 0.28);
+            color: rgba(232, 220, 190, 0.46);
+            font: inherit;
+            cursor: default;
+        }
+
+        .ats-calendar-day.is-empty {
+            border: 0;
+            background: transparent;
+        }
+
+        .ats-calendar-day.is-available {
+            border-color: rgba(215, 182, 71, 0.9);
+            background: rgba(201, 163, 58, 0.12);
+            color: #f2d984;
+            cursor: pointer;
+            box-shadow:
+                inset 0 0 14px rgba(201, 163, 58, 0.08),
+                0 0 12px rgba(201, 163, 58, 0.06);
+        }
+
+        .ats-calendar-day.is-available:hover,
+        .ats-calendar-day.is-selected {
+            background: #d7b647;
+            color: #090909;
+            border-color: #f2d984;
+        }
+
+        .ats-calendar-day.is-booked {
+            border-color: rgba(135, 105, 76, 0.38);
+            background:
+                repeating-linear-gradient(
+                    -45deg,
+                    rgba(90, 70, 55, 0.18),
+                    rgba(90, 70, 55, 0.18) 4px,
+                    rgba(0, 0, 0, 0.16) 4px,
+                    rgba(0, 0, 0, 0.16) 8px
+                );
+            color: rgba(184, 154, 123, 0.56);
+            text-decoration: line-through;
+        }
+
+        /* ATS_CALENDAR_STATUS_VISUALS_V2 */
+        .ats-calendar-day.is-unavailable {
+            border-style: dashed;
+            border-color: rgba(201, 163, 58, 0.28);
+            background: rgba(0, 0, 0, 0.16);
+            color: rgba(232, 220, 190, 0.34);
+            opacity: 0.62;
+        }
+
+        .ats-calendar-day.is-past {
+            border-color: rgba(201, 163, 58, 0.08);
+            background: rgba(0, 0, 0, 0.1);
+            color: rgba(232, 220, 190, 0.18);
+            opacity: 0.18;
+        }
+
+
+        .ats-calendar-slots,
+        .ats-calendar-undated {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+            color: rgba(232, 220, 190, 0.7);
+            font-size: 13px;
+        }
+
+        .ats-calendar-slots-title {
+            flex-basis: 100%;
+            color: #d7b647;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 15px;
+            letter-spacing: 0.04em;
+        }
+
+        .ats-calendar-slot {
+            min-height: 40px;
+            padding: 9px 13px;
+            border: 1px solid rgba(201, 163, 58, 0.52);
+            background: rgba(0, 0, 0, 0.42);
+            color: #e8ddc6;
+            font: inherit;
+            cursor: pointer;
+        }
+
+        .ats-calendar-slot:hover,
+        .ats-calendar-slot.is-selected {
+            background: #d7b647;
+            border-color: #f2d984;
+            color: #090909;
+        }
+
+        .ats-calendar-slot.is-booked {
+            opacity: 0.42;
+            cursor: not-allowed;
+            text-decoration: line-through;
+        }
+
+
+        /* ATS_CALENDAR_AGREEMENT_INPUT_STYLES_V1 */
+        .ats-calendar-agreement {
+            flex-basis: 100%;
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: 8px;
+            padding: 14px;
+            border: 1px solid rgba(215, 182, 71, 0.42);
+            background: rgba(0, 0, 0, 0.32);
+        }
+
+        .ats-calendar-agreement-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #d7b647;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 15px;
+            letter-spacing: 0.04em;
+        }
+
+        .ats-calendar-agreement-input {
+            display: block;
+            width: 100%;
+            min-height: 88px;
+            box-sizing: border-box;
+            padding: 11px 12px;
+            border: 1px solid rgba(215, 182, 71, 0.48);
+            border-radius: 0;
+            background: rgba(0, 0, 0, 0.56);
+            color: #e8ddc6;
+            font: inherit;
+            line-height: 1.45;
+            resize: vertical;
+        }
+
+        .ats-calendar-agreement-input::placeholder {
+            color: rgba(232, 220, 190, 0.38);
+        }
+
+        .ats-calendar-agreement-input:focus {
+            outline: none;
+            border-color: #d7b647;
+            box-shadow:
+                inset 0 0 12px rgba(201, 163, 58, 0.08),
+                0 0 10px rgba(201, 163, 58, 0.1);
+        }
+
+        .ats-calendar-agreement-hint {
+            margin-top: 7px;
+            color: rgba(232, 220, 190, 0.52);
+            font-size: 11px;
+            line-height: 1.45;
+        }
+
+        .ats-calendar-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 18px;
+            padding-top: 13px;
+            border-top: 1px solid rgba(201, 163, 58, 0.2);
+            color: rgba(232, 220, 190, 0.56);
+            font-size: 11px;
+        }
+
+        .ats-calendar-legend span {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .ats-calendar-legend i {
+            width: 11px;
+            height: 11px;
+            border: 1px solid rgba(201, 163, 58, 0.3);
+        }
+
+        .ats-calendar-legend .is-free {
+            border-color: #d7b647;
+            background: rgba(201, 163, 58, 0.28);
+        }
+
+        .ats-calendar-legend .is-busy {
+            background:
+                repeating-linear-gradient(
+                    -45deg,
+                    rgba(120, 90, 65, 0.45),
+                    rgba(120, 90, 65, 0.45) 2px,
+                    transparent 2px,
+                    transparent 4px
+                );
+        }
+
+
+        .ats-calendar-legend .is-closed {
+            border-style: dashed;
+            border-color: rgba(201, 163, 58, 0.42);
+            background: transparent;
+            opacity: 0.62;
+        }
+
+
+        .ats-calendar-message,
+        .ats-calendar-validation {
+            padding: 14px;
+            border: 1px solid rgba(201, 163, 58, 0.3);
+            color: rgba(232, 220, 190, 0.72);
+            line-height: 1.5;
+        }
+
+        .ats-calendar-message.is-error,
+        .ats-calendar-validation {
+            border-color: rgba(190, 84, 60, 0.62);
+            color: #e1a28f;
+        }
+
+        .ats-calendar-validation {
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 600px) {
+            .ats-calendar-shell {
+                padding: 13px 9px;
+            }
+
+            .ats-calendar-toolbar {
+                grid-template-columns: 38px 1fr 38px;
+                gap: 6px;
+            }
+
+            .ats-calendar-nav {
+                width: 38px;
+                height: 38px;
+            }
+
+            .ats-calendar-month {
+                font-size: 17px;
+            }
+
+            .ats-calendar-weekdays,
+            .ats-calendar-grid {
+                gap: 3px;
+            }
+
+            .ats-calendar-day {
+                min-height: 39px;
+                padding: 2px;
+                font-size: 13px;
+            }
+
+            .ats-calendar-slot {
+                width: 100%;
+            }
+        }
+    </style>
+
+
+    <!-- ATS_MOBILE_IOS_REQUEST_V2 -->
+    <style id="atsMobileIosRequestV2">
+        html {
+            min-height: 100%;
+            background-color: #020202 !important;
+            color-scheme: dark;
+        }
+
+        body {
+            min-height: 100vh;
+            min-height: 100svh;
+            min-height: 100dvh;
+            background-color: #020202 !important;
+            overscroll-behavior-y: none;
+        }
+
+        @supports (padding: max(0px)) {
+            body {
+                padding-top: env(safe-area-inset-top);
+                padding-right: env(safe-area-inset-right);
+                padding-bottom: env(safe-area-inset-bottom);
+                padding-left: env(safe-area-inset-left);
+            }
+        }
+
+        @media (max-width: 720px) {
+            header {
+                padding: 16px 14px 4px;
+            }
+
+            .logo {
+                font-size: 14px;
+                letter-spacing: 0.12em;
+            }
+
+            main {
+                width: 100%;
+                padding:
+                    20px
+                    12px
+                    calc(36px + env(safe-area-inset-bottom));
+            }
+
+            .hero {
+                margin-bottom: 18px;
+            }
+
+            h1 {
+                font-size: clamp(29px, 9.5vw, 43px);
+                line-height: 1;
+                letter-spacing: 0.055em;
+            }
+
+            .lead {
+                font-size: 16px;
+                line-height: 1.48;
+            }
+
+            .quick-request__panel {
+                margin-top: 18px;
+                padding: 18px 14px;
+            }
+
+            .quick-request__form .form-grid {
+                gap: 16px;
+            }
+
+            input,
+            select,
+            textarea {
+                max-width: 100%;
+                font-size: 16px;
+            }
+
+            .city-dates-field {
+                padding: 14px 10px;
+            }
+
+            .legal-consent {
+                grid-template-columns: 24px minmax(0, 1fr);
+                gap: 12px;
+                align-items: start;
+                margin: 20px 0;
+                font-size: 12px;
+                line-height: 1.5;
+            }
+
+            .legal-consent input[type="checkbox"] {
+                width: 22px;
+                height: 22px;
+                margin: 2px 0 0;
+            }
+
+            .legal-consent span {
+                min-width: 0;
+                overflow-wrap: anywhere;
+            }
+
+            .quick-request__actions {
+                gap: 10px;
+                margin-top: 18px;
+            }
+
+            .quick-request__actions button {
+                width: 100%;
+                min-height: 52px;
+                padding: 10px 12px;
+                font-size: 16px;
+                line-height: 1.2;
+                white-space: normal;
+            }
+
+            .quick-request__secondary {
+                letter-spacing: 0.055em;
+            }
+
+            .quick-request__note {
+                font-size: 12px;
+                line-height: 1.5;
+            }
+
+            .ats-calendar-shell {
+                padding: 12px 8px;
+            }
+
+            .ats-calendar-day {
+                min-height: 40px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            main {
+                padding-left: 8px;
+                padding-right: 8px;
+            }
+
+            .quick-request__panel {
+                padding: 15px 10px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+
+
+    <!-- ATS_REQUEST_MOBILE_PERFORMANCE_V1 -->
+    <style id="atsRequestMobilePerformanceV1">
+        @media (max-width: 720px) {
+            html {
+                min-height: 100%;
+                background: #050403;
+            }
+
+            body {
+                min-height: 100vh;
+                min-height: 100dvh;
+                background:
+                    linear-gradient(
+                        180deg,
+                        #090806 0%,
+                        #050403 38%,
+                        #020202 100%
+                    );
+            }
+
+            h1 {
+                text-shadow: none;
+            }
+
+            .quick-request__panel {
+                background: rgba(4, 4, 4, 0.97);
+                box-shadow: none;
+            }
+
+            .ats-calendar-shell {
+                background: rgba(4, 4, 4, 0.98);
+                box-shadow: none;
+            }
+
+            .ats-calendar-day.is-available {
+                box-shadow: none;
+            }
+
+            .quick-request__secondary,
+            .quick-request__actions button,
+            .ats-calendar-nav,
+            .ats-calendar-day,
+            .ats-calendar-slot,
+            input,
+            select,
+            textarea {
+                transition: none !important;
+            }
+
+            .quick-request__secondary:hover,
+            .quick-request__secondary:focus-visible {
+                box-shadow: none;
+            }
+
+            .quick-request__panel,
+            .ats-calendar-shell,
+            .ats-calendar-agreement {
+                -webkit-backdrop-filter: none !important;
+                backdrop-filter: none !important;
+            }
+        }
+    </style>
+
+
+<style>
+/* ATS_CERTIFICATE_TITLE_SMALLER_V1 */
+
+.certificate-request-title {
+    font-size: clamp(40px, 4.3vw, 60px) !important;
+    line-height: 0.98 !important;
+    letter-spacing: 0.035em !important;
+}
+
+@media (max-width: 720px) {
+    .certificate-request-title {
+        font-size: clamp(34px, 10vw, 46px) !important;
+        line-height: 1 !important;
+    }
+}
+</style>
+
+    <!-- ATS_GLOBAL_PUBLIC_HEADER_LOGO_V1 -->
+    <link rel="stylesheet" href="/static/site_header_logo.css?v=20260815-logo-exact-1to1-v1">
+
+    <!-- ATS_CALENDAR_PARTIAL_AVAILABILITY_V1_STYLE -->
+    <style id="atsCalendarPartialAvailabilityV1">
+
+        /*
+         * Полностью свободный:
+         * обычное золотое состояние.
+         *
+         * Частично свободный:
+         * золотая диагональная текстура,
+         * но БЕЗ зачёркивания.
+         */
+
+        .ats-calendar-day.is-partial {
+            border-color: rgba(215, 182, 71, 0.82);
+            background:
+                repeating-linear-gradient(
+                    -45deg,
+                    rgba(201, 163, 58, 0.15),
+                    rgba(201, 163, 58, 0.15) 5px,
+                    rgba(0, 0, 0, 0.18) 5px,
+                    rgba(0, 0, 0, 0.18) 10px
+                );
+            color: #f2d984;
+            cursor: pointer;
+            box-shadow:
+                inset 0 0 12px rgba(201, 163, 58, 0.05);
+        }
+
+        .ats-calendar-day.is-partial:hover {
+            border-color: #f2d984;
+            background:
+                repeating-linear-gradient(
+                    -45deg,
+                    rgba(201, 163, 58, 0.22),
+                    rgba(201, 163, 58, 0.22) 5px,
+                    rgba(0, 0, 0, 0.12) 5px,
+                    rgba(0, 0, 0, 0.12) 10px
+                );
+        }
+
+        .ats-calendar-day-time {
+            display: block;
+            width: 100%;
+            margin-top: 4px;
+            color: inherit;
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+            font-size: 9px;
+            line-height: 1.05;
+            letter-spacing: 0;
+            text-align: center;
+            white-space: normal;
+            text-decoration: none;
+            opacity: 0.82;
+            pointer-events: none;
+        }
+
+        .ats-calendar-day.is-selected
+        .ats-calendar-day-time {
+            color: #090909;
+            opacity: 0.9;
+        }
+
+        .ats-calendar-legend .is-partial {
+            border-color: rgba(215, 182, 71, 0.82);
+            background:
+                repeating-linear-gradient(
+                    -45deg,
+                    rgba(201, 163, 58, 0.48),
+                    rgba(201, 163, 58, 0.48) 2px,
+                    transparent 2px,
+                    transparent 4px
+                );
+        }
+
+        @media (min-width: 601px) {
+            .ats-calendar-day.is-available,
+            .ats-calendar-day.is-partial {
+                min-height: 54px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .ats-calendar-day.is-available,
+            .ats-calendar-day.is-partial {
+                min-height: 50px;
+            }
+
+            .ats-calendar-day-time {
+                margin-top: 3px;
+                font-size: 7.5px;
+                line-height: 1;
+            }
+
+            .ats-calendar-legend {
+                gap: 9px;
+            }
+        }
+
+    </style>
+
+
+    <!-- ATS_CALENDAR_TIME_READABILITY_V2_STYLE -->
+    <style id="atsCalendarTimeReadabilityV2">
+
+        /*
+         * Клетка даты стала выше.
+         * Число даты — крупнее.
+         * Время — полноценный читаемый интервал.
+         */
+
+        button.ats-calendar-day {
+            min-height: 68px !important;
+            padding: 7px 4px !important;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 18px !important;
+            line-height: 1 !important;
+            font-weight: 600;
+        }
+
+        .ats-calendar-day-time {
+            display: block !important;
+            width: 100%;
+
+            margin-top: 7px !important;
+
+            color: inherit;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif !important;
+
+            font-size: 11px !important;
+            line-height: 1.18 !important;
+            font-weight: 600 !important;
+
+            letter-spacing: 0.035em !important;
+            text-align: center;
+
+            white-space: pre-line !important;
+            text-decoration: none !important;
+
+            opacity: 0.96 !important;
+        }
+
+        /*
+         * Первая строка ВРЕМЯ визуально отделяется
+         * переносом строки в JS.
+         */
+
+        .ats-calendar-day.is-partial
+        .ats-calendar-day-time {
+            color: #f2d984;
+        }
+
+        .ats-calendar-day.is-selected
+        .ats-calendar-day-time {
+            color: #090909 !important;
+        }
+
+        .ats-calendar-legend {
+            font-size: 12px !important;
+            line-height: 1.35;
+            gap: 16px !important;
+        }
+
+        @media (max-width: 600px) {
+
+            button.ats-calendar-day {
+                min-height: 59px !important;
+                padding: 5px 2px !important;
+                font-size: 15px !important;
+            }
+
+            .ats-calendar-day-time {
+                margin-top: 5px !important;
+                font-size: 8.5px !important;
+                line-height: 1.12 !important;
+                letter-spacing: 0 !important;
+            }
+
+            .ats-calendar-legend {
+                font-size: 10px !important;
+                gap: 9px !important;
+            }
+        }
+
+    </style>
+
+
+    <!-- ATS_CALENDAR_STRIPES_BUSY_ONLY_V1 -->
+    <style id="atsCalendarStripesBusyOnlyV1">
+
+        /*
+         * Визуальная система:
+         *
+         * GOLD        = свободен весь день
+         * BRONZE      = есть свободное время
+         * STRIPES     = полностью занято
+         */
+
+
+        /*
+         * -------------------------------
+         * PARTIAL — БЕЗ ШТРИХОВКИ
+         * -------------------------------
+         */
+
+        .ats-calendar-day.is-partial {
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(63, 43, 25, 0.82) 0%,
+                    rgba(26, 19, 13, 0.94) 100%
+                )
+                !important;
+
+            border-color:
+                rgba(145, 96, 52, 0.72)
+                !important;
+
+            color:
+                #c9a16d
+                !important;
+
+            box-shadow:
+                inset 0 0 18px
+                    rgba(0, 0, 0, 0.34)
+                !important;
+        }
+
+
+        /*
+         * -------------------------------
+         * OZON 21:00–23:00
+         * ЕЩЁ ТЕМНЕЕ, НО ТОЖЕ БЕЗ ПОЛОС
+         * -------------------------------
+         */
+
+        .ats-calendar-day.is-partial.is-ozon-late {
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(34, 25, 18, 0.94) 0%,
+                    rgba(10, 9, 7, 0.98) 100%
+                )
+                !important;
+
+            border-color:
+                rgba(102, 69, 43, 0.72)
+                !important;
+
+            color:
+                #aa8965
+                !important;
+
+            box-shadow:
+                inset 0 0 24px
+                    rgba(0, 0, 0, 0.62)
+                !important;
+        }
+
+
+        /*
+         * Бронзовое доступное время.
+         */
+
+        .ats-calendar-day.is-partial
+        .ats-calendar-day-time {
+            color:
+                #b56f3c
+                !important;
+        }
+
+        .ats-calendar-day.is-partial.is-ozon-late
+        .ats-calendar-day-time {
+            color:
+                #9d6037
+                !important;
+        }
+
+
+        /*
+         * -------------------------------
+         * HOVER
+         * -------------------------------
+         */
+
+        .ats-calendar-day.is-partial:hover {
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(76, 50, 27, 0.88) 0%,
+                    rgba(31, 22, 14, 0.96) 100%
+                )
+                !important;
+
+            border-color:
+                rgba(184, 124, 66, 0.92)
+                !important;
+        }
+
+        .ats-calendar-day.is-partial.is-ozon-late:hover {
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(46, 31, 20, 0.95) 0%,
+                    rgba(13, 10, 8, 0.98) 100%
+                )
+                !important;
+
+            border-color:
+                rgba(139, 91, 51, 0.88)
+                !important;
+        }
+
+
+        /*
+         * -------------------------------
+         * SELECTED
+         * -------------------------------
+         */
+
+        .ats-calendar-day.is-partial.is-selected,
+        .ats-calendar-day.is-partial.is-ozon-late.is-selected {
+            background:
+                #d7b647
+                !important;
+
+            border-color:
+                #f2d984
+                !important;
+
+            color:
+                #090909
+                !important;
+        }
+
+        .ats-calendar-day.is-selected
+        .ats-calendar-day-time {
+            color:
+                #211408
+                !important;
+        }
+
+
+        /*
+         * -------------------------------
+         * LEGEND
+         * -------------------------------
+         *
+         * Partial = solid bronze.
+         * Busy keeps existing stripes.
+         */
+
+        .ats-calendar-legend .is-partial {
+            background:
+                #704626
+                !important;
+
+            border-color:
+                #9b673b
+                !important;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <a
+            class="logo ats-site-header-logo"
+            href="/"
+            aria-label="ArtToSlipAway — на главную"
+        >
+            <img
+                src="/static/images/logo.webp?v=20260815-logo-webp"
+                alt="ArtToSlipAway"
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+            >
+        </a>
+
+    </header>
+
+    <main>
+        <section class="hero quick-request" aria-labelledby="quickRequestTitle">
+            <!-- ATS_CERTIFICATE_FORM_COPY_V1 -->
+            <h1
+                id="quickRequestTitle"
+                class="{% if selected_category == 'tattoo-gift-certificate' %}certificate-request-title{% endif %}"
+            >
+                {% if selected_category == "tattoo-gift-certificate" %}
+                    ОФОРМЛЕНИЕ ПОДАРОЧНОГО СЕРТИФИКАТА
+                {% else %}
+                    ХОЧУ, ЧТОБЫ СО МНОЙ СВЯЗАЛИСЬ
+                {% endif %}
+            </h1>
+            <p class="lead">
+                {% if selected_category == "tattoo-gift-certificate" %}
+                    Укажи имя, удобный способ связи и желаемый номинал.
+                    Я свяжусь с тобой, подтвержу детали и подготовлю сертификат.
+                {% else %}
+                    Оставь имя и удобный способ связи. Я сам напишу тебе,
+                    уточню детали и помогу определить подходящий формат проекта.
+                {% endif %}
+            </p>
+
+            <div class="quick-request__panel">
+                <form action="/request" method="post" id="quickLeadForm" class="quick-request__form">
+                    <input type="hidden" name="lead_source" value="quick_callback">
+                    <input type="hidden" name="entry_page" id="quickEntryPage" value="">
+                    <input type="hidden" name="service_type" value="consultation">
+                    <input
+                        type="hidden"
+                        name="category_slug"
+                        value="{{ selected_category }}"
+                    >
+
+                    {% if selected_category == "tattoo-gift-certificate" %}
+                    <!-- ATS_CERTIFICATE_REQUEST_V1 -->
+                    <input
+                        type="hidden"
+                        name="request_type"
+                        value="certificate_purchase"
+                    >
+                    {% endif %}
+
+                    <div class="form-grid">
+                        <div class="field">
+                            <label for="quick_name">Как к тебе обращаться?</label>
+                            <input
+                                id="quick_name"
+                                name="name"
+                                type="text"
+                                required
+                                autocomplete="name"
+                                placeholder="Твоё имя"
+                            >
+                        </div>
+
+                        <div class="field">
+                            <label for="quick_contact_method">Где удобнее получить ответ?</label>
+                            <select id="quick_contact_method" name="contact_method" required>
+                                <option value="telegram">Telegram</option>
+                                <option value="vk">VK</option>
+                                <option value="phone">Телефон</option>
+                            </select>
+                        </div>
+
+                        <div class="field full">
+                            <label for="quick_contact">Куда написать?</label>
+                            <input
+                                id="quick_contact"
+                                name="contact"
+                                type="text"
+                                required
+                                placeholder="@username или номер телефона"
+                            >
+                        </div>
+
+                        {% if selected_category == "tattoo-gift-certificate" %}
+                        <!-- ATS_CERTIFICATE_NOMINAL_V1 -->
+                        <div class="field full">
+                            <label for="certificate_nominal">
+                                Желаемый номинал сертификата
+                            </label>
+
+                            <input
+                                id="certificate_nominal"
+                                name="budget_range"
+                                type="number"
+                                min="{{ certificate_min_nominal }}"
+                                step="1"
+                                inputmode="numeric"
+                                required
+                                placeholder="Например, {{ certificate_min_nominal }}"
+
+                                data-ats-certificate-min="ATS_CERTIFICATE_DYNAMIC_MIN_FORM_V1"
+                            >
+
+                            <div class="hint">
+                                Минимальный номинал — {{ certificate_min_nominal }} ₽.
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% if selected_category != "tattoo-gift-certificate" %}
+                        <!-- ATS_CERTIFICATE_MINIMAL_FORM_V1 -->
+                        <!-- ATS_QUICK_CITY_CALENDAR_V1 -->
+                        <div class="field full">
+                            <label for="quick_city">
+                                В каком городе планируется проект?
+                            </label>
+
+                            <select
+                                id="quick_city"
+                                name="city"
+                                required
+                            >
+                                <option value="">Выбери город</option>
+                                <option value="spb">Санкт-Петербург</option>
+                                <option value="smolensk">Смоленск</option>
+                                <option value="moscow">Москва</option>
+                                <option value="other">
+                                    Другой город — обсудим возможность
+                                </option>
+                            </select>
+                        </div>
+
+                        <div
+                            id="quickCityDatesField"
+                            class="field full city-dates-field"
+                            hidden
+                        >
+                            <label id="quickCityDatesLabel">
+                                Выбери свободную дату
+                            </label>
+
+                            <input
+                                id="quick_preferred_dates"
+                                name="preferred_dates"
+                                type="hidden"
+                                value=""
+                            >
+
+                            <div
+                                id="quickCityDatesStatus"
+                                class="city-dates-status"
+                                aria-live="polite"
+                            ></div>
+
+                            <div
+                                id="quickCityDatesList"
+                                class="city-dates-list"
+                                role="radiogroup"
+                                aria-labelledby="quickCityDatesLabel"
+                            ></div>
+
+                            <div class="hint city-dates-hint">
+                                Дата будет окончательно подтверждена после
+                                обсуждения проекта.
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <label class="legal-consent">
+                        <input type="checkbox" name="personal_data_agreement" value="yes" required>
+                        <span>
+                            Я согласен(на) на обработку персональных данных и ознакомлен(а) с
+                            <a href="/privacy" target="_blank">Политикой обработки персональных данных</a>,
+                            <a href="/consent" target="_blank">Согласием на обработку персональных данных</a>
+                            и <a href="/terms" target="_blank">Условиями записи</a>.
+                        </span>
+                    </label>
+
+                    <div class="quick-request__actions">
+                        <button type="submit">
+                            {% if selected_category == "tattoo-gift-certificate" %}
+                                Оформить сертификат
+                            {% else %}
+                                Свяжитесь со мной
+                            {% endif %}
+                        </button>
+                        {% if selected_category != "tattoo-gift-certificate" %}
+                        <button
+                            type="button"
+                            class="quick-request__secondary"
+                            id="extendedRequestToggle"
+                            aria-expanded="false"
+                            aria-controls="extendedRequest"
+                        >
+                            Рассказать о проекте подробнее
+                        </button>
+                        {% endif %}
+                    </div>
+
+                    <div class="quick-request__note">
+                        {% if selected_category == "tattoo-gift-certificate" %}
+                            После отправки заявки я свяжусь с тобой для подтверждения
+                            номинала и способа получения. Оплата — после согласования деталей.
+                        {% else %}
+                            Без оплаты и обязательств. Я лично свяжусь с тобой
+                            и помогу определить следующий шаг.
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        {% if selected_category != "tattoo-gift-certificate" %}
+        <section
+            class="extended-request"
+            id="extendedRequest"
+            data-auto-open="{% if selected_project or selected_sketch_title %}true{% else %}false{% endif %}"
+            hidden
+        >
+            <section class="hero">
+            <h2 class="request-section-title">ОБСУДИМ ТВОЙ ПРОЕКТ</h2>
+            <p class="lead">
+                {% if selected_sketch_title %}
+                Эскиз уже выбран. Осталось указать зону, масштаб и контакты — я получу заявку уже с выбранной работой.
+                {% else %}
+                Расскажи, что хочешь реализовать. Я лично изучу идею, предложу подходящий формат и сориентирую по стоимости, срокам и следующему шагу.
+                {% endif %}
+            </p>
+        </section>
+
+        {% if selected_project %}
+            <div class="selected-project">
+                <strong>Выбранный проект:</strong> {{ selected_project.title }}
+                {% if selected_project.short_description %}
+                    <div class="hint">{{ selected_project.short_description }}</div>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        {% if selected_sketch_title %}
+            {% set selected_sketch_preview = '' %}
+            {% if selected_media and selected_media.poster_path %}
+                {% set selected_sketch_preview = selected_media.poster_path %}
+            {% elif selected_media and selected_media.media_type == 'image' %}
+                {% set selected_sketch_preview = selected_media.file_path %}
+            {% endif %}
+
+            <section class="selected-sketch-card" aria-label="Выбранный эскиз">
+                <div class="selected-sketch-card__preview">
+                    {% if selected_sketch_preview %}
+                        <img src="{{ selected_sketch_preview }}" alt="{{ selected_sketch_title }}">
+                    {% else %}
+                        <span class="selected-sketch-card__placeholder">3D эскиз</span>
+                    {% endif %}
+                </div>
+
+                <div class="selected-sketch-card__content">
+                    <div class="selected-sketch-card__status">
+                        <span class="selected-sketch-card__check" aria-hidden="true">✓</span>
+                        Эскиз выбран
+                    </div>
+                    <h2 class="selected-sketch-card__title">{{ selected_sketch_title }}</h2>
+                    <p class="selected-sketch-card__text">
+                        Он уже добавлен в эту заявку. Повторно выбирать эскиз не нужно — я увижу его вместе с отправленной формой.
+                    </p>
+                </div>
+
+                <a class="selected-sketch-card__action" href="/categories/free-sketches">
+                    Выбрать другой
+                </a>
+            </section>
+        {% endif %}
+
+        <form action="/request" method="post" enctype="multipart/form-data" id="leadForm">
+            <input type="hidden" name="lead_source" value="{{ lead_source or 'site' }}">
+            <input type="hidden" name="entry_page" id="entryPage" value="">
+            <input type="hidden" name="category_slug" value="{{ selected_category or '' }}">
+            <input type="hidden" name="selected_media_id" value="{{ selected_media_id or '' }}">
+            <input type="hidden" name="selected_sketch_title" value="{{ selected_sketch_title or '' }}">
+
+            {% if selected_project %}
+                <input type="hidden" name="project_id" value="{{ selected_project.id }}">
+            {% endif %}
+
+            <div class="form-grid">
+                <div class="field full">
+                    <label for="service_type">Что тебя интересует?</label>
+                    <select id="service_type" name="service_type" required>
+                        <option value="tattoo">Авторская татуировка</option>
+                        <option value="free_sketch">Свободный эскиз</option>
+                        <option value="painting">Картина</option>
+                        <option value="skate">Картина на скейтборде</option>
+                        <option value="merch">Мерч</option>
+                        <option value="consultation">Нужна консультация</option>
+                    </select>
+                </div>
+
+                <div class="field conditional service-tattoo">
+                    <label for="request_type">Какой формат татуировки рассматриваешь?</label>
+                    <select id="request_type" name="request_type">
+                        <option value="">Выбери вариант</option>
+                        <option value="new_tattoo">Новую авторскую татуировку</option>
+                        <option value="coverup">Перекрыть старую работу</option>
+                        <option value="rework">Доработать существующую татуировку</option>
+                        <option value="one_session">Небольшую работу за один сеанс</option>
+                        <option value="large_project">Крупный проект: рукав / спина / нога</option>
+                        <option value="not_sure">Пока не определился — хочу обсудить</option>
+                    </select>
+                </div>
+
+                <div class="field conditional service-tattoo service-free_sketch">
+                    <label for="body_place">Где планируется татуировка?</label>
+                    <select id="body_place" name="body_place">
+                        <option value="">Выбери зону</option>
+                        <option value="arm">Рука</option>
+                        <option value="leg">Нога</option>
+                        <option value="back">Спина</option>
+                        <option value="chest">Грудь</option>
+                        <option value="neck">Шея</option>
+                        <option value="ribs">Рёбра</option>
+                        <option value="other">Другое</option>
+                    </select>
+                </div>
+
+                <div class="field conditional service-tattoo service-free_sketch">
+                    <label for="approximate_size">Какой масштаб рассматриваешь?</label>
+                    <select id="approximate_size" name="approximate_size">
+                        <option value="">Выбери масштаб</option>
+                        <option value="up_to_10">До 10 см</option>
+                        <option value="10_20">10–20 см</option>
+                        <option value="20_40">20–40 см</option>
+                        <option value="large">Крупный проект</option>
+                        <option value="not_sure">Пока не понимаю</option>
+                    </select>
+                </div>
+
+                <div id="stylePreferenceField" class="field conditional service-tattoo service-painting service-skate">
+                    <label id="stylePreferenceLabel" for="style_preference">Какое направление тебе ближе?</label>
+                    <select id="style_preference" name="style_preference">
+                        <option value="">Выбери стиль</option>
+                        <option value="japanese">Японская / ирезуми</option>
+                        <option value="engraving">Гравюра</option>
+                        <option value="graphics">Графика</option>
+                        <option value="traditional">Traditional / old school</option>
+                        <option value="dotwork">Dotwork</option>
+                        <option value="not_sure">Пока не знаю — доверюсь рекомендации мастера</option>
+                                            <option value="custom">Свой вариант</option>
+</select>
+                    <div
+                        id="customStyleWrap"
+                        class="custom-style-wrap"
+                        style="display: none;"
+                    >
+                        <label for="customStyleInput">
+                            Опиши свою стилистику
+                        </label>
+
+                        <input
+                            id="customStyleInput"
+                            type="text"
+                            autocomplete="off"
+                            placeholder="Например: сюрреализм, витраж, тёмная графика"
+                        >
+                    </div>
+</div>
+
+                <!-- FREE_SKETCH_CTA_START -->
+                <div
+                    id="freeSketchCatalogCta"
+                    class="field full free-sketch-catalog-cta-v2"
+                    data-has-selected-sketch="{{ 'true' if selected_sketch_title else 'false' }}"
+                    style="display: none;"
+                >
+                    <div class="free-sketch-catalog-cta-v2__title">
+                        Выбери готовый эскиз
+                    </div>
+
+                    <div class="free-sketch-catalog-cta-v2__text">
+                        Перейди в каталог, выбери понравившуюся работу
+                        и нажми «Хочу этот». Эскиз автоматически
+                        прикрепится к заявке.
+                    </div>
+
+                    <a
+                        href="/categories/free-sketches"
+                        class="free-sketch-catalog-cta-v2__button"
+                    >
+                        Смотреть свободные эскизы
+                    </a>
+                </div>
+                <!-- FREE_SKETCH_CTA_END -->
+
+                <div class="field conditional service-painting service-merch">
+                    <label for="product_format">В каком формате хочешь работу?</label>
+                    <select id="product_format" name="product_format">
+                        <option value="">Выбери формат</option>
+                        <option value="canvas" data-only-service="painting">Холст</option>
+                        <option value="skate" data-only-service="painting">Скейтборд</option>
+                        <option value="plywood" data-only-service="painting">Фанера</option>
+                        <option value="stickerpack" data-only-service="merch">Стикерпак</option>
+                        <option value="print" data-only-service="merch">Принт</option>
+                        <option value="other" data-shared-format="true">Хочу обсудить индивидуальный вариант</option>
+                    </select>
+                </div>
+
+                <div class="field conditional service-painting service-skate service-merch service-tattoo service-free_sketch">
+                    <label for="budget_range">На какой бюджет за сеанс ориентируешься?</label>
+                    <input id="budget_range" name="budget_range" type="text" placeholder="Например: до 20 000 ₽ / обсуждаемо / хочу узнать ориентир">
+                    <div class="hint">Это не фиксирует итоговую стоимость. Ответ поможет мне сразу предложить реалистичный формат проекта.</div>
+                </div>
+
+                <div class="field conditional service-painting service-skate service-merch service-tattoo service-free_sketch">
+</div>
+
+                <div class="field">
+                    <label for="city">Где удобнее реализовать проект?</label>
+                    <select id="city" name="city">
+                        <option value="">Выбери город</option>
+                        <option value="spb" {% if selected_city == "spb" %}selected{% endif %}>Санкт-Петербург</option>
+                        <option value="smolensk" {% if selected_city == "smolensk" %}selected{% endif %}>Смоленск</option>
+                        <option value="moscow" {% if selected_city == "moscow" %}selected{% endif %}>Москва</option>
+                        <option value="other" {% if selected_city == "other" %}selected{% endif %}>Другой город — обсудим возможность</option>
+                    </select>
+                </div>
+
+                <div
+                    id="cityDatesField"
+                    class="field full city-dates-field"
+                    hidden
+                >
+                    <label id="cityDatesLabel">
+                        Выбери свободную дату
+                    </label>
+
+                    <input
+                        id="preferred_dates"
+                        name="preferred_dates"
+                        type="hidden"
+                        value=""
+                    >
+
+                    <div
+                        id="cityDatesStatus"
+                        class="city-dates-status"
+                        aria-live="polite"
+                    ></div>
+
+                    <div
+                        id="cityDatesList"
+                        class="city-dates-list"
+                        role="radiogroup"
+                        aria-labelledby="cityDatesLabel"
+                    ></div>
+
+                    <div class="hint city-dates-hint">
+                        Выбор даты не является автоматическим бронированием.
+                        Я подтвержу её после изучения заявки.
+                    </div>
+                </div>
+
+                <div class="field full">
+                    <label for="idea">Расскажи, что хочешь увидеть в работе</label>
+                    <textarea id="idea" name="idea" placeholder="Опиши сюжет, настроение, персонажей или символы, которые для тебя важны. Необязательно формулировать всё идеально — я помогу собрать идею в цельный проект."></textarea>
+                </div>
+
+                <div class="field full">
+                    <label for="message">Что важно учесть?</label>
+                    <textarea id="message" name="message" placeholder="Можно рассказать о пожеланиях, ограничениях или вопросах. Например: это первая татуировка, есть старая работа, чувствительная зона или особенности кожи."></textarea>
+                </div>
+
+                <div class="field full">
+                    <label for="reference_files">Покажи, что тебе близко визуально</label>
+                    <input id="reference_files" name="reference_files" type="file" multiple accept="image/*,.pdf">
+                    <div class="hint">Можно прикрепить понравившиеся работы, фотографию зоны или собственный набросок. Необязательно искать точный пример — изображения помогут мне понять направление.</div>
+                </div>
+
+                <div class="field">
+                    <label for="name">Как к тебе обращаться?</label>
+                    <input id="name" name="name" type="text" required placeholder="Твоё имя">
+                </div>
+
+                <div class="field">
+                    <label for="contact_method">Где удобнее получить ответ?</label>
+                    <select id="contact_method" name="contact_method" required>
+                        <option value="telegram">Telegram</option>
+                        <option value="phone">Телефон</option>
+                        <option value="vk">VK</option>
+                        <option value="other">Другое</option>
+                    </select>
+                </div>
+
+                <div class="field full">
+                    <label for="contact">Куда написать?</label>
+                    <input id="contact" name="contact" type="text" required placeholder="Telegram username, номер телефона или ссылка VK">
+                </div>
+
+
+<label class="legal-consent">
+    <input type="checkbox" name="personal_data_agreement" value="yes" required>
+    <span>
+        Я согласен(на) на обработку персональных данных и ознакомлен(а) с
+        <a href="/privacy" target="_blank">Политикой обработки персональных данных</a>,
+        <a href="/consent" target="_blank">Согласием на обработку персональных данных</a>
+        и <a href="/terms" target="_blank">Условиями записи</a>.
+    </span>
+</label>
+
+
+                <div class="submit-row">
+                    <button type="submit">
+                        {% if selected_sketch_title %}
+                            Отправить заявку на этот эскиз
+                        {% else %}
+                            Обсудить проект с мастером
+                        {% endif %}
+                    </button>
+                    <div class="hint">
+                        Без оплаты и обязательств. Я лично изучу идею и свяжусь с тобой, чтобы предложить подходящий формат, сориентировать по стоимости и обсудить следующий шаг.
+                    </div>
+                </div>
+            </div>
+        </form>
+        </section>
+        {% endif %}
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const quickEntryPage = document.getElementById('quickEntryPage');
+            const quickContactMethod = document.getElementById('quick_contact_method');
+            const quickContact = document.getElementById('quick_contact');
+            const extendedRequest = document.getElementById('extendedRequest');
+            const extendedRequestToggle = document.getElementById('extendedRequestToggle');
+
+            if (quickEntryPage) {
+                quickEntryPage.value = window.location.pathname + window.location.search;
+            }
+
+            function updateQuickContactPlaceholder() {
+                if (!quickContactMethod || !quickContact) return;
+
+                const placeholders = {
+                    telegram: '@username или номер телефона',
+                    vk: 'Ссылка на страницу VK',
+                    phone: 'Номер телефона'
+                };
+
+                quickContact.placeholder =
+                    placeholders[quickContactMethod.value] ||
+                    'Укажи удобный контакт';
+            }
+
+            function setExtendedRequestOpen(isOpen, shouldScroll) {
+                if (!extendedRequest || !extendedRequestToggle) return;
+
+                extendedRequest.hidden = !isOpen;
+                extendedRequestToggle.setAttribute(
+                    'aria-expanded',
+                    isOpen ? 'true' : 'false'
+                );
+                extendedRequestToggle.textContent = isOpen
+                    ? 'Скрыть расширенную форму'
+                    : 'Рассказать о проекте подробнее';
+
+                if (isOpen && shouldScroll) {
+                    window.requestAnimationFrame(function () {
+                        extendedRequest.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    });
+                }
+            }
+
+            if (quickContactMethod) {
+                quickContactMethod.addEventListener(
+                    'change',
+                    updateQuickContactPlaceholder
+                );
+                updateQuickContactPlaceholder();
+            }
+
+            if (extendedRequestToggle && extendedRequest) {
+                extendedRequestToggle.addEventListener('click', function () {
+                    setExtendedRequestOpen(
+                        extendedRequest.hidden,
+                        extendedRequest.hidden
+                    );
+                });
+
+                const shouldAutoOpen =
+                    extendedRequest.dataset.autoOpen === 'true' ||
+                    window.location.hash === '#extended-request';
+
+                if (shouldAutoOpen) {
+                    setExtendedRequestOpen(true, false);
+                }
+            }
+
+
+            const serviceSelect = document.getElementById('service_type');
+            const conditionalFields = Array.from(document.querySelectorAll('.conditional'));
+            const entryPage = document.getElementById('entryPage');
+
+            if (entryPage) {
+                entryPage.value = window.location.pathname + window.location.search;
+            }
+
+            const selectedService = "{{ selected_service or '' }}";
+            const selectedProjectType = "{{ selected_project.project_type if selected_project else '' }}";
+
+            function normalizeService(value) {
+                if (!value) return '';
+
+                if (value === 'sketch') return 'free_sketch';
+                if (value === 'art' || value === 'canvas') return 'painting';
+
+                return value;
+            }
+
+            const initialService = normalizeService(selectedService || selectedProjectType);
+
+            if (initialService) {
+                const option = serviceSelect.querySelector('option[value="' + initialService + '"]');
+                if (option) {
+                    serviceSelect.value = initialService;
+                }
+            }
+
+            function updateConditionalFields() {
+                const service = serviceSelect.value;
+
+                conditionalFields.forEach(function (field) {
+                    if (field.classList.contains('service-' + service)) {
+                        field.classList.add('is-visible');
+                    } else {
+                        field.classList.remove('is-visible');
+                    }
+                });
+            }
+
+            serviceSelect.addEventListener('change', updateConditionalFields);
+            updateConditionalFields();
+        });
+    </script>
+    <script src="/static/city_funnel.js?v=4"></script>
+    <script src="/static/request_city_dates.js?v=20260816_full_day_v1"></script>
+    <script defer src="/static/js/site-announcement.js?v=3"></script>
+
+    <script>
+        // PRODUCT_FORMATS_BY_SERVICE_V2
+        document.addEventListener('DOMContentLoaded', function () {
+            const serviceSelect =
+                document.getElementById('service_type');
+
+            const productFormat =
+                document.getElementById('product_format');
+
+            if (!serviceSelect || !productFormat) {
+                return;
+            }
+
+            const formatOptions = Array.from(
+                productFormat.options
+            );
+
+            function updateProductFormats() {
+                const service = serviceSelect.value;
+
+                formatOptions.forEach(function (option) {
+                    const onlyService =
+                        option.dataset.onlyService || '';
+
+                    const isPlaceholder =
+                        option.value === '';
+
+                    const isShared =
+                        option.dataset.sharedFormat === 'true';
+
+                    let isVisible = true;
+
+                    if (service === 'painting') {
+                        isVisible =
+                            isPlaceholder ||
+                            isShared ||
+                            onlyService === 'painting';
+                    } else if (service === 'merch') {
+                        isVisible =
+                            isPlaceholder ||
+                            isShared ||
+                            onlyService === 'merch';
+                    }
+
+                    option.hidden = !isVisible;
+                    option.disabled = !isVisible;
+                });
+
+                const selectedOption =
+                    productFormat.options[
+                        productFormat.selectedIndex
+                    ];
+
+                if (
+                    selectedOption &&
+                    selectedOption.disabled
+                ) {
+                    productFormat.value = '';
+                }
+
+                if (
+                    service !== 'painting' &&
+                    service !== 'merch'
+                ) {
+                    productFormat.value = '';
+                }
+            }
+
+            serviceSelect.addEventListener(
+                'change',
+                function () {
+                    window.setTimeout(
+                        updateProductFormats,
+                        0
+                    );
+                }
+            );
+
+            updateProductFormats();
+
+            window.setTimeout(
+                updateProductFormats,
+                100
+            );
+        });
+    </script>
+
+
+
+    <script>
+        // PROJECT_STYLE_SWITCH_V3
+        document.addEventListener('DOMContentLoaded', function () {
+            const form =
+                document.getElementById('leadForm');
+
+            const serviceSelect =
+                document.getElementById('service_type');
+
+            const productFormat =
+                document.getElementById('product_format');
+
+            const styleField =
+                document.getElementById('stylePreferenceField');
+
+            const styleLabel =
+                document.getElementById('stylePreferenceLabel');
+
+            const styleSelect =
+                document.getElementById('style_preference');
+
+            const customStyleWrap =
+                document.getElementById('customStyleWrap');
+
+            const customStyleInput =
+                document.getElementById('customStyleInput');
+
+            const freeSketchCta =
+                document.getElementById('freeSketchCatalogCta');
+
+            const messageField =
+                document.getElementById('message');
+
+            function setVisible(element, visible) {
+                if (!element) {
+                    return;
+                }
+
+                element.style.setProperty(
+                    'display',
+                    visible ? 'block' : 'none',
+                    'important'
+                );
+            }
+
+            function updateCustomStyleField() {
+                if (
+                    !serviceSelect ||
+                    !styleSelect ||
+                    !customStyleWrap ||
+                    !customStyleInput
+                ) {
+                    return;
+                }
+
+                const service = serviceSelect.value;
+
+                const styleIsAvailable =
+                    service === 'tattoo' ||
+                    service === 'painting' ||
+                    service === 'skate';
+
+                const showCustom =
+                    styleIsAvailable &&
+                    styleSelect.value === 'custom';
+
+                setVisible(
+                    customStyleWrap,
+                    showCustom
+                );
+
+                customStyleInput.required = showCustom;
+
+                if (!showCustom) {
+                    customStyleInput.setCustomValidity('');
+                }
+            }
+
+            function updateProjectStyleBlocks() {
+                if (!serviceSelect) {
+                    return;
+                }
+
+                const service = serviceSelect.value;
+
+                const showStyle =
+                    service === 'tattoo' ||
+                    service === 'painting' ||
+                    service === 'skate';
+
+                const showFreeSketchCta =
+                    service === 'free_sketch' &&
+                    freeSketchCta &&
+                    freeSketchCta.dataset.hasSelectedSketch !== 'true';
+
+                setVisible(
+                    styleField,
+                    showStyle
+                );
+
+                setVisible(
+                    freeSketchCta,
+                    showFreeSketchCta
+                );
+
+                if (styleLabel) {
+                    if (service === 'painting') {
+                        styleLabel.textContent =
+                            'В какой стилистике хочешь картину?';
+                    } else if (service === 'skate') {
+                        styleLabel.textContent =
+                            'В какой стилистике хочешь картину на скейтборде?';
+                    } else {
+                        styleLabel.textContent =
+                            'Какое направление тебе ближе?';
+                    }
+                }
+
+                /*
+                 * Для картины на скейтборде формат уже известен.
+                 * Не отправляем старое скрытое значение.
+                 */
+                if (
+                    productFormat &&
+                    service === 'skate'
+                ) {
+                    productFormat.value = '';
+                }
+
+                if (
+                    !showStyle &&
+                    styleSelect
+                ) {
+                    styleSelect.value = '';
+
+                    if (customStyleInput) {
+                        customStyleInput.value = '';
+                    }
+                }
+
+                updateCustomStyleField();
+            }
+
+            if (serviceSelect) {
+                serviceSelect.addEventListener(
+                    'change',
+                    function () {
+                        window.setTimeout(
+                            updateProjectStyleBlocks,
+                            0
+                        );
+                    }
+                );
+            }
+
+            if (styleSelect) {
+                styleSelect.addEventListener(
+                    'change',
+                    updateCustomStyleField
+                );
+            }
+
+            if (customStyleInput) {
+                customStyleInput.addEventListener(
+                    'input',
+                    function () {
+                        customStyleInput.setCustomValidity('');
+                    }
+                );
+            }
+
+            if (form) {
+                form.addEventListener(
+                    'submit',
+                    function (event) {
+                        if (
+                            !styleSelect ||
+                            styleSelect.value !== 'custom'
+                        ) {
+                            return;
+                        }
+
+                        const customValue =
+                            customStyleInput
+                                ? customStyleInput.value.trim()
+                                : '';
+
+                        if (!customValue) {
+                            event.preventDefault();
+
+                            if (customStyleInput) {
+                                customStyleInput.setCustomValidity(
+                                    'Укажи свой вариант стилистики.'
+                                );
+
+                                customStyleInput.reportValidity();
+                                customStyleInput.focus();
+                            }
+
+                            return;
+                        }
+
+                        /*
+                         * Backend не меняем.
+                         * Свой вариант сохраняется в поле
+                         * дополнительных пожеланий заявки.
+                         */
+                        if (messageField) {
+                            const currentService =
+                                serviceSelect
+                                    ? serviceSelect.value
+                                    : '';
+
+                            let prefix =
+                                'Свой вариант стилистики: ';
+
+                            if (currentService === 'painting') {
+                                prefix =
+                                    'Стилистика картины: ';
+                            } else if (currentService === 'skate') {
+                                prefix =
+                                    'Стилистика картины на скейтборде: ';
+                            }
+
+                            const line =
+                                prefix + customValue;
+
+                            const currentMessage =
+                                messageField.value.trim();
+
+                            if (
+                                !currentMessage.includes(line)
+                            ) {
+                                messageField.value =
+                                    currentMessage
+                                        ? currentMessage +
+                                          '\n\n' +
+                                          line
+                                        : line;
+                            }
+                        }
+                    }
+                );
+            }
+
+            updateProjectStyleBlocks();
+
+            window.setTimeout(
+                updateProjectStyleBlocks,
+                100
+            );
+        });
+    </script>
+
+    <script src="/static/tattoo_cursor.js?v=20260722_201404" defer></script>
+    <script defer src="/static/site_header_logo.js?v=20260815-logo-exact-1to1-v1"></script>
+</body>
+</html>

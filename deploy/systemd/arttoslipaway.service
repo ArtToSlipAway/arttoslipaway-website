@@ -1,0 +1,21 @@
+[Unit]
+Description=ArtToSlipAway FastAPI Website
+Wants=network-online.target
+After=network-online.target postgresql.service
+
+[Service]
+Type=simple
+User=arttoslipaway
+Group=arttoslipaway
+WorkingDirectory=/srv/arttoslipaway
+EnvironmentFile=/srv/arttoslipaway/.env
+ExecStart=/srv/arttoslipaway/.venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8000
+Restart=always
+RestartSec=5
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

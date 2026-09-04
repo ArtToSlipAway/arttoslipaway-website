@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Информационная строка — ArtToSlipAway Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+        <meta name="theme-color" content="#020202">
+<style>
+        :root {
+            --gold: #c9a33a;
+            --gold-light: #f2d984;
+            --bg: #050505;
+            --panel: rgba(0,0,0,0.72);
+            --panel-2: rgba(255,255,255,0.035);
+            --border: rgba(201, 163, 58, 0.38);
+            --text: #e8dcc4;
+            --muted: #9f947f;
+            --ok: #7daa63;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(201, 163, 58, 0.08), transparent 34%),
+                linear-gradient(180deg, #111, #050505 52%, #020202);
+            color: var(--text);
+        }
+
+        a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        .admin-shell {
+            max-width: 1360px;
+            margin: 0 auto;
+            padding: 28px 28px 80px;
+        }
+
+        .admin-brand {
+            font-family: Georgia, "Times New Roman", serif;
+            color: var(--gold);
+            font-size: 26px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+
+        .admin-nav {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 44px;
+        }
+
+        .admin-nav a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 36px;
+            padding: 9px 13px;
+            border: 1px solid rgba(201, 163, 58, 0.28);
+            color: var(--gold);
+            background: rgba(0,0,0,0.34);
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            font-size: 13px;
+            line-height: 1;
+        }
+
+        .admin-nav a:hover,
+        .admin-nav a.is-active {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: #111;
+        }
+
+        h1 {
+            font-family: Georgia, "Times New Roman", serif;
+            color: var(--gold);
+            font-size: clamp(46px, 6.5vw, 78px);
+            line-height: 0.95;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            margin: 0 0 18px;
+        }
+
+        .lead {
+            max-width: 840px;
+            color: var(--muted);
+            font-size: 18px;
+            line-height: 1.55;
+            margin-bottom: 34px;
+        }
+
+        .notice {
+            max-width: 980px;
+            border: 1px solid rgba(125, 170, 99, 0.45);
+            color: #cfe5bf;
+            background: rgba(125, 170, 99, 0.08);
+            padding: 13px 15px;
+            margin-bottom: 18px;
+        }
+
+        .admin-card {
+            max-width: 980px;
+            border: 1px solid var(--border);
+            background:
+                linear-gradient(180deg, rgba(0,0,0,0.58), rgba(0,0,0,0.82)),
+                radial-gradient(circle at left top, rgba(201, 163, 58, 0.06), transparent 36%);
+            padding: 24px;
+            box-shadow: 0 0 26px rgba(0,0,0,0.34);
+        }
+
+        .admin-card-title {
+            font-family: Georgia, "Times New Roman", serif;
+            color: var(--gold-light);
+            font-size: 30px;
+            line-height: 1.15;
+            margin: 0 0 18px;
+        }
+
+        label {
+            display: block;
+            color: var(--gold);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 8px;
+        }
+
+        textarea,
+        input {
+            width: 100%;
+            border: 1px solid rgba(201, 163, 58, 0.34);
+            background: rgba(0,0,0,0.48);
+            color: var(--text);
+            padding: 12px;
+            font-size: 15px;
+            font-family: Arial, sans-serif;
+        }
+
+        textarea {
+            min-height: 140px;
+            resize: vertical;
+            line-height: 1.5;
+        }
+
+        .row {
+            margin-bottom: 18px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .check-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 22px;
+            padding: 14px;
+            border: 1px solid rgba(201, 163, 58, 0.16);
+            background: var(--panel-2);
+        }
+
+        .check-row input {
+            width: auto;
+            transform: scale(1.1);
+        }
+
+        .check-row label {
+            margin: 0;
+            color: var(--text);
+            text-transform: none;
+            letter-spacing: 0;
+            font-size: 15px;
+        }
+
+        .hint {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.45;
+            margin-top: 7px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 22px;
+        }
+
+        button,
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 46px;
+            border: 1px solid var(--gold);
+            background: var(--gold);
+            color: #111;
+            padding: 13px 18px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        button:hover,
+        .button:hover {
+            background: var(--gold-light);
+            border-color: var(--gold-light);
+            color: #111;
+        }
+
+        .button.secondary {
+            background: rgba(0,0,0,0.34);
+            color: var(--gold);
+        }
+
+        .button.secondary:hover {
+            background: var(--gold);
+            color: #111;
+        }
+
+        .preview {
+            margin-top: 26px;
+            border: 1px solid rgba(201, 163, 58, 0.36);
+            background: rgba(0,0,0,0.44);
+        }
+
+        .preview-title {
+            padding: 10px 14px;
+            color: var(--muted);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            border-bottom: 1px solid rgba(201, 163, 58, 0.18);
+        }
+
+        .preview-line {
+            padding: 14px;
+            color: var(--gold-light);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 16px;
+            letter-spacing: 0.03em;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 760px) {
+            .admin-shell {
+                padding: 22px 16px 60px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 42px;
+                letter-spacing: 0.06em;
+            }
+
+            .admin-nav a {
+                font-size: 12px;
+                padding: 9px 10px;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="/static/admin.css?v=10">
+</head>
+
+<body class="admin-page">
+<div class="admin-shell">
+    <div class="admin-brand">ArtToSlipAway Admin</div>
+
+    <nav class="admin-nav">
+        <a href="/admin">Панель</a>
+        <a href="/admin/leads">Заявки</a>
+        <a href="/admin/projects">Проекты</a>
+        <a href="/admin/categories">Категории</a>
+        <a href="/admin/city-slots">Даты</a>
+        <a href="/admin/carousel">Карусель</a>
+        <a href="/admin/media">Медиа</a>
+        <a href="/admin/upload-check">Файлы</a>
+        <a href="/admin/legal">Право</a>
+        <a href="/admin/stats">Статистика</a>
+        <a href="/admin/visual">Визуал</a>
+        <a class="is-active" href="/admin/announcement">Инфострока</a>
+        <a href="/admin/logout">Выход</a>
+        <a href="/" target="_blank">Сайт</a>
+    </nav>
+
+    <h1>Информационная строка</h1>
+
+    <div class="lead">
+        Верхняя бегущая строка сайта. Можно использовать для акций, скидок,
+        свободных дат, важных объявлений и временных сообщений.
+    </div>
+
+    {% if saved %}
+        <div class="notice">Настройки сохранены. Обнови сайт через Cmd + Shift + R, если браузер показывает старую версию.</div>
+    {% endif %}
+
+    <form class="admin-card" method="post" action="/admin/announcement">
+        <h2 class="admin-card-title">Настройки строки</h2>
+
+        <div class="check-row">
+            <input
+                type="checkbox"
+                id="is_enabled"
+                name="is_enabled"
+                value="on"
+                {% if announcement.is_enabled %}checked{% endif %}
+            >
+            <label for="is_enabled">Показывать информационную строку на сайте</label>
+        </div>
+
+        <div class="row">
+            <label for="text">Текст информационной строки</label>
+            <textarea id="text" name="text" maxlength="420">{{ announcement.text }}</textarea>
+            <div class="hint">До 420 символов. Для акций лучше писать коротко: событие, срок, действие.</div>
+        </div>
+
+        <div class="grid">
+            <div class="row">
+                <label for="desktop_seconds">Скорость на компьютере, секунд</label>
+                <input id="desktop_seconds" name="desktop_seconds" type="number" min="10" max="240" value="{{ announcement.desktop_seconds }}">
+                <div class="hint">Чем больше число, тем медленнее движется строка.</div>
+            </div>
+
+            <div class="row">
+                <label for="mobile_seconds">Скорость на телефоне, секунд</label>
+                <input id="mobile_seconds" name="mobile_seconds" type="number" min="10" max="240" value="{{ announcement.mobile_seconds }}">
+                <div class="hint">Можно поставить так же, как на компьютере.</div>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button type="submit">Сохранить</button>
+            <a class="button secondary" href="/" target="_blank">Открыть сайт</a>
+        </div>
+
+        <div class="preview">
+            <div class="preview-title">Текущий текст</div>
+            <div class="preview-line">{{ announcement.text }}</div>
+        </div>
+    </form>
+</div>
+
+    <script defer src="/static/js/admin-static-nav.js?v=4"></script>
+</body>
+</html>

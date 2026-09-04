@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ project.title }} — ArtToSlipAway</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://arttoslipaway.art{{ request.url.path }}">
+    {% set seo_description = project.short_description or project.full_description or project.title %}
+    <meta name="description" content="{{ seo_description|striptags|trim|truncate(160, True, '…') }}">
+    <meta property="og:site_name" content="ArtToSlipAway">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ project.title }} — ArtToSlipAway">
+    <meta property="og:description" content="{{ seo_description|striptags|trim|truncate(160, True, '…') }}">
+    <meta property="og:url" content="https://arttoslipaway.art{{ request.url.path }}">
+    <meta property="og:image" content="https://arttoslipaway.art/static/og/og-home.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #111;
+            color: #f2f2f2;
+        }
+
+        header {
+            padding: 28px 40px;
+            border-bottom: 1px solid #222;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        a {
+            color: #f2f2f2;
+            text-decoration: none;
+        }
+
+        main {
+            padding: 60px 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .back {
+            display: inline-block;
+            color: #999;
+            margin-bottom: 28px;
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+            gap: 42px;
+            align-items: start;
+        }
+
+        .image-wrap {
+            border-radius: 28px;
+            overflow: hidden;
+            background: #191919;
+            border: 1px solid #2a2a2a;
+        }
+
+        .project-image {
+            width: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        .placeholder {
+            aspect-ratio: 4 / 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 18px;
+        }
+
+        .type {
+            color: #888;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1.6px;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-size: 48px;
+            line-height: 1.05;
+            margin: 0 0 22px;
+        }
+
+        .short {
+            color: #cfcfcf;
+            font-size: 21px;
+            line-height: 1.5;
+            margin-bottom: 28px;
+        }
+
+        .full {
+            color: #aaa;
+            font-size: 18px;
+            line-height: 1.65;
+            white-space: pre-line;
+            margin-bottom: 28px;
+        }
+
+        .meta {
+            border-top: 1px solid #2a2a2a;
+            border-bottom: 1px solid #2a2a2a;
+            padding: 20px 0;
+            display: grid;
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+
+        .meta-row {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 16px;
+            color: #ccc;
+        }
+
+        .meta-label {
+            color: #777;
+        }
+
+        .button {
+            display: inline-block;
+            background: #f2f2f2;
+            color: #111;
+            padding: 15px 22px;
+            border-radius: 999px;
+            font-weight: 700;
+        }
+
+        .secondary {
+            display: inline-block;
+            margin-left: 12px;
+            color: #aaa;
+        }
+
+        @media (max-width: 850px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 38px;
+            }
+
+            main {
+                padding: 40px 22px;
+            }
+        }
+
+        /* === ArtToSlipAway hover glow effects === */
+        a,
+        button,
+        .button,
+        .cta-button,
+        .social,
+        .main-card,
+        .subcard,
+        .card,
+        .category-link,
+        .filter,
+        .city-grid div,
+        .main-title,
+        .sub-title,
+        .card-title,
+        .section-title,
+        h1 {
+            transition:
+                color 0.22s ease,
+                text-shadow 0.22s ease,
+                border-color 0.22s ease,
+                box-shadow 0.22s ease,
+                transform 0.22s ease,
+                filter 0.22s ease;
+        }
+
+        a:hover,
+        nav a:hover,
+        .logo:hover,
+        .main-title:hover,
+        .sub-title:hover,
+        .card-title:hover,
+        .section-title:hover,
+        .city-grid div:hover {
+            color: #f2d984 !important;
+            text-shadow:
+                0 0 8px rgba(242, 217, 132, 0.85),
+                0 0 18px rgba(201, 163, 58, 0.55),
+                0 0 32px rgba(201, 163, 58, 0.25);
+        }
+
+        .button:hover,
+        .cta-button:hover,
+        button:hover,
+        .social:hover,
+        .category-link:hover,
+        .filter:hover {
+            color: #111 !important;
+            background: #f2d984 !important;
+            border-color: #f2d984 !important;
+            box-shadow:
+                0 0 12px rgba(242, 217, 132, 0.75),
+                0 0 28px rgba(201, 163, 58, 0.45);
+            transform: translateY(-2px);
+        }
+
+        .main-card:hover,
+        .card:hover,
+        .subcard:hover {
+            border-color: #f2d984 !important;
+            box-shadow:
+                0 0 0 1px rgba(201, 163, 58, 0.55),
+                0 0 24px rgba(201, 163, 58, 0.45),
+                inset 0 0 26px rgba(201, 163, 58, 0.10);
+            transform: translateY(-3px);
+        }
+
+        .main-card:hover img,
+        .card:hover img,
+        .subcard:hover img,
+        .main-card:hover .main-bg {
+            filter:
+                brightness(1.08)
+                contrast(1.08)
+                saturate(1.08);
+        }
+
+        .main-card:hover .main-title,
+        .card:hover .card-title,
+        .subcard:hover .sub-title {
+            color: #f2d984 !important;
+            text-shadow:
+                0 0 10px rgba(242, 217, 132, 0.9),
+                0 0 22px rgba(201, 163, 58, 0.55);
+        }
+        /* === /ArtToSlipAway hover glow effects === */
+
+
+        /* === ArtToSlipAway logo image === */
+        .logo.logo-image {
+            display: inline-flex !important;
+            align-items: center !important;
+            text-decoration: none !important;
+            line-height: 1 !important;
+            font-size: 0 !important;
+            letter-spacing: 0 !important;
+            color: transparent !important;
+        }
+
+        .logo.logo-image img {
+            display: block;
+            height: 72px;
+            width: auto;
+            max-width: 340px;
+            object-fit: contain;
+            filter:
+                drop-shadow(0 0 8px rgba(201, 163, 58, 0.35))
+                drop-shadow(0 0 18px rgba(201, 163, 58, 0.18));
+            transition:
+                filter 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        .logo.logo-image:hover img {
+            transform: translateY(-1px);
+            filter:
+                drop-shadow(0 0 10px rgba(242, 217, 132, 0.70))
+                drop-shadow(0 0 26px rgba(201, 163, 58, 0.40));
+        }
+
+        @media (max-width: 768px) {
+            .logo.logo-image img {
+                height: 52px;
+                max-width: 230px;
+            }
+        }
+        /* === /ArtToSlipAway logo image === */
+
+    </style>
+    <!-- ATS_GLOBAL_PUBLIC_HEADER_LOGO_V1 -->
+    <link rel="stylesheet" href="/static/site_header_logo.css?v=20260815-logo-exact-1to1-v1">
+</head>
+<body>
+    <header>
+        <a
+            class="ats-site-header-logo"
+            href="/"
+            aria-label="ArtToSlipAway — на главную"
+        >
+            <img
+                src="/static/images/logo.webp?v=20260815-logo-webp"
+                alt="ArtToSlipAway"
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+            >
+        </a>
+        <nav>
+            <a href="/projects">Проекты</a>
+            &nbsp;&nbsp;
+            <a href="/request?project={{ project.slug }}">Обсудить похожий проект</a>
+        </nav>
+    </header>
+
+    <main>
+        <a class="back" href="/projects">← Все проекты</a>
+
+        <div class="layout">
+            <div class="image-wrap">
+                {% if project.image_url %}
+                    <img class="project-image" src="{{ project.image_url }}" alt="{{ project.title }}">
+                {% else %}
+                    <div class="placeholder">Изображение проекта</div>
+                {% endif %}
+            </div>
+
+            <section>
+                <div class="type">
+                    {% if project.project_type == "tattoo" %}
+                        Художественная татуировка
+                    {% elif project.project_type == "canvas" %}
+                        Картина на холсте
+                    {% elif project.project_type == "skate" %}
+                        Картина на скейтборде
+                    {% elif project.project_type == "sketch" %}
+                        Свободный эскиз
+                    {% elif project.project_type == "merch" %}
+                        Мерч
+                    {% else %}
+                        {{ project.project_type }}
+                    {% endif %}
+
+                    •
+
+                    {% if project.status == "available" %}
+                        Доступен
+                    {% elif project.status == "reserved" %}
+                        Забронирован
+                    {% elif project.status == "sold" %}
+                        Продан
+                    {% elif project.status == "done" %}
+                        Выполнен
+                    {% elif project.status == "draft" %}
+                        Черновик
+                    {% elif project.status == "hidden" %}
+                        Скрыт
+                    {% else %}
+                        {{ project.status }}
+                    {% endif %}
+                </div>
+
+                <h1>{{ project.title }}</h1>
+
+                {% if project.short_description %}
+                    <div class="short">{{ project.short_description }}</div>
+                {% endif %}
+
+                {% if project.full_description %}
+                    <div class="full">{{ project.full_description }}</div>
+                {% endif %}
+
+                <div class="meta">
+                    <div class="meta-row">
+                        <div class="meta-label">Стиль</div>
+                        <div>{{ project.style }}</div>
+                    </div>
+
+                    <div class="meta-row">
+                        <div class="meta-label">Формат</div>
+                        <div>{{ project.format }}</div>
+                    </div>
+
+                    <div class="meta-row">
+                        <div class="meta-label">Цена</div>
+                        <div>{{ project.price }}</div>
+                    </div>
+                </div>
+
+                <a class="button" href="/request?project={{ project.slug }}">Обсудить этот проект</a>
+                <a class="secondary" href="/projects">Назад к каталогу</a>
+            </section>
+        </div>
+    </main>
+    <script src="/static/funnel_cta.js?v=1"></script>
+    <script src="/static/project_media.js?v=1"></script>
+    <script defer src="/static/js/site-announcement.js?v=3"></script>
+    <script src="/static/tattoo_cursor.js?v=20260722_201404" defer></script>
+    <script defer src="/static/site_header_logo.js?v=20260815-logo-exact-1to1-v1"></script>
+</body>
+</html>

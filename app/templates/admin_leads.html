@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Заявки — ArtToSlipAway Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+        <meta name="theme-color" content="#020202">
+<style>
+        :root {
+            --gold: #c9a33a;
+            --gold-light: #f2d984;
+            --bg: #050505;
+            --panel: rgba(0,0,0,0.72);
+            --panel-2: rgba(255,255,255,0.025);
+            --border: rgba(201,163,58,0.35);
+            --text: #e8dcc4;
+            --muted: #9f947f;
+            --danger: #c05a4a;
+            --ok: #7daa63;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at top left, rgba(201,163,58,0.10), transparent 34%),
+                linear-gradient(180deg, #10100d, #050505 62%);
+            color: var(--text);
+            font-family: Arial, sans-serif;
+        }
+
+        a { color: inherit; }
+
+        header {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 22px 22px 10px;
+        }
+
+        .brand {
+            color: var(--gold);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 22px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        nav a {
+            display: inline-flex;
+            border: 1px solid var(--border);
+            padding: 7px 10px;
+            text-decoration: none;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            font-size: 11px;
+            background: rgba(0,0,0,0.34);
+        }
+
+        nav a.active {
+            background: var(--gold);
+            color: #111;
+        }
+
+        main {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 20px 22px 70px;
+        }
+
+        h1 {
+            font-family: Georgia, "Times New Roman", serif;
+            color: var(--gold);
+            font-size: clamp(38px, 5vw, 68px);
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin: 12px 0 8px;
+        }
+
+        .lead-count {
+            color: var(--muted);
+            margin-bottom: 22px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 18px 0 26px;
+        }
+
+        .tab {
+            border: 1px solid var(--border);
+            padding: 10px 12px;
+            color: var(--gold);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.07em;
+            background: rgba(0,0,0,0.32);
+        }
+
+        .tab.active {
+            background: var(--gold);
+            color: #111;
+        }
+
+        .lead-card {
+            border: 1px solid var(--border);
+            background:
+                linear-gradient(180deg, rgba(0,0,0,0.58), rgba(0,0,0,0.82)),
+                radial-gradient(circle at left top, rgba(201,163,58,0.06), transparent 36%);
+            margin-bottom: 22px;
+            padding: 20px;
+            box-shadow: 0 0 26px rgba(0,0,0,0.34);
+        }
+
+        .lead-head {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 18px;
+            align-items: start;
+            border-bottom: 1px solid rgba(201,163,58,0.20);
+            padding-bottom: 14px;
+            margin-bottom: 16px;
+        }
+
+        .lead-title {
+            font-family: Georgia, "Times New Roman", serif;
+            color: var(--gold-light);
+            font-size: 24px;
+            line-height: 1.2;
+        }
+
+        .lead-meta {
+            color: var(--muted);
+            font-size: 13px;
+            margin-top: 6px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            justify-content: center;
+            min-width: 112px;
+            padding: 8px 12px;
+            border: 1px solid var(--border);
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            font-size: 12px;
+            background: rgba(0,0,0,0.34);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .field {
+            background: var(--panel-2);
+            border: 1px solid rgba(201,163,58,0.16);
+            padding: 12px;
+            min-height: 68px;
+        }
+
+        .field.full { grid-column: 1 / -1; }
+        .field.half { grid-column: span 2; }
+
+        .label {
+            color: var(--gold);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 7px;
+        }
+
+        .value {
+            color: var(--text);
+            line-height: 1.42;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .empty {
+            color: rgba(232,221,198,0.36);
+        }
+
+        .crm-actions {
+            display: grid;
+            grid-template-columns: 240px 1fr 260px;
+            gap: 14px;
+            margin-top: 16px;
+            border-top: 1px solid rgba(201,163,58,0.20);
+            padding-top: 16px;
+        }
+
+        form { margin: 0; }
+
+        select,
+        textarea,
+        button {
+            width: 100%;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            border: 1px solid rgba(201,163,58,0.32);
+            background: #050505;
+            color: var(--text);
+            padding: 10px;
+        }
+
+        textarea {
+            min-height: 88px;
+            resize: vertical;
+        }
+
+        button {
+            margin-top: 8px;
+            border: 1px solid var(--gold);
+            background: var(--gold);
+            color: #111;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        button.secondary {
+            background: transparent;
+            color: var(--gold);
+        }
+
+        button.danger {
+            border-color: var(--danger);
+            background: var(--danger);
+            color: #111;
+        }
+
+        .button-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+        }
+
+        .empty-state {
+            border: 1px dashed rgba(201,163,58,0.30);
+            padding: 26px;
+            color: var(--muted);
+            background: rgba(0,0,0,0.26);
+        }
+
+        @media (max-width: 980px) {
+            .grid,
+            .crm-actions,
+            .lead-head {
+                grid-template-columns: 1fr;
+            }
+
+            .field.half {
+                grid-column: 1 / -1;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="/static/admin.css?v=9">
+</head>
+<body class="admin-page">
+<header>
+    <div class="brand">ArtToSlipAway Admin</div>
+    <nav>
+        <a href="/admin">Панель</a>
+        <a class="active" href="/admin/leads">Заявки</a>
+        <a href="/admin/projects">Проекты</a>
+        <a href="/admin/categories">Категории</a>
+        <a href="/admin/city-slots">Даты</a>
+        <a href="/admin/carousel">Карусель</a>
+        <a href="/admin/media">Медиа</a>
+        <a href="/admin/stats">Статистика</a>
+        <a href="/admin/legal">Право</a>
+        <a href="/">Сайт</a>
+    </nav>
+</header>
+
+<main>
+    <h1>Заявки</h1>
+    <div class="lead-count">
+        CRM-режим заявок. Всего в текущем разделе: {{ leads|length }}
+    </div>
+
+    <div class="tabs">
+        <a class="tab {% if view == 'active' %}active{% endif %}" href="/admin/leads?view=active">
+            Активные: {{ counts.active_count or 0 }}
+        </a>
+        <a class="tab {% if view == 'archived' %}active{% endif %}" href="/admin/leads?view=archived">
+            Архив: {{ counts.archived_count or 0 }}
+        </a>
+        <a class="tab {% if view == 'trash' %}active{% endif %}" href="/admin/leads?view=trash">
+            Корзина: {{ counts.trash_count or 0 }}
+        </a>
+    </div>
+
+    {% if not leads %}
+        <div class="empty-state">
+            В этом разделе пока нет заявок.
+        </div>
+    {% endif %}
+
+    {% for lead in leads %}
+        <section class="lead-card">
+            <div class="lead-head">
+                <div>
+                    <div class="lead-title">#{{ lead.id }} — {{ lead.name or "Без имени" }}</div>
+                    <div class="lead-meta">
+                        <span>{{ lead.created_at }}</span>
+                        <span>{{ lead.contact or "Контакт не указан" }}</span>
+                        <span>{{ lead.contact_method or "" }}</span>
+                    </div>
+                </div>
+                <div class="status-badge">{{ status_labels.get(lead.lead_status, lead.lead_status) }}</div>
+            </div>
+
+            <div class="grid">
+                <div class="field">
+                    <div class="label">Тип заявки</div>
+                    <div class="value">{{ lead.request_type or lead.service_type or lead.project_interest or "—" }}</div>
+                </div>
+
+                <div class="field">
+                    <div class="label">Тип проекта</div>
+                    <div class="value">{{ lead.project_title or lead.category_title or "—" }}</div>
+                </div>
+
+                <div class="field">
+                    <div class="label">Город</div>
+                    <div class="value">{{ lead.city or "—" }}</div>
+                </div>
+
+                <div class="field">
+                    <div class="label">Зона</div>
+                    <div class="value">{{ lead.body_place or "—" }}</div>
+                </div>
+
+                <div class="field">
+                    <div class="label">Размер</div>
+                    <div class="value">{{ lead.approximate_size or "—" }}</div>
+                </div>
+
+                <div class="field">
+                    <div class="label">Стиль</div>
+                    <div class="value">{{ lead.style_preference or "—" }}</div>
+                </div>
+
+                <div class="field">
+                    <div class="label">Бюджет</div>
+                    <div class="value">{{ lead.budget_range or "—" }}</div>
+                </div>
+
+                <div class="field">
+                    <div class="label">Срок</div>
+                    <div class="value">{{ lead.deadline or "—" }}</div>
+                </div>
+
+                <div class="field half">
+                    <div class="label">Выбранная дата</div>
+                    <div class="value">{{ lead.preferred_dates or "—" }}</div>
+                </div>
+
+                <div class="field half">
+                    <div class="label">Выбранный эскиз</div>
+                    <div class="value">{{ lead.selected_sketch_title or "—" }}</div>
+                </div>
+
+                <div class="field full">
+                    <div class="label">Идея</div>
+                    <div class="value">{{ lead.idea or lead.message or "—" }}</div>
+                </div>
+
+                <div class="field full">
+                    <div class="label">Дополнительно</div>
+                    <div class="value">{{ lead.master_note or lead.admin_note or "—" }}</div>
+                </div>
+
+                <div class="field full">
+                    <div class="label">Файлы</div>
+                    <div class="value">
+                        {% if lead.files %}
+                            {% for file in lead.files %}
+                                <a href="{{ file.file_path }}" target="_blank">{{ file.original_filename or ("Файл #" ~ file.id) }}</a>{% if not loop.last %}<br>{% endif %}
+                            {% endfor %}
+                        {% else %}
+                            —
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="crm-actions">
+                <form method="post" action="/admin/leads/{{ lead.id }}/status">
+                    <input type="hidden" name="view" value="{{ view }}">
+                    <div class="label">Статус</div>
+                    <select name="lead_status">
+                        {% for key, label in status_labels.items() %}
+                            <option value="{{ key }}" {% if lead.lead_status == key %}selected{% endif %}>{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit">Сохранить статус</button>
+                </form>
+
+                <form method="post" action="/admin/leads/{{ lead.id }}/note">
+                    <input type="hidden" name="view" value="{{ view }}">
+                    <div class="label">Заметка мастера</div>
+                    <textarea name="master_note" placeholder="Например: обсудить рукав, запросить фото старой тату">{{ lead.master_note or lead.admin_note or "" }}</textarea>
+                    <button type="submit">Сохранить заметку</button>
+                </form>
+
+                <div class="button-row">
+                    {% if view == "active" %}
+                        <form method="post" action="/admin/leads/{{ lead.id }}/action">
+                            <input type="hidden" name="view" value="{{ view }}">
+                            <input type="hidden" name="action" value="archive">
+                            <button class="secondary" type="submit">В архив</button>
+                        </form>
+
+                        <form method="post" action="/admin/leads/{{ lead.id }}/action">
+                            <input type="hidden" name="view" value="{{ view }}">
+                            <input type="hidden" name="action" value="trash">
+                            <button class="danger" type="submit">В корзину</button>
+                        </form>
+                    {% elif view == "archived" %}
+                        <form method="post" action="/admin/leads/{{ lead.id }}/action">
+                            <input type="hidden" name="view" value="{{ view }}">
+                            <input type="hidden" name="action" value="restore">
+                            <button type="submit">Восстановить</button>
+                        </form>
+
+                        <form method="post" action="/admin/leads/{{ lead.id }}/action">
+                            <input type="hidden" name="view" value="{{ view }}">
+                            <input type="hidden" name="action" value="trash">
+                            <button class="danger" type="submit">В корзину</button>
+                        </form>
+                    {% elif view == "trash" %}
+                        <form method="post" action="/admin/leads/{{ lead.id }}/action">
+                            <input type="hidden" name="view" value="{{ view }}">
+                            <input type="hidden" name="action" value="restore">
+                            <button type="submit">Восстановить</button>
+                        </form>
+
+                        <form method="post" action="/admin/leads/{{ lead.id }}/action" onsubmit="return confirm('Удалить заявку окончательно?');">
+                            <input type="hidden" name="view" value="{{ view }}">
+                            <input type="hidden" name="action" value="delete">
+                            <button class="danger" type="submit">Удалить навсегда</button>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+    {% endfor %}
+</main>
+
+    <script defer src="/static/js/admin-static-nav.js?v=3"></script>
+</body>
+</html>

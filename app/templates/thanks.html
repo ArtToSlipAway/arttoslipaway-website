@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Заявка отправлена — ArtToSlipAway</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, follow">
+
+    <style>
+        :root {
+            --gold: #c9a33a;
+            --gold-light: #f2d984;
+            --text: #e8ddc6;
+            --muted: #a99d82;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            background:
+                radial-gradient(circle at center, rgba(201, 163, 58, 0.14), transparent 36%),
+                linear-gradient(180deg, #090909, #020202);
+            color: var(--text);
+            font-family: Georgia, "Times New Roman", serif;
+        }
+
+        .box {
+            max-width: 720px;
+            margin: 24px;
+            padding: clamp(28px, 5vw, 56px);
+            border: 1px solid rgba(201, 163, 58, 0.46);
+            background: rgba(0,0,0,0.72);
+            text-align: center;
+            box-shadow:
+                0 0 34px rgba(0,0,0,0.54),
+                inset 0 0 34px rgba(201, 163, 58, 0.04);
+        }
+
+        h1 {
+            color: var(--gold);
+            font-size: clamp(34px, 5vw, 64px);
+            line-height: 1;
+            margin: 0 0 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 400;
+        }
+
+        p {
+            color: var(--muted);
+            font-size: 18px;
+            line-height: 1.55;
+            margin: 0 0 26px;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        a {
+            display: inline-block;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 13px 18px;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            font-size: 13px;
+        }
+
+        a.primary {
+            background: var(--gold);
+            color: #111;
+        }
+
+        a:hover {
+            border-color: var(--gold-light);
+            color: var(--gold-light);
+        }
+
+        a.primary:hover {
+            background: var(--gold-light);
+            color: #111;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>ИДЕЯ УЖЕ У МЕНЯ</h1>
+        <p>
+            Я лично изучу заявку и референсы, а затем свяжусь с тобой, чтобы обсудить формат проекта, стоимость и возможную запись. Повторно отправлять заявку не нужно — все детали уже сохранены.
+            в выбранный способ связи.
+        </p>
+
+        <div class="actions">
+
+            <a href="/projects">Смотреть проекты</a>
+        </div>
+    </div>
+    <script defer src="/static/js/site-announcement.js?v=3"></script>
+    <script src="/static/tattoo_cursor.js?v=20260722_201404" defer></script>
+</body>
+</html>

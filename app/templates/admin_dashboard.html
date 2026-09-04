@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }} — ArtToSlipAway Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+        <meta name="theme-color" content="#020202">
+<style>
+        :root {
+            --bg: #070707;
+            --panel: rgba(14, 14, 14, 0.92);
+            --gold: #c9a33a;
+            --gold-light: #f2d984;
+            --text: #e8ddc6;
+            --muted: #9f947c;
+            --border: rgba(201, 163, 58, 0.34);
+            --danger: #c05a4a;
+            --ok: #7daa63;
+            --blue: #7ca0c9;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at center top, rgba(201, 163, 58, 0.10), transparent 34%),
+                linear-gradient(180deg, #090909, #020202);
+            color: var(--text);
+            font-family: Arial, sans-serif;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        header {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 28px 22px 12px;
+            display: flex;
+            justify-content: space-between;
+            gap: 18px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .brand {
+            color: var(--gold);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 22px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        nav {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        nav a {
+            color: var(--gold);
+        }
+
+        nav a:hover {
+            color: var(--gold-light);
+        }
+
+        main {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 20px 22px 70px;
+        }
+
+        h1 {
+            font-family: Georgia, "Times New Roman", serif;
+            color: var(--gold);
+            font-size: clamp(38px, 5vw, 72px);
+            line-height: 0.95;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin: 16px 0 10px;
+        }
+
+        .lead {
+            color: var(--muted);
+            max-width: 760px;
+            line-height: 1.55;
+            margin-bottom: 30px;
+            font-size: 17px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 210px;
+
+            border: 1px solid var(--border);
+            background:
+                linear-gradient(180deg, rgba(0,0,0,0.58), rgba(0,0,0,0.84)),
+                radial-gradient(circle at left top, rgba(201, 163, 58, 0.07), transparent 40%);
+            padding: 22px;
+            box-shadow: 0 0 26px rgba(0,0,0,0.34);
+
+            transition:
+                transform 0.22s ease,
+                border-color 0.22s ease,
+                box-shadow 0.22s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(242, 217, 132, 0.72);
+            box-shadow:
+                0 0 18px rgba(201, 163, 58, 0.12),
+                0 0 34px rgba(0,0,0,0.5);
+        }
+
+        .card-title {
+            color: var(--gold-light);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 28px;
+            line-height: 1.1;
+            margin-bottom: 12px;
+        }
+
+        .card-text {
+            color: var(--muted);
+            line-height: 1.45;
+            margin-bottom: 18px;
+        }
+
+        .stat {
+            display: inline-flex;
+            align-items: center;
+            width: fit-content;
+            gap: 8px;
+            border: 1px solid rgba(201, 163, 58, 0.28);
+            color: var(--gold);
+            padding: 7px 10px;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .danger {
+            color: var(--danger);
+            border-color: rgba(192, 90, 74, 0.48);
+        }
+
+        .ok {
+            color: var(--ok);
+            border-color: rgba(125, 170, 99, 0.48);
+        }
+
+        @media (max-width: 1000px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 680px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="/static/admin.css?v=9">
+</head>
+
+<body class="admin-page">
+    <header>
+        <a class="brand" href="/admin">ArtToSlipAway Admin</a>
+
+        <nav class="admin-nav">
+            <a href="/admin">Панель</a>
+            <a href="/admin/leads">Заявки</a>
+            <a href="/admin/projects">Проекты</a>
+            <a href="/admin/categories">Категории</a>
+            <a href="/admin/city-slots">Даты</a>
+            <a href="/admin/carousel">Карусель</a>
+            <a href="/admin/media">Медиа</a>
+            <a href="/admin/upload-check">Файлы</a>
+            <a href="/admin/legal">Право</a>
+            <a href="/admin/stats">Статистика</a>
+            <a href="/admin/visual">Визуал</a>
+            <a href="/admin/announcement">Инфострока</a>
+        <a href="/admin/system">Сервер</a>
+        <a href="/admin/logout">Выход</a>
+            <a href="/">Сайт</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Панель управления</h1>
+
+        <div class="lead">
+            Центральная админка сайта. Здесь собраны основные блоки: заявки, проекты, категории,
+            свободные даты, визуальные настройки и медиафайлы. Дальше будем постепенно переносить весь визуал
+            и контент в управляемые разделы.
+        </div>
+
+        <section class="grid">
+            <a class="card" href="/admin/leads">
+                <div>
+                    <div class="card-title">Заявки</div>
+                    <div class="card-text">Лиды с сайта, брифы, контакты, статусы, заметки мастера.</div>
+                </div>
+                <div>
+                    <span class="stat {% if stats.leads_new > 0 %}danger{% endif %}">
+                        Всего: {{ stats.leads_total }} / Новых: {{ stats.leads_new }}
+                    </span>
+                </div>
+            </a>
+
+            <a class="card" href="/admin/projects">
+                <div>
+                    <div class="card-title">Проекты / портфолио</div>
+                    <div class="card-text">Работы, свободные проекты, описания, категории, порядок отображения.</div>
+                </div>
+                <div>
+                    <span class="stat">Проектов: {{ stats.projects_total }}</span>
+                </div>
+            </a>
+
+            <a class="card" href="/admin/projects?type=free_sketch">
+                <div>
+                    <div class="card-title">Свободные эскизы</div>
+                    <div class="card-text">Отдельный вход в проекты, которые можно забронировать через форму заявки.</div>
+                </div>
+                <div>
+                    <span class="stat">Через проекты</span>
+                </div>
+            </a>
+
+            <a class="card" href="/admin/categories">
+                <div>
+                    <div class="card-title">Категории</div>
+                    <div class="card-text">Тату, картины, мерч, стили, вложенные разделы и структура сайта.</div>
+                </div>
+                <div>
+                    <span class="stat">Категорий: {{ stats.categories_total }}</span>
+                </div>
+            </a>
+
+            <a class="card" href="/admin/city-slots">
+                <div>
+                    <div class="card-title">Города и даты</div>
+                    <div class="card-text">Свободные даты под Санкт-Петербург, Смоленск и Москву в футере сайта.</div>
+                </div>
+                <div>
+                    <span class="stat ok">Дат: {{ stats.city_slots_total }}</span>
+                </div>
+            </a>
+
+            <a class="card" href="/admin/visual">
+                <div>
+                    <div class="card-title">Визуал главной</div>
+                    <div class="card-text">Фон, видео, логотип, тексты, визуальные блоки и оформление главной страницы.</div>
+                </div>
+                <div>
+                    <span class="stat">Настройки</span>
+                </div>
+            </a>
+
+            <a class="card" href="/admin/media">
+                <div>
+                    <div class="card-title">Медиа-библиотека</div>
+                    <div class="card-text">Единое хранилище картинок, видео, постеров и 3D-моделей.</div>
+                </div>
+                <div>
+                    <span class="stat">
+                        {{ stats.media_total }} файлов
+                    </span>
+                </div>
+            </a>
+
+            <a class="card" href="/admin/media?type=video">
+                <div>
+                    <div class="card-title">Видео</div>
+                    <div class="card-text">Видео для проектов, портфолио, фона сайта и свободных эскизов.</div>
+                </div>
+                <div>
+                    <span class="stat">Видео: {{ stats.videos_total }}</span>
+                </div>
+            </a>
+
+            <a class="card" href="/admin/media?type=model">
+                <div>
+                    <div class="card-title">3D-модели</div>
+                    <div class="card-text">GLB/GLTF/OBJ/STL-файлы для проектов и отдельных карточек.</div>
+                </div>
+                <div>
+                    <span class="stat">3D: {{ stats.models_total }}</span>
+                </div>
+            </a>
+
+            <a class="card" href="/admin/stats">
+                <div>
+                    <div class="card-title">Статистика</div>
+                    <div class="card-text">Визиты, источники переходов, популярные страницы, устройства и браузеры.</div>
+                </div>
+                <div>
+                    <span class="stat">Локальная аналитика</span>
+                </div>
+            </a>
+        </section>
+
+        <section class="panel">
+            <h2>Юридические настройки</h2>
+            <div class="hint">
+                Политика персональных данных, согласие, условия записи, cookies и данные оператора.
+            </div>
+
+            <div class="form-actions">
+                <a class="button" href="/admin/legal">Открыть настройки</a>
+                <a class="button" href="/privacy" target="_blank">Проверить политику</a>
+            </div>
+        </section>
+
+
+        <!-- ATS_ADMIN_INFOLINE_CARD_START -->
+        <a class="card" href="/admin/announcement">
+            <h2>Информационная строка</h2>
+            <p>
+                Верхняя бегущая строка сайта: акции, скидки, свободные даты
+                и временные объявления.
+            </p>
+            <span class="button">Настроить</span>
+        </a>
+        <!-- ATS_ADMIN_INFOLINE_CARD_END -->
+
+</main>
+    <script src="/static/admin_ui.js?v=1"></script>
+
+    <script defer src="/static/js/admin-static-nav.js?v=3"></script>
+</body>
+</html>

@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Проверка загрузок — ArtToSlipAway Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+        <meta name="theme-color" content="#020202">
+
+    <style>
+        .check-hero {
+            margin-bottom: 28px;
+        }
+
+        .check-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 18px;
+        }
+
+        .check-card {
+            border: 1px solid rgba(201, 163, 58, 0.34);
+            background:
+                linear-gradient(180deg, rgba(0,0,0,0.56), rgba(0,0,0,0.84)),
+                radial-gradient(circle at left top, rgba(201, 163, 58, 0.06), transparent 38%);
+            padding: 20px;
+        }
+
+        .check-card h2 {
+            margin-bottom: 10px !important;
+        }
+
+        .check-list {
+            margin: 14px 0 0;
+            padding: 0;
+            list-style: none;
+            display: grid;
+            gap: 10px;
+        }
+
+        .check-list li {
+            border: 1px solid rgba(201, 163, 58, 0.16);
+            background: rgba(0,0,0,0.28);
+            padding: 10px;
+            line-height: 1.45;
+        }
+
+        .check-label {
+            display: inline-flex;
+            margin-bottom: 5px;
+            color: #f2d984;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .format-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .format {
+            border: 1px solid rgba(201, 163, 58, 0.28);
+            color: #c9a33a;
+            padding: 5px 8px;
+            font-size: 12px;
+            background: rgba(0,0,0,0.28);
+        }
+
+        .test-table {
+            margin-top: 22px;
+        }
+
+        .test-table td:first-child {
+            color: #f2d984;
+            width: 220px;
+        }
+
+        .risk {
+            color: #c05a4a;
+        }
+
+        .ok {
+            color: #7daa63;
+        }
+    </style>
+
+    <link rel="stylesheet" href="/static/admin.css?v=9">
+</head>
+
+<body class="admin-page">
+    <header class="admin-header">
+        <a class="brand" href="/admin">ArtToSlipAway Admin</a>
+
+        <nav class="admin-nav">
+            <a href="/admin">Панель</a>
+            <a href="/admin/leads">Заявки</a>
+            <a href="/admin/projects">Проекты</a>
+            <a href="/admin/categories">Категории</a>
+            <a href="/admin/city-slots">Даты</a>
+            <a href="/admin/carousel">Карусель</a>
+            <a href="/admin/media">Медиа</a>
+            <a href="/admin/upload-check">Файлы</a>
+            <a href="/admin/legal">Право</a>
+            <a href="/admin/visual">Визуал</a>
+            <a href="/admin/logout">Выход</a>
+            <a href="/">Сайт</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="check-hero">
+            <h1>Проверка файлов</h1>
+            <div class="hint">
+                Матрица ручной проверки загрузок. Цель — пройти все точки загрузки и убедиться,
+                что изображения, видео, 3D-файлы и клиентские референсы корректно сохраняются,
+                отображаются и не ломают страницы.
+            </div>
+        </section>
+
+        <section class="check-grid">
+            <article class="check-card">
+                <h2>Медиа-библиотека</h2>
+                <div class="hint">Базовая загрузка файлов в общий архив сайта.</div>
+
+                <div class="format-row">
+                    <span class="format">jpg</span>
+                    <span class="format">jpeg</span>
+                    <span class="format">png</span>
+                    <span class="format">webp</span>
+                    <span class="format">gif</span>
+                    <span class="format">mp4</span>
+                    <span class="format">mov</span>
+                    <span class="format">webm</span>
+                    <span class="format">glb</span>
+                    <span class="format">gltf</span>
+                    <span class="format">obj</span>
+                    <span class="format">stl</span>
+                    <span class="format">usdz</span>
+                </div>
+
+                <ul class="check-list">
+                    <li><span class="check-label">Где проверять</span><br><a href="/admin/media">/admin/media</a></li>
+                    <li><span class="check-label">Успех</span><br>Файл появился в списке, превью отображается, ссылка открывается.</li>
+                    <li><span class="check-label">Ошибка</span><br>Файл не должен ломать страницу и не должен сохраняться с опасным расширением.</li>
+                </ul>
+            </article>
+
+            <article class="check-card">
+                <h2>Карусель главной</h2>
+                <div class="hint">Загрузка медиа для карточек главной карусели.</div>
+
+                <div class="format-row">
+                    <span class="format">jpg</span>
+                    <span class="format">png</span>
+                    <span class="format">webp</span>
+                    <span class="format">mp4</span>
+                    <span class="format">mov</span>
+                    <span class="format">glb</span>
+                </div>
+
+                <ul class="check-list">
+                    <li><span class="check-label">Где проверять</span><br><a href="/admin/carousel">/admin/carousel</a></li>
+                    <li><span class="check-label">Успех</span><br>Файл загружается, можно выбрать карточку карусели, запись сохраняется.</li>
+                    <li><span class="check-label">Важно</span><br>Публичную подмену досок включаем позже точечно, чтобы не ломать визуал главной.</li>
+                </ul>
+            </article>
+
+            <article class="check-card">
+                <h2>Проекты / портфолио</h2>
+                <div class="hint">Медиа внутри конкретного проекта.</div>
+
+                <div class="format-row">
+                    <span class="format">jpg</span>
+                    <span class="format">png</span>
+                    <span class="format">webp</span>
+                    <span class="format">mp4</span>
+                    <span class="format">mov</span>
+                    <span class="format">glb</span>
+                </div>
+
+                <ul class="check-list">
+                    <li><span class="check-label">Где проверять</span><br><a href="/admin/projects">/admin/projects</a> → открыть проект → медиа проекта.</li>
+                    <li><span class="check-label">Успех</span><br>Медиа появляется в админке проекта, на странице проекта и на карточке проекта.</li>
+                    <li><span class="check-label">Важно</span><br>Первый активный файл используется как обложка карточки проекта.</li>
+                </ul>
+            </article>
+
+            <article class="check-card">
+                <h2>Свободные эскизы</h2>
+                <div class="hint">Эскизы, которые выводятся в верхней карусели страницы.</div>
+
+                <div class="format-row">
+                    <span class="format">jpg</span>
+                    <span class="format">png</span>
+                    <span class="format">webp</span>
+                    <span class="format">mp4</span>
+                    <span class="format">mov</span>
+                </div>
+
+                <ul class="check-list">
+                    <li><span class="check-label">Где проверять</span><br><a href="/admin/carousel">/admin/carousel</a> → карточка: Свободные эскизы.</li>
+                    <li><span class="check-label">Публично</span><br><a href="/categories/free-sketches">/categories/free-sketches</a></li>
+                    <li><span class="check-label">Успех</span><br>Эскиз появляется в карусели, кнопка “Хочу этот эскиз” ведёт в заявку.</li>
+                </ul>
+            </article>
+
+            <article class="check-card">
+                <h2>Референсы клиента</h2>
+                <div class="hint">Файлы, которые клиент прикладывает к заявке.</div>
+
+                <div class="format-row">
+                    <span class="format">jpg</span>
+                    <span class="format">jpeg</span>
+                    <span class="format">png</span>
+                    <span class="format">webp</span>
+                    <span class="format">pdf</span>
+                </div>
+
+                <ul class="check-list">
+                    <li><span class="check-label">Где проверять</span><br><a href="/request">/request</a></li>
+                    <li><span class="check-label">Админка</span><br><a href="/admin/leads">/admin/leads</a></li>
+                    <li><span class="check-label">Успех</span><br>Файл прикрепился к заявке и открывается из админки.</li>
+                </ul>
+            </article>
+
+            <article class="check-card">
+                <h2>Что должно быть запрещено</h2>
+                <div class="hint">Эти типы не должны проходить загрузку.</div>
+
+                <div class="format-row">
+                    <span class="format risk">php</span>
+                    <span class="format risk">py</span>
+                    <span class="format risk">sh</span>
+                    <span class="format risk">exe</span>
+                    <span class="format risk">js</span>
+                    <span class="format risk">html</span>
+                    <span class="format risk">svg</span>
+                </div>
+
+                <ul class="check-list">
+                    <li><span class="check-label">Цель</span><br>Сайт не должен принимать исполняемые и потенциально опасные файлы.</li>
+                    <li><span class="check-label">Следующий шаг</span><br>После ручной проверки добавим единый строгий upload-policy на backend.</li>
+                </ul>
+            </article>
+        </section>
+
+        <section class="panel test-table">
+            <h2>Тестовая последовательность</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Этап</th>
+                        <th>Что сделать</th>
+                        <th>Что считается успехом</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1. Медиа</td>
+                        <td>Загрузить jpg/png/webp, mp4 или mov, glb через /admin/media.</td>
+                        <td class="ok">Файл появился в медиа-библиотеке и открывается.</td>
+                    </tr>
+                    <tr>
+                        <td>2. Карусель</td>
+                        <td>Загрузить картинку в /admin/carousel и выбрать “Свободные эскизы”.</td>
+                        <td class="ok">Файл появился в списке карусели.</td>
+                    </tr>
+                    <tr>
+                        <td>3. Свободные эскизы</td>
+                        <td>Открыть /categories/free-sketches.</td>
+                        <td class="ok">Файл виден в верхней карусели.</td>
+                    </tr>
+                    <tr>
+                        <td>4. Заявка</td>
+                        <td>Нажать “Хочу этот эскиз” и отправить тестовую заявку.</td>
+                        <td class="ok">В /admin/leads видно выбранный эскиз с миниатюрой.</td>
+                    </tr>
+                    <tr>
+                        <td>5. Проект</td>
+                        <td>Добавить медиа в существующий проект.</td>
+                        <td class="ok">Медиа видно на странице проекта и в карточке проекта.</td>
+                    </tr>
+                    <tr>
+                        <td>6. Референсы</td>
+                        <td>Отправить заявку с jpg/png/pdf.</td>
+                        <td class="ok">Файлы открываются из карточки заявки.</td>
+                    </tr>
+                    <tr>
+                        <td>7. Запрет</td>
+                        <td>Попробовать загрузить .php/.sh/.html.</td>
+                        <td class="ok">Файл не принимается.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script src="/static/admin_ui.js?v=1"></script>
+
+    <script defer src="/static/js/admin-static-nav.js?v=3"></script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+# Add these declarations inside the nginx `http {}` context.
+limit_req_zone $binary_remote_addr zone=ats_global:10m rate=30r/s;
+limit_req_zone $binary_remote_addr zone=ats_admin_login:10m rate=5r/m;
+limit_req_zone $binary_remote_addr zone=ats_request_form:10m rate=10r/m;
+limit_req_zone $binary_remote_addr zone=ats_wp_noise:10m rate=2r/s;

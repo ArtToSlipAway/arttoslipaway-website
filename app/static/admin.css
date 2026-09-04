@@ -1,0 +1,680 @@
+/* === ArtToSlipAway unified admin UI === */
+
+:root {
+    --admin-bg: #070707;
+    --admin-bg-deep: #020202;
+    --admin-panel: rgba(10, 10, 10, 0.86);
+    --admin-panel-soft: rgba(0, 0, 0, 0.42);
+    --admin-gold: #c9a33a;
+    --admin-gold-light: #f2d984;
+    --admin-text: #e8ddc6;
+    --admin-muted: #9f947c;
+    --admin-border: rgba(201, 163, 58, 0.34);
+    --admin-border-soft: rgba(201, 163, 58, 0.18);
+    --admin-danger: #c05a4a;
+    --admin-ok: #7daa63;
+    --admin-blue: #7ca0c9;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body.admin-page {
+    margin: 0;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at center top, rgba(201, 163, 58, 0.10), transparent 34%),
+        linear-gradient(180deg, var(--admin-bg), var(--admin-bg-deep)) !important;
+    color: var(--admin-text) !important;
+    font-family: Arial, sans-serif !important;
+}
+
+body.admin-page a {
+    color: var(--admin-gold);
+    text-decoration: none;
+}
+
+body.admin-page a:hover {
+    color: var(--admin-gold-light);
+}
+
+body.admin-page header {
+    max-width: 1320px !important;
+    margin: 0 auto !important;
+    padding: 26px 22px 12px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    gap: 18px !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+}
+
+body.admin-page .brand {
+    color: var(--admin-gold) !important;
+    font-family: Georgia, "Times New Roman", serif !important;
+    font-size: 22px !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase !important;
+}
+
+body.admin-page nav,
+body.admin-page .admin-nav {
+    display: flex !important;
+    gap: 10px !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    font-size: 12px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.06em !important;
+}
+
+body.admin-page nav a,
+body.admin-page .admin-nav a {
+    display: inline-flex !important;
+    align-items: center !important;
+    min-height: 32px !important;
+    padding: 8px 10px !important;
+    border: 1px solid rgba(201, 163, 58, 0.20) !important;
+    background: rgba(0, 0, 0, 0.24) !important;
+    color: var(--admin-gold) !important;
+}
+
+body.admin-page nav a:hover,
+body.admin-page .admin-nav a:hover {
+    border-color: rgba(242, 217, 132, 0.64) !important;
+    background: rgba(201, 163, 58, 0.12) !important;
+    color: var(--admin-gold-light) !important;
+}
+
+body.admin-page main {
+    max-width: 1320px !important;
+    margin: 0 auto !important;
+    padding: 20px 22px 72px !important;
+}
+
+body.admin-page h1 {
+    font-family: Georgia, "Times New Roman", serif !important;
+    color: var(--admin-gold) !important;
+    font-size: clamp(34px, 4.6vw, 68px) !important;
+    line-height: 0.98 !important;
+    font-weight: 400 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+    margin: 14px 0 12px !important;
+}
+
+body.admin-page h2 {
+    color: var(--admin-gold-light) !important;
+    font-family: Georgia, "Times New Roman", serif !important;
+    font-size: clamp(24px, 3vw, 34px) !important;
+    font-weight: 400 !important;
+    margin: 0 0 18px !important;
+}
+
+body.admin-page .hint,
+body.admin-page .lead,
+body.admin-page .lead-count,
+body.admin-page .empty,
+body.admin-page .media-meta,
+body.admin-page .slot-head,
+body.admin-page .card-text {
+    color: var(--admin-muted) !important;
+    line-height: 1.5 !important;
+}
+
+body.admin-page .panel,
+body.admin-page .lead-card,
+body.admin-page .slot-card,
+body.admin-page .media-card,
+body.admin-page .card,
+body.admin-page .text-card {
+    border: 1px solid var(--admin-border) !important;
+    background:
+        linear-gradient(180deg, rgba(0,0,0,0.56), rgba(0,0,0,0.84)),
+        radial-gradient(circle at left top, rgba(201, 163, 58, 0.06), transparent 38%) !important;
+    box-shadow: 0 0 26px rgba(0,0,0,0.34) !important;
+}
+
+body.admin-page .panel {
+    padding: 22px !important;
+    margin-bottom: 22px !important;
+}
+
+body.admin-page .field,
+body.admin-page .inline-media-field {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 7px !important;
+}
+
+body.admin-page .field.full,
+body.admin-page .inline-media-field.full {
+    grid-column: 1 / -1 !important;
+}
+
+body.admin-page label,
+body.admin-page .label {
+    color: var(--admin-gold) !important;
+    font-size: 11px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+}
+
+body.admin-page input,
+body.admin-page select,
+body.admin-page textarea {
+    width: 100% !important;
+    border: 1px solid rgba(201, 163, 58, 0.32) !important;
+    background: rgba(0,0,0,0.56) !important;
+    color: var(--admin-text) !important;
+    padding: 10px !important;
+    font-family: Arial, sans-serif !important;
+    font-size: 14px !important;
+    outline: none !important;
+}
+
+body.admin-page input:focus,
+body.admin-page select:focus,
+body.admin-page textarea:focus {
+    border-color: var(--admin-gold-light) !important;
+    box-shadow: 0 0 12px rgba(201, 163, 58, 0.16) !important;
+}
+
+body.admin-page textarea {
+    resize: vertical !important;
+}
+
+body.admin-page button,
+body.admin-page .button,
+body.admin-page input[type="submit"] {
+    border: 1px solid var(--admin-gold) !important;
+    background: var(--admin-gold) !important;
+    color: #111 !important;
+    padding: 11px 12px !important;
+    font-family: Arial, sans-serif !important;
+    font-size: 13px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.07em !important;
+    cursor: pointer !important;
+    transition:
+        background 0.22s ease,
+        border-color 0.22s ease,
+        color 0.22s ease,
+        transform 0.22s ease !important;
+}
+
+body.admin-page button:hover,
+body.admin-page .button:hover,
+body.admin-page input[type="submit"]:hover {
+    background: var(--admin-gold-light) !important;
+    border-color: var(--admin-gold-light) !important;
+    transform: translateY(-1px) !important;
+}
+
+body.admin-page button.danger,
+body.admin-page .danger button,
+body.admin-page .danger {
+    border-color: var(--admin-danger) !important;
+    color: var(--admin-danger) !important;
+}
+
+body.admin-page button.danger {
+    background: transparent !important;
+}
+
+body.admin-page button.danger:hover {
+    background: var(--admin-danger) !important;
+    color: #111 !important;
+}
+
+body.admin-page .status-badge,
+body.admin-page .badge,
+body.admin-page .stat {
+    display: inline-flex !important;
+    align-items: center !important;
+    width: fit-content !important;
+    gap: 8px !important;
+    border: 1px solid rgba(201, 163, 58, 0.28) !important;
+    color: var(--admin-gold) !important;
+    padding: 6px 9px !important;
+    font-size: 11px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.055em !important;
+    background: rgba(0,0,0,0.22) !important;
+}
+
+body.admin-page .preview,
+body.admin-page .inline-media-preview,
+body.admin-page .selected-sketch-thumb {
+    border: 1px solid rgba(201, 163, 58, 0.22) !important;
+    background: rgba(0,0,0,0.48) !important;
+}
+
+body.admin-page img,
+body.admin-page video {
+    max-width: 100%;
+}
+
+body.admin-page .admin-section-title {
+    color: var(--admin-gold-light);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 26px;
+    font-weight: 400;
+    margin: 0 0 16px;
+}
+
+body.admin-page .admin-muted {
+    color: var(--admin-muted);
+}
+
+@media (max-width: 900px) {
+    body.admin-page header {
+        align-items: flex-start !important;
+        flex-direction: column !important;
+    }
+
+    body.admin-page nav,
+    body.admin-page .admin-nav {
+        width: 100% !important;
+    }
+
+    body.admin-page nav a,
+    body.admin-page .admin-nav a {
+        flex: 1 1 auto !important;
+        justify-content: center !important;
+    }
+
+    body.admin-page main {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+}
+
+/* === /ArtToSlipAway unified admin UI === */
+
+
+/* === Admin nav order fix === */
+
+body.admin-page .brand,
+body.admin-page a.brand {
+    display: inline-flex !important;
+    align-items: center !important;
+    width: fit-content !important;
+    color: var(--admin-gold) !important;
+    font-family: Georgia, "Times New Roman", serif !important;
+    font-size: 22px !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    border: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+}
+
+body.admin-page .brand:hover,
+body.admin-page a.brand:hover {
+    color: var(--admin-gold-light) !important;
+}
+
+body.admin-page .admin-nav a:last-child {
+    margin-left: 8px !important;
+    border-color: rgba(232, 221, 198, 0.24) !important;
+    color: rgba(232, 221, 198, 0.72) !important;
+}
+
+body.admin-page .admin-nav a:last-child:hover {
+    color: #111 !important;
+    background: var(--admin-gold-light) !important;
+    border-color: var(--admin-gold-light) !important;
+}
+
+/* === /Admin nav order fix === */
+
+
+/* === Admin inner polish v1 === */
+
+body.admin-page .admin-nav a.is-active {
+    background: var(--admin-gold) !important;
+    border-color: var(--admin-gold-light) !important;
+    color: #111 !important;
+}
+
+body.admin-page .admin-nav a.is-active:hover {
+    background: var(--admin-gold-light) !important;
+    color: #111 !important;
+}
+
+body.admin-page .grid,
+body.admin-page .cards,
+body.admin-page .cards-grid,
+body.admin-page .dashboard-grid,
+body.admin-page .media-grid,
+body.admin-page .slots-grid,
+body.admin-page .text-grid,
+body.admin-page .projects-grid,
+body.admin-page .categories-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+    gap: 18px !important;
+}
+
+body.admin-page .panel + .panel {
+    margin-top: 22px !important;
+}
+
+body.admin-page .panel-header,
+body.admin-page .card-header,
+body.admin-page .section-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+    margin-bottom: 16px !important;
+    flex-wrap: wrap !important;
+}
+
+body.admin-page .form-grid,
+body.admin-page .fields-grid,
+body.admin-page .edit-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+}
+
+body.admin-page .actions,
+body.admin-page .form-actions,
+body.admin-page .card-actions,
+body.admin-page .media-actions,
+body.admin-page .slot-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    flex-wrap: wrap !important;
+    margin-top: 14px !important;
+}
+
+body.admin-page .actions form,
+body.admin-page .form-actions form,
+body.admin-page .card-actions form,
+body.admin-page .media-actions form,
+body.admin-page .slot-actions form {
+    display: inline-flex !important;
+    margin: 0 !important;
+}
+
+body.admin-page .admin-danger-button,
+body.admin-page button.admin-danger-button,
+body.admin-page input.admin-danger-button {
+    background: transparent !important;
+    border-color: var(--admin-danger) !important;
+    color: var(--admin-danger) !important;
+}
+
+body.admin-page .admin-danger-button:hover,
+body.admin-page button.admin-danger-button:hover,
+body.admin-page input.admin-danger-button:hover {
+    background: var(--admin-danger) !important;
+    border-color: var(--admin-danger) !important;
+    color: #111 !important;
+}
+
+body.admin-page .admin-primary-button {
+    background: var(--admin-gold) !important;
+    border-color: var(--admin-gold) !important;
+    color: #111 !important;
+}
+
+body.admin-page .admin-upload-form {
+    border: 1px dashed rgba(201, 163, 58, 0.34) !important;
+    background: rgba(0, 0, 0, 0.22) !important;
+    padding: 16px !important;
+}
+
+body.admin-page input[type="file"] {
+    cursor: pointer !important;
+}
+
+body.admin-page input[type="file"]::file-selector-button {
+    border: 1px solid var(--admin-gold) !important;
+    background: transparent !important;
+    color: var(--admin-gold) !important;
+    padding: 9px 12px !important;
+    margin-right: 12px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.06em !important;
+    cursor: pointer !important;
+}
+
+body.admin-page input[type="file"]::file-selector-button:hover {
+    background: var(--admin-gold) !important;
+    color: #111 !important;
+}
+
+body.admin-page table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    border: 1px solid var(--admin-border-soft) !important;
+    background: rgba(0,0,0,0.32) !important;
+}
+
+body.admin-page th,
+body.admin-page td {
+    border-bottom: 1px solid rgba(201, 163, 58, 0.16) !important;
+    padding: 11px 10px !important;
+    text-align: left !important;
+    vertical-align: top !important;
+}
+
+body.admin-page th {
+    color: var(--admin-gold) !important;
+    font-size: 11px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+    background: rgba(201, 163, 58, 0.06) !important;
+}
+
+body.admin-page td {
+    color: var(--admin-text) !important;
+    font-size: 14px !important;
+}
+
+body.admin-page .preview,
+body.admin-page .media-preview,
+body.admin-page .inline-media-preview,
+body.admin-page .selected-sketch-thumb {
+    display: grid !important;
+    place-items: center !important;
+    overflow: hidden !important;
+}
+
+body.admin-page .preview img,
+body.admin-page .preview video,
+body.admin-page .media-preview img,
+body.admin-page .media-preview video,
+body.admin-page .inline-media-preview img,
+body.admin-page .inline-media-preview video {
+    width: 100% !important;
+    max-height: 260px !important;
+    object-fit: contain !important;
+    display: block !important;
+}
+
+body.admin-page .empty {
+    border: 1px dashed rgba(201, 163, 58, 0.28) !important;
+    background: rgba(0,0,0,0.22) !important;
+    padding: 22px !important;
+    text-align: center !important;
+}
+
+body.admin-page .value {
+    color: var(--admin-text) !important;
+}
+
+body.admin-page .value a {
+    word-break: break-word !important;
+}
+
+body.admin-page .small,
+body.admin-page small {
+    color: var(--admin-muted) !important;
+    font-size: 12px !important;
+    line-height: 1.45 !important;
+}
+
+@media (max-width: 760px) {
+    body.admin-page .form-grid,
+    body.admin-page .fields-grid,
+    body.admin-page .edit-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    body.admin-page table {
+        display: block !important;
+        overflow-x: auto !important;
+    }
+}
+
+/* === /Admin inner polish v1 === */
+
+/* === Admin mobile safe-area background fix === */
+
+html {
+    min-height: 100%;
+    background: #020202 !important;
+}
+
+body.admin-page {
+    min-height: 100vh !important;
+    min-height: 100svh !important;
+    background-color: #020202 !important;
+    overflow-x: hidden !important;
+}
+
+@supports (padding: env(safe-area-inset-left)) {
+    body.admin-page {
+        padding-left: env(safe-area-inset-left, 0px);
+        padding-right: env(safe-area-inset-right, 0px);
+    }
+}
+
+/* === /Admin mobile safe-area background fix === */
+
+
+/* === Admin global mobile consistency v9 === */
+
+html,
+body.admin-page {
+    background-color: #020202 !important;
+}
+
+html {
+    min-height: 100%;
+}
+
+body.admin-page {
+    width: 100%;
+    min-height: 100vh !important;
+    min-height: 100svh !important;
+    margin: 0 !important;
+    overflow-x: hidden !important;
+    color: var(--admin-text) !important;
+}
+
+/* Static navigation is the canonical admin header. */
+
+body.admin-page [data-ats-static-admin-header] {
+    box-sizing: border-box !important;
+}
+
+body.admin-page .ats-admin-static-brand {
+    color: var(--admin-gold) !important;
+}
+
+body.admin-page .ats-admin-static-nav {
+    width: 100%;
+}
+
+body.admin-page .ats-admin-static-nav a {
+    border: 1px solid rgba(201, 163, 58, 0.28) !important;
+    background: rgba(0, 0, 0, 0.34) !important;
+    color: var(--admin-gold) !important;
+}
+
+body.admin-page .ats-admin-static-nav a:hover,
+body.admin-page .ats-admin-static-nav a.is-active {
+    border-color: var(--admin-gold) !important;
+    background: var(--admin-gold) !important;
+    color: #111 !important;
+}
+
+@media (max-width: 760px) {
+    html,
+    body.admin-page {
+        background: #020202 !important;
+    }
+
+    body.admin-page [data-ats-static-admin-header] {
+        padding-left:
+            max(16px, env(safe-area-inset-left, 0px)) !important;
+        padding-right:
+            max(16px, env(safe-area-inset-right, 0px)) !important;
+    }
+
+    body.admin-page .ats-admin-static-nav {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+    }
+
+    body.admin-page .ats-admin-static-nav a {
+        flex: 0 0 auto !important;
+        min-height: 34px !important;
+        height: 34px !important;
+        padding: 0 10px !important;
+        font-size: 12px !important;
+        white-space: nowrap !important;
+    }
+
+    body.admin-page main {
+        padding-left:
+            max(16px, env(safe-area-inset-left, 0px)) !important;
+        padding-right:
+            max(16px, env(safe-area-inset-right, 0px)) !important;
+    }
+}
+
+/* === /Admin global mobile consistency v9 === */
+
+
+/* === Admin shell matches dashboard main v10 === */
+
+/*
+ * admin_stats.html and admin_announcement.html use .admin-shell
+ * instead of <main>. Keep their content geometry identical
+ * to the dashboard main container.
+ */
+body.admin-page .admin-shell {
+    width: 100% !important;
+    max-width: 1320px !important;
+    margin: 0 auto !important;
+    padding: 20px 22px 72px !important;
+}
+
+@media (max-width: 900px) {
+    body.admin-page .admin-shell {
+        padding-left:
+            max(16px, env(safe-area-inset-left, 0px)) !important;
+        padding-right:
+            max(16px, env(safe-area-inset-right, 0px)) !important;
+    }
+}
+
+@media (max-width: 760px) {
+    body.admin-page .admin-shell {
+        padding-top: 20px !important;
+        padding-bottom: 72px !important;
+    }
+}
+
+/* === /Admin shell matches dashboard main v10 === */

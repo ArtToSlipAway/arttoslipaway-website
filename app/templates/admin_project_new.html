@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить проект — ArtToSlipAway</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+        <meta name="theme-color" content="#020202">
+<style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #111;
+            color: #f2f2f2;
+        }
+
+        header {
+            padding: 24px 40px;
+            border-bottom: 1px solid #222;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        a {
+            color: #f2f2f2;
+            text-decoration: none;
+        }
+
+        main {
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 42px;
+            margin: 0 0 28px;
+        }
+
+        form {
+            display: grid;
+            gap: 20px;
+        }
+
+        label {
+            display: grid;
+            gap: 8px;
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 13px 14px;
+            border-radius: 14px;
+            border: 1px solid #444;
+            background: #161616;
+            color: #f2f2f2;
+            font-size: 16px;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .checkbox {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            color: #aaa;
+        }
+
+        .checkbox input {
+            width: auto;
+        }
+
+        button {
+            width: fit-content;
+            border: none;
+            background: #f2f2f2;
+            color: #111;
+            padding: 14px 22px;
+            border-radius: 999px;
+            font-weight: 800;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .hint {
+            color: #777;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 720px) {
+            main {
+                padding: 30px 20px;
+            }
+
+            .row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .image-preview-wrap {
+            border: 1px solid #333;
+            border-radius: 18px;
+            overflow: hidden;
+            background: #161616;
+            max-width: 420px;
+            padding: 14px;
+        }
+
+        .image-preview {
+            width: 100%;
+            display: block;
+            border-radius: 14px;
+            margin-top: 10px;
+        }
+
+    </style>
+
+    <link rel="stylesheet" href="/static/admin.css?v=9">
+</head>
+
+<body class="admin-page">
+    <header>
+        <a class="brand" href="/admin">ArtToSlipAway Admin</a>
+        <a href="/">ArtToSlipAway</a>
+
+        <nav class="admin-nav">
+            <a href="/admin">Панель</a>
+            <a href="/admin/leads">Заявки</a>
+            <a href="/admin/projects">Проекты</a>
+            <a href="/admin/categories">Категории</a>
+            <a href="/admin/city-slots">Даты</a>
+            <a href="/admin/carousel">Карусель</a>
+            <a href="/admin/media">Медиа</a>
+            <a href="/admin/upload-check">Файлы</a>
+            <a href="/admin/legal">Право</a>
+            <a href="/admin/visual">Визуал</a>
+            <a href="/admin/logout">Выход</a>
+            <a href="/">Сайт</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Добавить проект</h1>
+
+        <form method="post" action="/admin/projects/new" enctype="multipart/form-data">
+            <label>
+                Категория проекта
+                <select name="category_slug" required>
+                    <option value="tattoo">Татуировка / без подкатегории</option>
+
+                    {% for category in categories %}
+                        <option value="{{ category.slug }}">
+                            {% if category.parent_slug == "tattoo" %}
+                                Татуировка — {{ category.title }}
+                            {% elif category.parent_slug == "paintings" %}
+                                Картины — {{ category.title }}
+                            {% elif category.slug == "merch" %}
+                                Мерч
+                            {% else %}
+                                {{ category.title }}
+                            {% endif %}
+                        </option>
+                    {% endfor %}
+                </select>
+
+                <div class="hint">
+                    От этого зависит, в какой раздел сайта попадёт проект.
+                </div>
+            </label>
+
+            <div class="row">
+                <label>
+                    Название
+                    <input type="text" name="title" required>
+                </label>
+
+                <label>
+                    Slug / адрес
+                    <input type="text" name="slug" required placeholder="naprimer-yaponskiy-proekt">
+                </label>
+            </div>
+
+            <div class="row">
+                <label>
+                    Статус
+                    <select name="status">
+                        <option value="available">Доступен</option>
+                        <option value="reserved">Забронирован</option>
+                        <option value="sold">Продан</option>
+                        <option value="done">Выполнен</option>
+                        <option value="draft">Черновик</option>
+                        <option value="hidden">Скрыт</option>
+                    </select>
+                </label>
+
+                <label>
+                    Цена
+                    <input type="text" name="price" placeholder="по запросу / от ...">
+                </label>
+            </div>
+
+            <label>
+                Краткое описание
+                <textarea name="short_description"></textarea>
+            </label>
+
+            <label>
+                Полное описание
+                <textarea name="full_description"></textarea>
+            </label>
+
+            <div class="row">
+                <label>
+                    Стиль
+                    <input type="text" name="style" placeholder="Япония / гравюра / графика">
+                </label>
+
+                <label>
+                    Формат
+                    <input type="text" name="format" placeholder="Тату-проект / холст / скейт">
+                </label>
+            </div>
+
+            <label>
+                Ссылка на изображение
+                <input type="text" name="external_image_url" placeholder=" или внешняя ссылка">
+            </label>
+
+            <label>
+                Загрузить изображение
+                <input type="file" name="image_file" accept="image/*">
+            </label>
+
+            <div class="image-preview-wrap" id="imagePreviewWrap" style="display:none;">
+                <div class="hint">Предпросмотр изображения</div>
+                <img id="imagePreview" class="image-preview" src="" alt="Предпросмотр">
+            </div>
+
+            <label class="checkbox">
+                <input type="checkbox" name="is_featured">
+                Показывать как избранный проект
+            </label>
+
+            <button type="submit">Создать проект</button>
+        </form>
+    </main>
+
+    <script>
+        function transliterate(text) {
+            const map = {
+                'а':'a','б':'b','в':'v','г':'g','д':'d','е':'e','ё':'e','ж':'zh','з':'z','и':'i','й':'y',
+                'к':'k','л':'l','м':'m','н':'n','о':'o','п':'p','р':'r','с':'s','т':'t','у':'u','ф':'f',
+                'х':'h','ц':'ts','ч':'ch','ш':'sh','щ':'sch','ъ':'','ы':'y','ь':'','э':'e','ю':'yu','я':'ya'
+            };
+
+            return text
+                .toLowerCase()
+                .split('')
+                .map(char => map[char] || char)
+                .join('')
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-+|-+$/g, '')
+                .replace(/-+/g, '-');
+        }
+
+        const titleInput = document.querySelector('input[name="title"]');
+        const slugInput = document.querySelector('input[name="slug"]');
+
+        if (titleInput && slugInput) {
+            titleInput.addEventListener('input', function () {
+                if (!slugInput.dataset.edited) {
+                    slugInput.value = transliterate(titleInput.value);
+                }
+            });
+
+            slugInput.addEventListener('input', function () {
+                slugInput.dataset.edited = 'true';
+            });
+        }
+    </script>
+
+
+    <script>
+        const imageInput = document.querySelector('input[name="image_file"]');
+        const previewWrap = document.getElementById('imagePreviewWrap');
+        const previewImage = document.getElementById('imagePreview');
+
+        if (imageInput && previewWrap && previewImage) {
+            imageInput.addEventListener('change', function () {
+                const file = imageInput.files[0];
+
+                if (!file) {
+                    previewWrap.style.display = 'none';
+                    previewImage.src = '';
+                    return;
+                }
+
+                const reader = new FileReader();
+
+                reader.onload = function (event) {
+                    previewImage.src = event.target.result;
+                    previewWrap.style.display = 'block';
+                };
+
+                reader.readAsDataURL(file);
+            });
+        }
+    </script>
+
+    <script src="/static/admin_ui.js?v=1"></script>
+
+    <script defer src="/static/js/admin-static-nav.js?v=3"></script>
+</body>
+</html>

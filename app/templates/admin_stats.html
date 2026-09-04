@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Статистика сайта — ArtToSlipAway Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+        <meta name="theme-color" content="#020202">
+<style>
+        :root {
+            --gold: #c9a33a;
+            --gold-light: #f2d984;
+            --bg: #050505;
+            --text: #e8dcc4;
+            --muted: #9f947f;
+            --border: rgba(201, 163, 58, 0.34);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(201, 163, 58, 0.08), transparent 34%),
+                linear-gradient(180deg, #111, #050505 52%, #020202);
+            color: var(--text);
+        }
+
+        a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        .admin-shell {
+            max-width: 1360px;
+            margin: 0 auto;
+            padding: 28px 28px 80px;
+        }
+
+        .admin-brand {
+            font-family: Georgia, "Times New Roman", serif;
+            color: var(--gold);
+            font-size: 26px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+
+        .admin-nav {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 44px;
+        }
+
+        .admin-nav a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 36px;
+            padding: 9px 13px;
+            border: 1px solid rgba(201, 163, 58, 0.28);
+            color: var(--gold);
+            background: rgba(0,0,0,0.34);
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            font-size: 13px;
+            line-height: 1;
+        }
+
+        .admin-nav a:hover,
+        .admin-nav a.is-active {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: #111;
+        }
+
+        h1 {
+            margin: 0 0 14px;
+            color: #f0f0f0;
+            font-size: 32px;
+            line-height: 1.2;
+        }
+
+        .stats-lead {
+            max-width: 860px;
+            color: var(--muted);
+            line-height: 1.55;
+            margin: 0 0 22px;
+            font-size: 16px;
+        }
+
+        .stats-note {
+            max-width: 1260px;
+            border: 1px solid rgba(201, 163, 58, 0.24);
+            background: rgba(0,0,0,0.28);
+            color: var(--muted);
+            padding: 14px 16px;
+            line-height: 1.5;
+            font-size: 14px;
+            margin-top: 22px;
+        }
+
+        .stats-note strong {
+            color: var(--gold-light);
+        }
+
+        @media (max-width: 760px) {
+            .admin-shell {
+                padding: 22px 16px 60px;
+            }
+
+            .admin-brand {
+                font-size: 22px;
+                letter-spacing: 0.12em;
+            }
+
+            .admin-nav a {
+                font-size: 12px;
+                padding: 9px 10px;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="/static/admin.css?v=10">
+</head>
+
+<body class="admin-page">
+<div class="admin-shell">
+    <div class="admin-brand">ArtToSlipAway Admin</div>
+
+    <nav class="admin-nav">
+        <a href="/admin">Панель</a>
+        <a href="/admin/leads">Заявки</a>
+        <a href="/admin/projects">Проекты</a>
+        <a href="/admin/categories">Категории</a>
+        <a href="/admin/city-slots">Даты</a>
+        <a href="/admin/carousel">Карусель</a>
+        <a href="/admin/media">Медиа</a>
+        <a href="/admin/upload-check">Файлы</a>
+        <a href="/admin/legal">Право</a>
+        <a class="is-active" href="/admin/stats">Статистика</a>
+        <a href="/admin/visual">Визуал</a>
+        <a href="/admin/announcement">Инфострока</a>
+        <a href="/admin/system">Сервер</a>
+        <a href="/admin/logout">Выход</a>
+        <a href="/" target="_blank">Сайт</a>
+    </nav>
+
+    <h1>Статистика сайта</h1>
+
+    <p class="stats-lead">
+        Здесь показана очищенная статистика по публичным страницам сайта:
+        без админки, API, статики, сканеров, curl, ботов, WordPress-проб и технических обращений.
+    </p>
+
+    <div class="stats-note">
+        <strong>Важно:</strong> это локальная статистика сайта. Она ближе к реальному интересу клиентов,
+        чем сырые серверные визиты, но не заменяет Google Analytics.
+    </div>
+</div>
+
+<script defer src="/static/js/admin-clean-stats.js?v=6"></script>
+
+    <script defer src="/static/js/admin-static-nav.js?v=4"></script>
+</body>
+</html>

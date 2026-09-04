@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактировать направление — ArtToSlipAway</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+        <meta name="theme-color" content="#020202">
+<style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #111;
+            color: #f2f2f2;
+        }
+
+        header {
+            padding: 24px 40px;
+            border-bottom: 1px solid #222;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        a {
+            color: #f2f2f2;
+            text-decoration: none;
+        }
+
+        main {
+            padding: 40px;
+            max-width: 820px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #aaa;
+            line-height: 1.5;
+        }
+
+        form {
+            margin-top: 30px;
+            display: grid;
+            gap: 18px;
+        }
+
+        label {
+            display: grid;
+            gap: 8px;
+            color: #ccc;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 14px 16px;
+            border-radius: 14px;
+            border: 1px solid #333;
+            background: #181818;
+            color: #f2f2f2;
+            font-size: 16px;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .checkbox {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            color: #aaa;
+        }
+
+        .checkbox input {
+            width: auto;
+        }
+
+        button {
+            border: none;
+            background: #f2f2f2;
+            color: #111;
+            padding: 15px 22px;
+            border-radius: 999px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            width: fit-content;
+        }
+
+        .hint {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .current-image {
+            max-width: 320px;
+            border-radius: 18px;
+            border: 1px solid #333;
+            margin-top: 8px;
+        }
+
+        .category-image-preview-wrap {
+            border: 1px solid #333;
+            border-radius: 18px;
+            overflow: hidden;
+            background: #161616;
+            max-width: 520px;
+            padding: 14px;
+            margin-top: 12px;
+        }
+
+        .category-image-preview {
+            width: 100%;
+            display: block;
+            border-radius: 14px;
+            margin-top: 10px;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            background: #222;
+        }
+
+        .image-note {
+            color: #777;
+            font-size: 13px;
+            line-height: 1.45;
+            margin-top: 8px;
+        }
+
+    </style>
+
+    <style>
+        .certificate-3d-admin {
+            display: grid;
+            gap: 18px;
+            padding: 22px;
+            border: 1px solid #333;
+            border-radius: 20px;
+            background: #151515;
+        }
+
+        .certificate-3d-admin h2 {
+            margin: 0;
+            font-size: 25px;
+        }
+    </style>
+
+
+    <link rel="stylesheet" href="/static/admin.css?v=9">
+</head>
+<body class="admin-page">
+    <header>
+        <a class="brand" href="/admin">ArtToSlipAway Admin</a>
+        <a href="/">ArtToSlipAway</a>
+        <nav class="admin-nav">
+            <a href="/admin">Панель</a>
+            <a href="/admin/leads">Заявки</a>
+            <a href="/admin/projects">Проекты</a>
+            <a href="/admin/categories">Категории</a>
+            <a href="/admin/city-slots">Даты</a>
+            <a href="/admin/carousel">Карусель</a>
+            <a href="/admin/media">Медиа</a>
+            <a href="/admin/upload-check">Файлы</a>
+            <a href="/admin/legal">Право</a>
+            <a href="/admin/visual">Визуал</a>
+            <a href="/admin/logout">Выход</a>
+            <a href="/">Сайт</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Редактировать направление</h1>
+        <p>
+            Здесь можно прикрепить изображение к разделу или стилю:
+            японская татуировка, гравюра, картины на фанере и так далее.
+        </p>
+
+        <form method="post" action="/admin/categories/{{ category.id }}/edit" enctype="multipart/form-data">
+            <label>
+                Название
+                <input type="text" name="title" required value="{{ category.title }}">
+            </label>
+
+            <label>
+                Slug
+                <input type="text" name="slug" required value="{{ category.slug }}">
+                <span class="hint">Латиницей, без пробелов. Например: tattoo-japanese или paintings-plywood</span>
+            </label>
+
+            <label>
+                Родительский раздел
+                <input type="text" name="parent_slug" value="{{ category.parent_slug or '' }}">
+                <span class="hint">Для самостоятельных направлений оставить пустым.
+                Для вложенных разделов использовать slug родительской категории.</span>
+            </label>
+
+            <label>
+                Группа
+                <select name="category_group">
+                    <option value="main" {% if category.category_group == "main" %}selected{% endif %}>Главный раздел</option>
+                    <option value="tattoo" {% if category.category_group == "tattoo" %}selected{% endif %}>Татуировка</option>
+                    <option value="paintings" {% if category.category_group == "paintings" %}selected{% endif %}>Картины</option>
+                    <option value="products" {% if category.category_group == "products" %}selected{% endif %}>Сертификаты и товары</option>
+                    <option value="other" {% if category.category_group == "other" %}selected{% endif %}>Другое</option>
+                </select>
+            </label>
+
+            <label>
+                Описание
+                <textarea name="short_description">{{ category.short_description or "" }}</textarea>
+            </label>
+
+            {% if category.image_url %}
+                <div>
+                    <div class="hint">Текущее изображение:</div>
+                    <img class="current-image" src="{{ category.image_url }}" alt="{{ category.title }}">
+                </div>
+            {% endif %}
+
+            <label>
+                Загрузить изображение
+                <input type="file" name="image_file" accept=".jpg,.jpeg,.png,.webp">
+                <div class="image-note">
+                    Лучше загружать горизонтальное изображение. Оптимально: 1600×900 или другой формат 16:9.
+                </div>
+
+                <div class="category-image-preview-wrap" id="categoryImagePreviewWrap" style="display:none;">
+                    <div class="hint">Предпросмотр нового изображения</div>
+                    <img id="categoryImagePreview" class="category-image-preview" src="" alt="Предпросмотр">
+                </div>
+                <span class="hint">Лучше webp или jpg до 1–2 МБ.</span>
+            </label>
+
+            <label>
+                Ссылка на изображение
+                <input type="text" name="external_image_url" value="{{ category.image_url or '' }}">
+                <span class="hint">Если загрузить новый файл, он заменит эту ссылку.</span>
+            </label>
+
+            {% if category.slug == "tattoo-gift-certificate" %}
+                <!-- ATS_CERTIFICATE_3D_ADMIN_V1 -->
+                <section class="certificate-3d-admin">
+                    <h2>3D-модель сертификата</h2>
+
+                    <p class="hint">
+                        Здесь загружается интерактивная модель,
+                        которая будет показана справа на странице
+                        подарочного сертификата.
+                    </p>
+
+                    {% if certificate_model %}
+                        <div class="category-image-preview-wrap">
+                            <div class="hint">
+                                Текущая модель:
+                                {{ certificate_model.original_filename or certificate_model.file_path }}
+                            </div>
+
+                            {% if certificate_model.poster_path %}
+                                <img
+                                    class="category-image-preview"
+                                    src="{{ certificate_model.poster_path }}"
+                                    alt="Постер 3D-модели сертификата"
+                                >
+                            {% endif %}
+                        </div>
+                    {% endif %}
+
+                    <label>
+                        Загрузить 3D-модель
+                        <input
+                            type="file"
+                            name="certificate_model_file"
+                            accept=".glb,.gltf"
+                        >
+                        <span class="hint">
+                            Рекомендуемый формат — GLB.
+                            Новая модель заменит предыдущую.
+                        </span>
+                    </label>
+
+                    <label>
+                        Постер для 3D-модели
+                        <input
+                            type="file"
+                            name="certificate_poster_file"
+                            accept=".jpg,.jpeg,.png,.webp"
+                        >
+                        <span class="hint">
+                            Показывается до загрузки модели.
+                            Подойдёт PNG, WebP или JPG.
+                        </span>
+                    </label>
+                </section>
+            {% endif %}
+
+            <label>
+                Порядок показа
+                <input type="number" name="display_order" value="{{ category.display_order or 100 }}">
+            </label>
+
+            <label class="checkbox">
+                <input type="checkbox" name="is_active" value="yes" {% if category.is_active %}checked{% endif %}>
+                Показывать направление
+            </label>
+
+            <button type="submit">Сохранить направление</button>
+        </form>
+    </main>
+
+    <script>
+        const categoryImageInput = document.querySelector('input[name="image_file"]');
+        const categoryPreviewWrap = document.getElementById('categoryImagePreviewWrap');
+        const categoryPreviewImage = document.getElementById('categoryImagePreview');
+
+        if (categoryImageInput && categoryPreviewWrap && categoryPreviewImage) {
+            categoryImageInput.addEventListener('change', function () {
+                const file = categoryImageInput.files[0];
+
+                if (!file) {
+                    categoryPreviewWrap.style.display = 'none';
+                    categoryPreviewImage.src = '';
+                    return;
+                }
+
+                const reader = new FileReader();
+
+                reader.onload = function (event) {
+                    categoryPreviewImage.src = event.target.result;
+                    categoryPreviewWrap.style.display = 'block';
+                };
+
+                reader.readAsDataURL(file);
+            });
+        }
+    </script>
+
+    <script src="/static/admin_ui.js?v=1"></script>
+
+    <script defer src="/static/js/admin-static-nav.js?v=3"></script>
+</body>
+</html>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Категории — ArtToSlipAway</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+        <meta name="theme-color" content="#020202">
+<style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #111;
+            color: #f2f2f2;
+        }
+
+        header {
+            padding: 24px 40px;
+            border-bottom: 1px solid #222;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        a {
+            color: #f2f2f2;
+            text-decoration: none;
+        }
+
+        main {
+            padding: 40px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 42px;
+            margin: 0 0 12px;
+        }
+
+        .lead {
+            color: #aaa;
+            font-size: 18px;
+            line-height: 1.5;
+            max-width: 800px;
+            margin-bottom: 34px;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+            gap: 26px;
+        }
+
+        .main-card {
+            border: 1px solid #2a2a2a;
+            border-radius: 26px;
+            background: #161616;
+            overflow: hidden;
+        }
+
+        .main-image {
+            width: 100%;
+            aspect-ratio: 16 / 8;
+            object-fit: cover;
+            display: block;
+            background: #222;
+        }
+
+        .main-placeholder {
+            aspect-ratio: 16 / 8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            background: #202020;
+        }
+
+        .main-body {
+            padding: 24px;
+        }
+
+        .main-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 14px;
+            align-items: flex-start;
+            margin-bottom: 14px;
+        }
+
+        .main-title {
+            font-size: 28px;
+            font-weight: 800;
+            line-height: 1.1;
+        }
+
+        .muted {
+            color: #888;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .description {
+            color: #aaa;
+            line-height: 1.5;
+            margin: 14px 0 22px;
+        }
+
+        .edit {
+            border: 1px solid #444;
+            background: transparent;
+            color: #f2f2f2;
+            padding: 8px 12px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .subcategories {
+            display: grid;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .subcategory {
+            border: 1px solid #2d2d2d;
+            border-radius: 18px;
+            padding: 14px;
+            background: #121212;
+            display: grid;
+            grid-template-columns: 86px 1fr auto;
+            gap: 14px;
+            align-items: center;
+        }
+
+        .sub-image {
+            width: 86px;
+            height: 66px;
+            object-fit: cover;
+            border-radius: 12px;
+            background: #222;
+            border: 1px solid #333;
+        }
+
+        .sub-placeholder {
+            width: 86px;
+            height: 66px;
+            border-radius: 12px;
+            background: #222;
+            border: 1px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
+            font-size: 12px;
+        }
+
+        .sub-title {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 9px;
+            border-radius: 999px;
+            border: 1px solid #444;
+            color: #ccc;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        @media (max-width: 700px) {
+            main {
+                padding: 30px 18px;
+            }
+
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .subcategory {
+                grid-template-columns: 1fr;
+            }
+
+            .sub-image,
+            .sub-placeholder {
+                width: 100%;
+                height: 120px;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="/static/admin.css?v=9">
+</head>
+<body class="admin-page">
+    <header>
+        <a class="brand" href="/admin">ArtToSlipAway Admin</a>
+<nav class="admin-nav">
+            <a href="/admin">Панель</a>
+            <a href="/admin/leads">Заявки</a>
+            <a href="/admin/projects">Проекты</a>
+            <a href="/admin/categories">Категории</a>
+            <a href="/admin/city-slots">Даты</a>
+            <a href="/admin/carousel">Карусель</a>
+            <a href="/admin/media">Медиа</a>
+            <a href="/admin/upload-check">Файлы</a>
+            <a href="/admin/legal">Право</a>
+            <a href="/admin/visual">Визуал</a>
+            <a href="/admin/logout">Выход</a>
+            <a href="/">Сайт</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Категории</h1>
+
+        <div class="lead">
+            Здесь находятся направления сайта: авторская художественная татуировка,
+            картины, подарочный сертификат, стикерпак, набор для заживления
+            и футболки. Для каждого направления можно изменить описание,
+            изображение, порядок и статус публикации.
+        </div>
+
+        <div class="main-grid">
+            {% for main_category in categories %}
+                {% if not main_category.parent_slug %}
+                    <section class="main-card">
+                        {% if main_category.image_url %}
+                            <img class="main-image" src="{{ main_category.image_url }}" alt="{{ main_category.title }}">
+                        {% else %}
+                            <div class="main-placeholder">Изображение основной категории</div>
+                        {% endif %}
+
+                        <div class="main-body">
+                            <div class="main-top">
+                                <div>
+                                    <div class="main-title">{{ main_category.title }}</div>
+                                    <div class="muted">
+                                        slug: {{ main_category.slug }} · порядок: {{ main_category.display_order }}
+                                    </div>
+
+                                    <span class="status">
+                                        {% if main_category.is_active %}
+                                            Активно
+                                        {% else %}
+                                            Скрыто
+                                        {% endif %}
+                                    </span>
+                                </div>
+
+                                <a class="edit" href="/admin/categories/{{ main_category.id }}/edit">Редактировать</a>
+                            </div>
+
+                            {% if main_category.short_description %}
+                                <div class="description">{{ main_category.short_description }}</div>
+                            {% endif %}
+
+                            <div class="subcategories">
+                                {% for subcategory in categories %}
+                                    {% if subcategory.parent_slug == main_category.slug %}
+                                        <article class="subcategory">
+                                            {% if subcategory.image_url %}
+                                                <img class="sub-image" src="{{ subcategory.image_url }}" alt="{{ subcategory.title }}">
+                                            {% else %}
+                                                <div class="sub-placeholder">Нет фото</div>
+                                            {% endif %}
+
+                                            <div>
+                                                <div class="sub-title">{{ subcategory.title }}</div>
+                                                <div class="muted">
+                                                    slug: {{ subcategory.slug }} · порядок: {{ subcategory.display_order }}
+                                                </div>
+
+                                                {% if subcategory.short_description %}
+                                                    <div class="muted">{{ subcategory.short_description }}</div>
+                                                {% endif %}
+                                            </div>
+
+                                            <a class="edit" href="/admin/categories/{{ subcategory.id }}/edit">Редактировать</a>
+                                        </article>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </section>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </main>
+    <script src="/static/admin_ui.js?v=1"></script>
+
+    <script defer src="/static/js/admin-static-nav.js?v=3"></script>
+</body>
+</html>

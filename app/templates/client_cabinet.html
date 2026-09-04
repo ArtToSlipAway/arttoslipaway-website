@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Личный кабинет заявки — ArtToSlipAway</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+
+    <style>
+        :root {
+            --gold: #c9a33a;
+            --gold-light: #f2d984;
+            --bg: #050505;
+            --panel: rgba(0,0,0,0.72);
+            --border: rgba(201,163,58,0.42);
+            --text: #e8dcc4;
+            --muted: #9f947f;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at top, rgba(201,163,58,0.10), transparent 32%),
+                linear-gradient(180deg, #101010, #050505 68%);
+            color: var(--text);
+            font-family: Arial, sans-serif;
+        }
+
+        .page {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 34px 18px 70px;
+        }
+
+        .brand {
+            color: var(--gold);
+            font-family: Georgia, "Times New Roman", serif;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            font-size: 18px;
+            margin-bottom: 28px;
+        }
+
+        .card {
+            border: 1px solid var(--border);
+            background:
+                linear-gradient(180deg, rgba(0,0,0,0.52), rgba(0,0,0,0.86)),
+                radial-gradient(circle at left top, rgba(201,163,58,0.07), transparent 38%);
+            padding: 24px;
+            margin-bottom: 18px;
+            box-shadow: 0 0 34px rgba(0,0,0,0.38);
+        }
+
+        h1 {
+            margin: 0 0 10px;
+            color: var(--gold-light);
+            font-family: Georgia, "Times New Roman", serif;
+            font-weight: 400;
+            font-size: clamp(32px, 5vw, 54px);
+            line-height: 1.05;
+        }
+
+        h2 {
+            margin: 0 0 18px;
+            color: var(--gold);
+            font-family: Georgia, "Times New Roman", serif;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-size: 22px;
+        }
+
+        .muted {
+            color: var(--muted);
+            line-height: 1.55;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .field {
+            border: 1px solid rgba(201,163,58,0.18);
+            background: rgba(0,0,0,0.30);
+            padding: 13px;
+        }
+
+        .field.full {
+            grid-column: 1 / -1;
+        }
+
+        .label {
+            color: var(--gold);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 7px;
+        }
+
+        .value {
+            color: var(--text);
+            white-space: pre-wrap;
+            word-break: break-word;
+            line-height: 1.45;
+        }
+
+        .files {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .file-link,
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border);
+            color: var(--gold-light);
+            background: rgba(0,0,0,0.38);
+            padding: 10px 12px;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            font-size: 12px;
+        }
+
+        .button {
+            margin-top: 12px;
+        }
+
+        @media (max-width: 720px) {
+            .grid { grid-template-columns: 1fr; }
+            .card { padding: 18px; }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <div class="brand">ArtToSlipAway</div>
+
+    <section class="card">
+        <h1>Заявка #{{ lead.id }}</h1>
+        <div class="muted">
+            Это временный личный кабинет по вашей заявке. Здесь собрана основная информация,
+            которую мастер видит перед консультацией.
+        </div>
+    </section>
+
+    <section class="card">
+        <h2>Данные заявки</h2>
+
+        <div class="grid">
+            <div class="field">
+                <div class="label">Имя</div>
+                <div class="value">{{ lead.name or "—" }}</div>
+            </div>
+
+            <div class="field">
+                <div class="label">Статус</div>
+                <div class="value">{{ lead.lead_status or "new" }}</div>
+            </div>
+
+            <div class="field">
+                <div class="label">Город</div>
+                <div class="value">{{ lead.city or "—" }}</div>
+            </div>
+
+            <div class="field">
+                <div class="label">Предпочтительные даты</div>
+                <div class="value">{{ lead.preferred_dates or "—" }}</div>
+            </div>
+
+            <div class="field">
+                <div class="label">Формат</div>
+                <div class="value">{{ lead.request_type or lead.service_type or lead.project_interest or "—" }}</div>
+            </div>
+
+            <div class="field">
+                <div class="label">Стиль</div>
+                <div class="value">{{ lead.style_preference or "—" }}</div>
+            </div>
+
+            <div class="field">
+                <div class="label">Зона / место</div>
+                <div class="value">{{ lead.body_place or "—" }}</div>
+            </div>
+
+            <div class="field">
+                <div class="label">Размер</div>
+                <div class="value">{{ lead.approximate_size or "—" }}</div>
+            </div>
+
+            <div class="field full">
+                <div class="label">Идея</div>
+                <div class="value">{{ lead.idea or lead.message or "—" }}</div>
+            </div>
+
+            <div class="field full">
+                <div class="label">Выбранный проект / эскиз</div>
+                <div class="value">{{ lead.selected_sketch_title or lead.project_title or "—" }}</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="card">
+        <h2>Файлы</h2>
+
+        {% if files %}
+            <div class="files">
+                {% for file in files %}
+                    <a class="file-link" href="{{ file.public_path }}" target="_blank">
+                        {{ file.original_filename or ("Файл #" ~ file.id) }}
+                    </a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="muted">Файлы к заявке пока не прикреплены.</div>
+        {% endif %}
+    </section>
+
+    <section class="card">
+        <h2>Связь</h2>
+        <div class="muted">
+            Для уточнения деталей напишите мастеру в Telegram или используйте контакт,
+            который вы оставили в заявке.
+        </div>
+        <a class="button" href="https://t.me/ArtToSlipAway0" target="_blank">Написать в Telegram</a>
+    </section>
+</div>
+    <script src="/static/tattoo_cursor.js?v=20260722_201404" defer></script>
+</body>
+</html>

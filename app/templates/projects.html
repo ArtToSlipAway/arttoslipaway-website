@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Портфолио тату-мастера Дмитрия — ArtToSlipAway</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Портфолио тату-мастера Дмитрия: авторские татуировки, олд-скул, японская и неояпонская татуировка, гравюра, дотворк, картины на скейтбордах и холстах.">
+    <link rel="canonical" href="https://arttoslipaway.art{{ request.url.path }}">
+    <meta property="og:site_name" content="ArtToSlipAway">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Портфолио тату-мастера Дмитрия — ArtToSlipAway">
+    <meta property="og:description" content="Портфолио тату-мастера Дмитрия: авторские татуировки, японская стилистика, гравюра, дотворк и авторские картины.">
+    <meta property="og:url" content="https://arttoslipaway.art{{ request.url.path }}">
+    <meta property="og:image" content="https://arttoslipaway.art/static/og/og-home.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #111;
+            color: #f2f2f2;
+        }
+
+        header {
+            padding: 28px 40px;
+            border-bottom: 1px solid #222;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        a {
+            color: #f2f2f2;
+            text-decoration: none;
+        }
+
+        .hero {
+            padding: 70px 40px 36px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tag {
+            margin-bottom: 22px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 13px;
+        }
+
+        h1 {
+            font-size: 64px;
+            line-height: 1;
+            margin: 0 0 24px;
+        }
+
+        .subtitle {
+            font-size: 28px;
+            line-height: 1.35;
+            max-width: 860px;
+            margin-bottom: 18px;
+            font-weight: 800;
+        }
+
+        .intro {
+            font-size: 20px;
+            line-height: 1.6;
+            color: #bdbdbd;
+            max-width: 860px;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 28px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 40px 90px;
+        }
+
+        .main-card {
+            border: 1px solid #2a2a2a;
+            border-radius: 30px;
+            overflow: hidden;
+            background: #161616;
+            cursor: pointer;
+            transition: border-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .main-card:hover {
+            border-color: #666;
+            transform: translateY(-2px);
+        }
+
+        .main-image {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            display: block;
+            background: #222;
+        }
+
+        .placeholder {
+            aspect-ratio: 16 / 9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            background: #202020;
+            font-size: 16px;
+        }
+
+        .main-body {
+            padding: 28px;
+        }
+
+        .main-label {
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 13px;
+            margin-bottom: 14px;
+        }
+
+        .main-title {
+            font-size: 34px;
+            line-height: 1.08;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .main-description {
+            color: #aaa;
+            line-height: 1.55;
+            font-size: 17px;
+            margin-bottom: 24px;
+        }
+
+        .subgrid {
+            display: grid;
+            gap: 12px;
+            margin-top: 22px;
+        }
+
+        .subcard {
+            border: 1px solid #2d2d2d;
+            border-radius: 18px;
+            background: #121212;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 110px 1fr;
+            min-height: 92px;
+            cursor: pointer;
+            transition: border-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .subcard:hover {
+            border-color: #666;
+            transform: translateY(-2px);
+        }
+
+        .sub-image {
+            width: 110px;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            background: #222;
+        }
+
+        .sub-placeholder {
+            width: 110px;
+            height: 100%;
+            min-height: 92px;
+            background: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
+            font-size: 12px;
+        }
+
+        .sub-body {
+            padding: 14px;
+        }
+
+        .sub-title {
+            font-weight: 800;
+            margin-bottom: 6px;
+            line-height: 1.2;
+        }
+
+        .sub-description {
+            color: #888;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 20px;
+            color: #111;
+            background: #f2f2f2;
+            padding: 12px 18px;
+            border-radius: 999px;
+            font-weight: 800;
+        }
+
+        @media (max-width: 720px) {
+            .hero {
+                padding: 54px 22px 28px;
+            }
+
+            h1 {
+                font-size: 44px;
+            }
+
+            .subtitle {
+                font-size: 22px;
+            }
+
+            .intro {
+                font-size: 17px;
+            }
+
+            .main-grid {
+                grid-template-columns: 1fr;
+                padding: 10px 22px 54px;
+            }
+
+            .subcard {
+                grid-template-columns: 1fr;
+            }
+
+            .sub-image,
+            .sub-placeholder {
+                width: 100%;
+                height: 140px;
+            }
+        }
+
+        /* === ArtToSlipAway hover glow effects === */
+        a,
+        button,
+        .button,
+        .cta-button,
+        .social,
+        .main-card,
+        .subcard,
+        .card,
+        .category-link,
+        .filter,
+        .city-grid div,
+        .main-title,
+        .sub-title,
+        .card-title,
+        .section-title,
+        h1 {
+            transition:
+                color 0.22s ease,
+                text-shadow 0.22s ease,
+                border-color 0.22s ease,
+                box-shadow 0.22s ease,
+                transform 0.22s ease,
+                filter 0.22s ease;
+        }
+
+        a:hover,
+        nav a:hover,
+        .logo:hover,
+        .main-title:hover,
+        .sub-title:hover,
+        .card-title:hover,
+        .section-title:hover,
+        .city-grid div:hover {
+            color: #f2d984 !important;
+            text-shadow:
+                0 0 8px rgba(242, 217, 132, 0.85),
+                0 0 18px rgba(201, 163, 58, 0.55),
+                0 0 32px rgba(201, 163, 58, 0.25);
+        }
+
+        .button:hover,
+        .cta-button:hover,
+        button:hover,
+        .social:hover,
+        .category-link:hover,
+        .filter:hover {
+            color: #111 !important;
+            background: #f2d984 !important;
+            border-color: #f2d984 !important;
+            box-shadow:
+                0 0 12px rgba(242, 217, 132, 0.75),
+                0 0 28px rgba(201, 163, 58, 0.45);
+            transform: translateY(-2px);
+        }
+
+        .main-card:hover,
+        .card:hover,
+        .subcard:hover {
+            border-color: #f2d984 !important;
+            box-shadow:
+                0 0 0 1px rgba(201, 163, 58, 0.55),
+                0 0 24px rgba(201, 163, 58, 0.45),
+                inset 0 0 26px rgba(201, 163, 58, 0.10);
+            transform: translateY(-3px);
+        }
+
+        .main-card:hover img,
+        .card:hover img,
+        .subcard:hover img,
+        .main-card:hover .main-bg {
+            filter:
+                brightness(1.08)
+                contrast(1.08)
+                saturate(1.08);
+        }
+
+        .main-card:hover .main-title,
+        .card:hover .card-title,
+        .subcard:hover .sub-title {
+            color: #f2d984 !important;
+            text-shadow:
+                0 0 10px rgba(242, 217, 132, 0.9),
+                0 0 22px rgba(201, 163, 58, 0.55);
+        }
+        /* === /ArtToSlipAway hover glow effects === */
+
+
+        /* === ArtToSlipAway logo image === */
+        .logo.logo-image {
+            display: inline-flex !important;
+            align-items: center !important;
+            text-decoration: none !important;
+            line-height: 1 !important;
+            font-size: 0 !important;
+            letter-spacing: 0 !important;
+            color: transparent !important;
+        }
+
+        .logo.logo-image img {
+            display: block;
+            height: 72px;
+            width: auto;
+            max-width: 340px;
+            object-fit: contain;
+            filter:
+                drop-shadow(0 0 8px rgba(201, 163, 58, 0.35))
+                drop-shadow(0 0 18px rgba(201, 163, 58, 0.18));
+            transition:
+                filter 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        .logo.logo-image:hover img {
+            transform: translateY(-1px);
+            filter:
+                drop-shadow(0 0 10px rgba(242, 217, 132, 0.70))
+                drop-shadow(0 0 26px rgba(201, 163, 58, 0.40));
+        }
+
+        @media (max-width: 768px) {
+            .logo.logo-image img {
+                height: 52px;
+                max-width: 230px;
+            }
+        }
+        /* === /ArtToSlipAway logo image === */
+
+        /* === Portfolio editorial intro === */
+        :root {
+            --portfolio-gold: #c9a33a;
+            --portfolio-gold-light: #f2d984;
+            --portfolio-muted: #aaa08c;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at 16% 0%, rgba(201, 163, 58, 0.08), transparent 34%),
+                radial-gradient(circle at 88% 18%, rgba(38, 72, 68, 0.07), transparent 30%),
+                #070707 !important;
+            color: #eee8dc !important;
+        }
+
+        header {
+            padding: 22px 40px !important;
+            border-bottom-color: rgba(201, 163, 58, 0.32) !important;
+            background: rgba(7, 7, 7, 0.82);
+        }
+
+        header nav {
+            display: flex;
+            align-items: center;
+            gap: 26px;
+        }
+
+        header nav a {
+            color: rgba(242, 217, 132, 0.82) !important;
+            font-size: 12px;
+            letter-spacing: 0.11em;
+            text-transform: uppercase;
+        }
+
+        .hero {
+            padding-top: 64px !important;
+            padding-bottom: 54px !important;
+        }
+
+        .tag {
+            color: rgba(201, 163, 58, 0.8) !important;
+            font-size: 11px !important;
+            letter-spacing: 0.18em !important;
+        }
+
+        h1 {
+            margin-bottom: 38px !important;
+            color: var(--portfolio-gold-light) !important;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(54px, 7vw, 92px) !important;
+            font-weight: 500 !important;
+            letter-spacing: 0.035em;
+            text-transform: uppercase;
+            text-shadow: 0 0 30px rgba(201, 163, 58, 0.16);
+        }
+
+        .portfolio-intro {
+            position: relative;
+            max-width: 1020px;
+            padding: clamp(30px, 4vw, 52px);
+            border: 1px solid rgba(201, 163, 58, 0.32);
+            background:
+                linear-gradient(135deg, rgba(201, 163, 58, 0.08), transparent 42%),
+                rgba(11, 10, 8, 0.76);
+            box-shadow: 0 28px 74px rgba(0, 0, 0, 0.3);
+        }
+
+        .portfolio-intro::after {
+            content: "◇";
+            position: absolute;
+            top: 20px;
+            right: 24px;
+            color: rgba(201, 163, 58, 0.42);
+            font-size: 24px;
+        }
+
+        .portfolio-intro__lead {
+            max-width: 720px;
+            margin: 0;
+            color: #e6dcc9;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(22px, 2.2vw, 31px);
+            line-height: 1.42;
+        }
+
+        .portfolio-intro__top {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) clamp(230px, 25vw, 320px);
+            align-items: center;
+            gap: clamp(30px, 5vw, 64px);
+            margin-bottom: 34px;
+        }
+
+        .portfolio-intro__photo {
+            position: relative;
+            aspect-ratio: 4 / 5;
+            overflow: hidden;
+            border: 1px solid rgba(201, 163, 58, 0.48);
+            background:
+                radial-gradient(circle at 50% 35%, rgba(201, 163, 58, 0.13), transparent 45%),
+                #080806;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.38);
+        }
+
+        .portfolio-intro__photo img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .portfolio-intro__photo-placeholder {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            place-items: center;
+            color: rgba(230, 201, 103, 0.72);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+        }
+
+        .portfolio-intro__grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 22px 42px;
+        }
+
+        .portfolio-intro__text {
+            margin: 0;
+            color: var(--portfolio-muted);
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        .portfolio-intro__closing {
+            grid-column: 1 / -1;
+            margin: 8px 0 0;
+            padding-top: 22px;
+            border-top: 1px solid rgba(201, 163, 58, 0.2);
+            color: var(--portfolio-gold-light);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(20px, 1.9vw, 27px);
+            line-height: 1.45;
+        }
+
+        .portfolio-catalog-lead {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 40px 10px;
+        }
+
+        .portfolio-catalog-lead__label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--portfolio-gold);
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .portfolio-catalog-lead h2 {
+            max-width: 820px;
+            margin: 0;
+            color: #e8deca;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(28px, 3.2vw, 44px);
+            font-weight: 500;
+            line-height: 1.18;
+        }
+
+        .main-card,
+        .subcard {
+            border-color: rgba(201, 163, 58, 0.3) !important;
+            border-radius: 0 !important;
+            background: rgba(13, 12, 10, 0.86) !important;
+        }
+
+        .main-title,
+        .sub-title {
+            color: var(--portfolio-gold-light) !important;
+            font-family: Georgia, "Times New Roman", serif;
+        }
+
+        .button {
+            border: 1px solid rgba(201, 163, 58, 0.68);
+            border-radius: 0 !important;
+            background: var(--portfolio-gold) !important;
+            padding: 14px 20px !important;
+            font-size: 11px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 720px) {
+            header {
+                padding: 18px 20px !important;
+            }
+
+            header nav {
+                gap: 14px;
+            }
+
+            header nav a {
+                font-size: 10px;
+            }
+
+            .hero {
+                padding: 44px 18px 38px !important;
+            }
+
+            h1 {
+                margin-bottom: 28px !important;
+                font-size: clamp(42px, 14vw, 62px) !important;
+            }
+
+            .portfolio-intro {
+                padding: 28px 22px;
+            }
+
+            .portfolio-intro__top {
+                grid-template-columns: 1fr;
+                gap: 26px;
+            }
+
+            .portfolio-intro__photo {
+                width: min(100%, 320px);
+                justify-self: center;
+            }
+
+            .portfolio-intro__grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .portfolio-intro__closing {
+                grid-column: auto;
+            }
+
+            .portfolio-catalog-lead {
+                padding: 14px 22px 8px;
+            }
+        }
+        /* === /Portfolio editorial intro === */
+
+    </style>
+    <script defer src="/static/js/analytics-consent.js"></script>
+    <link rel="stylesheet" href="/static/site_header_logo.css?v=20260815-logo-exact-1to1-v1">
+</head>
+
+<body>
+    <header>
+        <a class="logo logo-image" href="/" aria-label="ArtToSlipAway — на главную">
+            <img src="/static/images/logo.webp?v=20260815-logo-webp" alt="ArtToSlipAway">
+        </a>
+
+        <nav>
+            <a href="/projects">Портфолио</a>
+            <a href="/request">Обсудить проект</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="tag">Санкт-Петербург • Москва • Смоленск • авторские татуировки, картины и мерч</div>
+
+        <h1>Портфолио</h1>
+
+        <div class="portfolio-intro">
+            <div class="portfolio-intro__top">
+                <p class="portfolio-intro__lead">
+                    {{ settings.get('portfolio_lead') or 'Занимаюсь художественной татуировкой и продолжаю развивать собственный узнаваемый стиль.' }}
+                </p>
+
+                <div class="portfolio-intro__photo">
+                    {% if settings.get('portfolio_photo_url') %}
+                        <img src="{{ settings.get('portfolio_photo_url') }}" alt="Автор художественных татуировок" loading="lazy">
+                    {% else %}
+                        <div class="portfolio-intro__photo-placeholder">Место для фото</div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="portfolio-intro__grid">
+                <p class="portfolio-intro__text">
+                    {{ settings.get('portfolio_text_1') or 'Создаю авторские работы и картины на скейтбордах и холстах уделяя внимание каждой детали.' }}
+                </p>
+
+                <p class="portfolio-intro__text">
+                    {{ settings.get('portfolio_text_2') or 'Работаю в стилях олд-скул, япония, неояпония, гравюра и дотворк от каноничной классики до сложных сюжетов.' }}
+                </p>
+
+                <p class="portfolio-intro__text">
+                    {{ settings.get('portfolio_text_3') or 'Важен не только результат, но и сам процесс: каждая татуировка — это совместное творчество, где идея клиента и мой опыт соединяются в единую историю.' }}
+                </p>
+
+                <p class="portfolio-intro__text">
+                    {{ settings.get('portfolio_text_4') or 'Мне важно, чтобы человек получал удовольствие от каждого этапа от первых набросков до зажившего рисунка.' }}
+                </p>
+
+                <p class="portfolio-intro__closing">
+                    {{ (settings.get('portfolio_closing') or 'Готов создать для вас татуировку, которая будет выглядеть выразительно, технически грамотно и станет частью вашего образа') | safe }}
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="portfolio-catalog-lead" aria-labelledby="portfolio-directions-title">
+        <span class="portfolio-catalog-lead__label">Направления</span>
+        <h2 id="portfolio-directions-title">
+            Выберите раздел, чтобы посмотреть работы и подробнее познакомиться с каждым направлением.
+        </h2>
+    </section>
+
+    <main class="main-grid">
+        {% for main_category in categories %}
+            {% if not main_category.parent_slug and main_category.slug in ["tattoo", "paintings", "merch"] %}
+                <section class="main-card" onclick="window.location.href='/categories/{{ main_category.slug }}'">
+                    {% if main_category.image_url %}
+                        <img class="main-image" src="{{ main_category.image_url }}" alt="{{ main_category.title }}">
+                    {% else %}
+                        <div class="placeholder">Изображение направления</div>
+                    {% endif %}
+
+                    <div class="main-body">
+                        <div class="main-label">Основное направление</div>
+
+                        <div class="main-title">{{ main_category.title }}</div>
+
+                        {% if main_category.short_description %}
+                            <div class="main-description">
+                                {{ main_category.short_description }}
+                            </div>
+                        {% endif %}
+
+                        <div class="subgrid">
+                            {% for subcategory in categories %}
+                                {% if subcategory.parent_slug == main_category.slug %}
+                                    <a class="subcard" href="/categories/{{ subcategory.slug }}" onclick="event.stopPropagation()">
+                                        {% if subcategory.image_url %}
+                                            <img class="sub-image" src="{{ subcategory.image_url }}" alt="{{ subcategory.title }}">
+                                        {% else %}
+                                            <div class="sub-placeholder">Фото</div>
+                                        {% endif %}
+
+                                        <div class="sub-body">
+                                            <div class="sub-title">{{ subcategory.title }}</div>
+
+                                            {% if subcategory.short_description %}
+                                                <div class="sub-description">
+                                                    {{ subcategory.short_description }}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+
+                        <a class="button" href="/categories/{{ main_category.slug }}" onclick="event.stopPropagation()">Смотреть направление</a>
+                    </div>
+                </section>
+            {% endif %}
+        {% endfor %}
+    </main>
+    <script src="/static/funnel_cta.js?v=1"></script>
+    <script src="/static/project_cards_media.js?v=1"></script>
+    <script defer src="/static/js/site-announcement.js?v=3"></script>
+
+<!-- ATS_PORTFOLIO_ORDER_V7_START -->
+<script id="atsPortfolioOrderV7">
+(function () {
+    "use strict";
+
+    const currentPath = window.location.pathname
+        .replace(/\/+$/, "");
+
+    if (currentPath !== "/projects") {
+        return;
+    }
+
+    const wantedOrder = [
+        {
+            key: "tattoo",
+            title: "Авторская художественная татуировка"
+        },
+        {
+            key: "paintings",
+            title: "Картины"
+        },
+        {
+            key: "merch",
+            title: "Мерч"
+        }
+    ];
+
+    function normalize(value) {
+        return String(value || "")
+            .replace(/\s+/g, " ")
+            .trim()
+            .toLocaleLowerCase("ru-RU");
+    }
+
+    function findHeading(title) {
+        const exactTitle = normalize(title);
+
+        const headingSelectors = [
+            "h2",
+            "h3",
+            "h4",
+            "h5"
+        ];
+
+        for (const selector of headingSelectors) {
+            const heading = Array.from(
+                document.querySelectorAll(
+                    "main " + selector
+                )
+            ).find(function (element) {
+                return (
+                    normalize(element.textContent)
+                    === exactTitle
+                );
+            });
+
+            if (heading) {
+                return heading;
+            }
+        }
+
+        return Array.from(
+            document.querySelectorAll(
+                "main [class*='title']"
+            )
+        ).find(function (element) {
+            return (
+                normalize(element.textContent)
+                === exactTitle
+            );
+        }) || null;
+    }
+
+    function directChild(container, element) {
+        let current = element;
+
+        while (
+            current
+            && current.parentElement
+            && current.parentElement !== container
+        ) {
+            current = current.parentElement;
+        }
+
+        if (
+            current
+            && current.parentElement === container
+        ) {
+            return current;
+        }
+
+        return null;
+    }
+
+    function findCards(headings) {
+        let container = headings[0].parentElement;
+
+        while (
+            container
+            && container !== document.body
+        ) {
+            const containsAll = headings.every(
+                function (heading) {
+                    return container.contains(heading);
+                }
+            );
+
+            if (containsAll) {
+                const cards = headings.map(
+                    function (heading) {
+                        return directChild(
+                            container,
+                            heading
+                        );
+                    }
+                );
+
+                const uniqueCards = new Set(cards);
+
+                if (
+                    cards.every(Boolean)
+                    && uniqueCards.size === 3
+                ) {
+                    return {
+                        container: container,
+                        cards: cards
+                    };
+                }
+            }
+
+            container = container.parentElement;
+        }
+
+        return null;
+    }
+
+    function removeExtraPortfolioLines() {
+        const unwanted = [
+            "📍 Санкт-Петербург/Кудрово/Смоленск",
+            "📩 Запись👇🏼"
+        ].map(normalize);
+
+        const elements = Array.from(
+            document.querySelectorAll(
+                "main p, main div, main span, main li"
+            )
+        );
+
+        /*
+         * Начинаем с самых вложенных элементов,
+         * чтобы не удалить весь информационный блок.
+         */
+        elements.reverse().forEach(
+            function (element) {
+                const elementText = normalize(
+                    element.textContent
+                );
+
+                if (!unwanted.includes(elementText)) {
+                    return;
+                }
+
+                const parent = element.parentElement;
+
+                element.remove();
+
+                if (
+                    parent
+                    && normalize(parent.textContent) === ""
+                    && !parent.querySelector(
+                        "img, a, button, video"
+                    )
+                ) {
+                    parent.remove();
+                }
+            }
+        );
+    }
+
+    function applyPortfolioOrder() {
+        const headings = wantedOrder.map(
+            function (item) {
+                return findHeading(item.title);
+            }
+        );
+
+        if (
+            headings.some(function (heading) {
+                return !heading;
+            })
+        ) {
+            return false;
+        }
+
+        const layout = findCards(headings);
+
+        if (!layout) {
+            return false;
+        }
+
+        layout.cards.forEach(
+            function (card, index) {
+                card.setAttribute(
+                    "data-ats-portfolio-order",
+                    wantedOrder[index].key
+                );
+
+                card.style.setProperty(
+                    "order",
+                    String(index + 1),
+                    "important"
+                );
+
+                layout.container.appendChild(card);
+            }
+        );
+
+        layout.container.setAttribute(
+            "data-ats-portfolio-order-ready",
+            "true"
+        );
+
+        return true;
+    }
+
+    function run() {
+        removeExtraPortfolioLines();
+        applyPortfolioOrder();
+    }
+
+    run();
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        run
+    );
+
+    window.setTimeout(run, 100);
+    window.setTimeout(run, 350);
+    window.setTimeout(run, 800);
+    window.setTimeout(run, 1500);
+})();
+</script>
+<!-- ATS_PORTFOLIO_ORDER_V7_END -->
+
+    <script src="/static/tattoo_cursor.js?v=20260722_201404" defer></script>
+    <script defer src="/static/site_header_logo.js?v=20260815-logo-exact-1to1-v1"></script>
+</body>
+</html>

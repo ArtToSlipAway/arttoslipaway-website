@@ -1,0 +1,12 @@
+.git
+.env
+.env.*
+!.env.example
+credentials
+app/uploads
+backups
+*.dump
+*.log
+__pycache__
+.venv
+venv

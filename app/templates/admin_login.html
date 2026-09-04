@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Вход — ArtToSlipAway Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#020202">
+
+    <style>
+        .login-wrap {
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+        }
+
+        .login-card {
+            width: min(100%, 520px);
+            border: 1px solid rgba(201, 163, 58, 0.36);
+            background:
+                linear-gradient(180deg, rgba(0,0,0,0.64), rgba(0,0,0,0.92)),
+                radial-gradient(circle at center top, rgba(201, 163, 58, 0.09), transparent 42%);
+            padding: 30px;
+            box-shadow: 0 0 34px rgba(0,0,0,0.42);
+        }
+
+        .login-brand {
+            color: #c9a33a;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 26px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+
+        .login-card h1 {
+            font-size: clamp(36px, 6vw, 64px) !important;
+            margin-bottom: 18px !important;
+        }
+
+        .login-error {
+            border: 1px solid rgba(192, 90, 74, 0.48);
+            background: rgba(192, 90, 74, 0.10);
+            color: #e0a39a;
+            padding: 12px;
+            margin-bottom: 16px;
+        }
+
+        .login-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 14px;
+            margin-top: 18px;
+        }
+
+        .login-actions a {
+            color: rgba(232, 221, 198, 0.7);
+        }
+    </style>
+
+    <link rel="stylesheet" href="/static/admin.css?v=9">
+</head>
+
+<body class="admin-page">
+    <main class="login-wrap">
+        <section class="login-card">
+            <div class="login-brand">ArtToSlipAway Admin</div>
+
+            <h1>Вход</h1>
+
+            {% if error %}
+                <div class="login-error">{{ error }}</div>
+            {% endif %}
+
+            <form action="/admin/login" method="post">
+                <input type="hidden" name="next_url" value="{{ next_url or '/admin' }}">
+
+                <div class="field">
+                    <label>Логин</label>
+                    <input name="username" autocomplete="username" required autofocus>
+                </div>
+
+                <div class="field" style="margin-top: 14px;">
+                    <label>Пароль</label>
+                    <input name="password" type="password" autocomplete="current-password" required>
+                </div>
+
+                <div class="login-actions">
+                    <button type="submit">Войти</button>
+                    <a href="/">На сайт</a>
+                </div>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

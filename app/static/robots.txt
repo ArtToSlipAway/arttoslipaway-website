@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://arttoslipaway.art/sitemap.xml

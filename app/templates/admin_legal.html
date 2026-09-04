@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Юридические настройки — ArtToSlipAway Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+        <meta name="theme-color" content="#020202">
+
+    <style>
+        .legal-settings-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .legal-preview-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .legal-preview-links a {
+            border: 1px solid rgba(201, 163, 58, 0.28);
+            padding: 9px 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            font-size: 12px;
+        }
+
+        .saved-note {
+            border: 1px solid rgba(125, 170, 99, 0.42);
+            background: rgba(125, 170, 99, 0.10);
+            color: #9bc17f;
+            padding: 12px;
+            margin-bottom: 18px;
+        }
+
+        .warning-note {
+            border: 1px solid rgba(201, 163, 58, 0.28);
+            background: rgba(201, 163, 58, 0.07);
+            color: rgba(232, 221, 198, 0.74);
+            padding: 14px;
+            margin-bottom: 18px;
+            line-height: 1.55;
+        }
+
+        @media (max-width: 760px) {
+            .legal-settings-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="/static/admin.css?v=9">
+</head>
+
+<body class="admin-page">
+    <header class="admin-header">
+        <a class="brand" href="/admin">ArtToSlipAway Admin</a>
+
+        <nav class="admin-nav">
+            <a href="/admin">Панель</a>
+            <a href="/admin/leads">Заявки</a>
+            <a href="/admin/projects">Проекты</a>
+            <a href="/admin/categories">Категории</a>
+            <a href="/admin/city-slots">Даты</a>
+            <a href="/admin/carousel">Карусель</a>
+            <a href="/admin/media">Медиа</a>
+            <a href="/admin/upload-check">Файлы</a>
+            <a href="/admin/legal">Право</a>
+            <a href="/admin/visual">Визуал</a>
+            <a href="/admin/logout">Выход</a>
+            <a href="/">Сайт</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Юридические настройки</h1>
+
+        <div class="warning-note">
+            Это технические настройки для автоподстановки данных в юридические страницы.
+            Перед публичным запуском тексты лучше проверить с юристом, особенно если будешь оформлять ИП,
+            самозанятость, онлайн-оплату, договор-оферту или обработку чувствительных данных.
+        </div>
+
+        {% if saved %}
+            <div class="saved-note">Настройки сохранены.</div>
+        {% endif %}
+
+        <section class="panel">
+            <h2>Данные оператора</h2>
+
+            <form action="/admin/legal" method="post">
+                <div class="legal-settings-grid">
+                    <div class="field">
+                        <label>ФИО / название проекта / оператор</label>
+                        <input name="operator_name" value="{{ settings.operator_name or '' }}" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Статус</label>
+                        <input name="operator_status" value="{{ settings.operator_status or '' }}" placeholder="самозанятый / ИП / физическое лицо">
+                    </div>
+
+                    <div class="field">
+                        <label>Email для обращений по персональным данным</label>
+                        <input name="operator_email" value="{{ settings.operator_email or '' }}" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Город</label>
+                        <input name="operator_city" value="{{ settings.operator_city or '' }}">
+                    </div>
+
+                    <div class="field">
+                        <label>Домен сайта</label>
+                        <input name="site_domain" value="{{ settings.site_domain or '' }}" placeholder="arttoslipaway.ru">
+                    </div>
+
+                    <div class="field">
+                        <label>Дата публикации документов</label>
+                        <input name="publication_date" value="{{ settings.publication_date or '' }}" placeholder="09.07.2026">
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit">Сохранить настройки</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="panel">
+            <h2>Публичные юридические страницы</h2>
+
+            <div class="hint">
+                Эти страницы уже доступны посетителям сайта. После сохранения настроек открой их и проверь подстановку данных.
+            </div>
+
+            <div class="legal-preview-links">
+                <a href="/privacy" target="_blank">Политика</a>
+                <a href="/consent" target="_blank">Согласие</a>
+                <a href="/terms" target="_blank">Условия</a>
+                <a href="/cookies" target="_blank">Cookies</a>
+                <a href="/request" target="_blank">Форма заявки</a>
+            </div>
+        </section>
+    </main>
+
+    <script src="/static/admin_ui.js?v=1"></script>
+
+    <script defer src="/static/js/admin-static-nav.js?v=3"></script>
+</body>
+</html>

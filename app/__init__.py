@@ -1,0 +1,1 @@
+"""ArtToSlipAway web application."""

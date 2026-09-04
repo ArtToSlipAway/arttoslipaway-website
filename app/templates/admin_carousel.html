@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }} — ArtToSlipAway Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+        <meta name="theme-color" content="#020202">
+<style>
+        :root {
+            --gold: #c9a33a;
+            --gold-light: #f2d984;
+            --text: #e8ddc6;
+            --muted: #9f947c;
+            --border: rgba(201, 163, 58, 0.34);
+            --danger: #c05a4a;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at center top, rgba(201, 163, 58, 0.10), transparent 34%),
+                linear-gradient(180deg, #090909, #020202);
+            color: var(--text);
+            font-family: Arial, sans-serif;
+        }
+
+        a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        a:hover { color: var(--gold-light); }
+
+        header {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 26px 22px 12px;
+            display: flex;
+            justify-content: space-between;
+            gap: 18px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .brand {
+            color: var(--gold);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 22px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        nav {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        main {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 20px 22px 70px;
+        }
+
+        h1 {
+            font-family: Georgia, "Times New Roman", serif;
+            color: var(--gold);
+            font-size: clamp(34px, 4.2vw, 58px);
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin: 12px 0 8px;
+        }
+
+        h2 {
+            color: var(--gold-light);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 28px;
+            font-weight: 400;
+            margin: 0 0 18px;
+        }
+
+        .hint {
+            color: var(--muted);
+            margin-bottom: 26px;
+            line-height: 1.5;
+        }
+
+        .panel {
+            border: 1px solid var(--border);
+            background:
+                linear-gradient(180deg, rgba(0,0,0,0.58), rgba(0,0,0,0.82)),
+                radial-gradient(circle at left top, rgba(201, 163, 58, 0.06), transparent 36%);
+            padding: 22px;
+            margin-bottom: 22px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .field.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            color: var(--gold);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        input, select, textarea, button {
+            width: 100%;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        input, select, textarea {
+            border: 1px solid rgba(201, 163, 58, 0.32);
+            background: rgba(0,0,0,0.56);
+            color: var(--text);
+            padding: 10px;
+            outline: none;
+        }
+
+        textarea {
+            min-height: 76px;
+            resize: vertical;
+        }
+
+        button {
+            border: 1px solid var(--gold);
+            background: var(--gold);
+            color: #111;
+            padding: 11px 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: var(--gold-light);
+            border-color: var(--gold-light);
+        }
+
+        button.danger {
+            border-color: var(--danger);
+            background: transparent;
+            color: var(--danger);
+        }
+
+        button.danger:hover {
+            background: var(--danger);
+            color: #111;
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .media-card {
+            border: 1px solid rgba(201, 163, 58, 0.22);
+            background: rgba(0,0,0,0.34);
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .preview {
+            width: 100%;
+            aspect-ratio: 1 / 0.72;
+            border: 1px solid rgba(201, 163, 58, 0.18);
+            background: rgba(0,0,0,0.48);
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            color: var(--muted);
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .preview img,
+        .preview video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .meta {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.45;
+            word-break: break-word;
+        }
+
+        .title {
+            color: var(--gold-light);
+            font-size: 18px;
+        }
+
+        .actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        @media (max-width: 1100px) {
+            .media-grid { grid-template-columns: repeat(2, 1fr); }
+            .form-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 760px) {
+            .media-grid, .form-grid, .actions { grid-template-columns: 1fr; }
+            header { align-items: flex-start; flex-direction: column; }
+        }
+
+        .text-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .text-card {
+            border: 1px solid rgba(201, 163, 58, 0.22);
+            background: rgba(0,0,0,0.34);
+            padding: 14px;
+        }
+
+        .text-card-title {
+            color: var(--gold-light);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .check-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--muted);
+            font-size: 13px;
+            margin: 8px 0 12px;
+        }
+
+        .check-row input {
+            width: auto;
+        }
+
+        @media (max-width: 1100px) {
+            .text-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 760px) {
+            .text-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+    .ats-carousel-groups {
+        margin: 28px 0;
+        display: grid;
+        gap: 18px;
+    }
+
+    .ats-carousel-group {
+        border: 1px solid rgba(214, 179, 90, .32);
+        background: rgba(0, 0, 0, .28);
+        padding: 22px;
+    }
+
+    .ats-carousel-group-title {
+        color: #d6b35a;
+        font-family: Georgia, serif;
+        font-size: 26px;
+        line-height: 1.15;
+        margin: 0 0 14px;
+    }
+
+    .ats-carousel-subgrid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 12px;
+    }
+
+    .ats-carousel-subcard {
+        border: 1px solid rgba(214, 179, 90, .22);
+        padding: 14px;
+        background: rgba(255, 255, 255, .025);
+    }
+
+    .ats-carousel-subtitle {
+        color: #f3de8a;
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+
+    .ats-carousel-meta {
+        color: #9f9682;
+        font-size: 12px;
+        margin-bottom: 10px;
+        word-break: break-word;
+    }
+
+    .ats-carousel-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .ats-carousel-actions a {
+        color: #d6b35a;
+        text-decoration: none;
+        border: 1px solid rgba(214, 179, 90, .35);
+        padding: 6px 9px;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: .04em;
+    }
+
+    .ats-carousel-disabled {
+        opacity: .45;
+    }
+
+    .ats-carousel-subcard-link {
+        display: block;
+        color: inherit;
+        text-decoration: none;
+        height: 100%;
+    }
+
+    .ats-carousel-subcard:hover {
+        border-color: rgba(214, 179, 90, .7);
+        background: rgba(214, 179, 90, .06);
+    }
+
+    .ats-edit-group {
+        margin-bottom: 26px;
+    }
+
+    .ats-edit-group h3 {
+        color: var(--gold);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 26px;
+        font-weight: 400;
+        margin: 0 0 16px;
+    }
+
+    .ats-edit-subgroup-title {
+        color: var(--muted);
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: .08em;
+        margin: 0 0 12px;
+    }
+
+    .text-card {
+        scroll-margin-top: 28px;
+    }
+
+</style>
+
+    <link rel="stylesheet" href="/static/admin.css?v=9">
+</head>
+
+<body class="admin-page">
+    <header>
+        <a class="brand" href="/admin">ArtToSlipAway Admin</a>
+
+        <nav class="admin-nav">
+            <a href="/admin">Панель</a>
+            <a href="/admin/leads">Заявки</a>
+            <a href="/admin/projects">Проекты</a>
+            <a href="/admin/categories">Категории</a>
+            <a href="/admin/city-slots">Даты</a>
+            <a href="/admin/carousel">Карусель</a>
+            <a href="/admin/media">Медиа</a>
+            <a href="/admin/upload-check">Файлы</a>
+            <a href="/admin/legal">Право</a>
+            <a href="/admin/visual">Визуал</a>
+            <a href="/admin/logout">Выход</a>
+            <a href="/">Сайт</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Карусель главной</h1>
+
+        <div class="hint">
+            Здесь хранятся медиа для главной карусели. У каждого файла можно выбрать конкретную карточку, куда он должен попасть. Пока мы только загружаем и управляем файлами.
+            Публичный вывод подключим следующим шагом, чтобы не сломать текущую рабочую карусель.
+        </div>
+
+
+        <!-- === carousel cards text admin === -->
+        <section class="panel">
+            <h2>Тексты карточек карусели</h2>
+
+            <div class="hint">
+                Здесь редактируются названия, подписи, ссылки, порядок и активность карточек карусели.
+                Карточки разделены так же, как структура главной страницы.
+            </div>
+
+            {% macro carousel_card_form(card) %}
+                <article class="text-card" id="carousel-card-{{ card.target_key }}">
+                    <div class="text-card-title">{{ card.label }}</div>
+                    <div class="ats-carousel-meta">target_key: {{ card.target_key }}</div>
+
+                    <form action="/admin/carousel/cards/{{ card.target_key }}/edit" method="post">
+                        <div class="field">
+                            <label>Название на карточке</label>
+                            <input name="label" value="{{ card.label }}" required>
+                        </div>
+
+                        <div class="field">
+                            <label>Подпись / пояснение</label>
+                            <textarea name="subtitle">{{ card.subtitle or '' }}</textarea>
+                        </div>
+
+                        <div class="field">
+                            <label>Ссылка</label>
+                            <input name="link_url" value="{{ card.link_url or '' }}" placeholder="/categories/free-sketches">
+                        </div>
+
+                        <div class="field">
+                            <label>Порядок</label>
+                            <input name="sort_order" type="number" value="{{ card.sort_order or 100 }}">
+                        </div>
+
+                        <label class="check-row">
+                            <input type="checkbox" name="is_active" value="yes" {% if card.is_active %}checked{% endif %}>
+                            Карточка активна
+                        </label>
+
+                        <button type="submit">Сохранить текст</button>
+                    </form>
+                </article>
+            {% endmacro %}
+
+            <div class="ats-edit-group">
+                <h3>Авторская художественная татуировка</h3>
+                {% set tattoo_keys = ['tattoo', 'free_sketch', 'japanese', 'graphics', 'engraving', 'traditional', 'dotwork'] %}
+                <div class="text-grid">
+                    {% for key in tattoo_keys %}
+                        {% for card in carousel_cards %}
+                            {% if card.target_key == key %}
+                                {{ carousel_card_form(card) }}
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="ats-edit-group">
+                <h3>Картины</h3>
+                {% set painting_keys = ['paintings', 'canvas', 'skateboards', 'plywood'] %}
+                <div class="text-grid">
+                    {% for key in painting_keys %}
+                        {% for card in carousel_cards %}
+                            {% if card.target_key == key %}
+                                {{ carousel_card_form(card) }}
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="ats-edit-group">
+                <h3>Мерч</h3>
+
+                <!-- ATS_CAROUSEL_PRODUCTS_ADMIN_V1 -->
+                <!-- ATS_MERCH_SEPARATE_DISPLAY_MEDIA_KEYS_V1 -->
+
+                {# В обычной сетке сертификат не показываем:
+                   он ниже в объединённой карточке. #}
+                {% set merch_display_keys = [
+                    'stickerpack',
+                    'tattoo-aftercare-kit',
+                    'tshirts'
+                ] %}
+
+                {# Для выбора медиа доступны все 4 направления. #}
+                {% set product_keys = [
+                    'tattoo-gift-certificate',
+                    'stickerpack',
+                    'tattoo-aftercare-kit',
+                    'tshirts'
+                ] %}
+
+                <div class="text-grid">
+                    {% for key in merch_display_keys %}
+                        {% for card in carousel_cards %}
+                            {% if card.target_key == key %}
+                                {{ carousel_card_form(card) }}
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+
+                <!-- ATS_CERTIFICATE_MERCH_SETTINGS_ADMIN_V1 -->
+                <div
+                    class="text-grid"
+                    style="margin-top:24px;"
+                >
+                    <article
+                        class="text-card"
+                        id="certificate-settings"
+                    >
+                        <!-- ATS_CERTIFICATE_ADMIN_COMBINED_V1 -->
+
+                        <div class="text-card-title">
+                            Подарочный сертификат на татуировку
+                        </div>
+
+                        <div class="ats-carousel-meta">
+                            Пункт главной карусели
+                        </div>
+
+                        {% for card in carousel_cards %}
+                            {% if card.target_key == 'tattoo-gift-certificate' %}
+
+                                <form
+                                    action="/admin/carousel/cards/{{ card.target_key }}/edit"
+                                    method="post"
+                                >
+                                    <div class="field">
+                                        <label>
+                                            Название на карточке
+                                        </label>
+
+                                        <input
+                                            name="label"
+                                            value="{{ card.label }}"
+                                            required
+                                        >
+                                    </div>
+
+                                    <div class="field">
+                                        <label>
+                                            Подпись / пояснение
+                                        </label>
+
+                                        <textarea
+                                            name="subtitle"
+                                        >{{ card.subtitle or '' }}</textarea>
+                                    </div>
+
+                                    <div class="field">
+                                        <label>Ссылка</label>
+
+                                        <input
+                                            name="link_url"
+                                            value="{{ card.link_url or '' }}"
+                                        >
+                                    </div>
+
+                                    <div class="field">
+                                        <label>Порядок</label>
+
+                                        <input
+                                            name="sort_order"
+                                            type="number"
+                                            value="{{ card.sort_order or 130 }}"
+                                        >
+                                    </div>
+
+                                    <label class="check-row">
+                                        <input
+                                            type="checkbox"
+                                            name="is_active"
+                                            value="yes"
+                                            {% if card.is_active %}checked{% endif %}
+                                        >
+                                        Карточка активна
+                                    </label>
+
+                                    <button type="submit">
+                                        Сохранить пункт карусели
+                                    </button>
+                                </form>
+
+                            {% endif %}
+                        {% endfor %}
+
+                        <div
+                            class="ats-carousel-meta"
+                            style="
+                                margin-top:28px;
+                                padding-top:22px;
+                                border-top:1px solid rgba(201,163,58,.35);
+                            "
+                        >
+                            Настройки страницы сертификата
+                        </div>
+
+                        <form
+                            action="/admin/carousel/certificate-settings"
+                            method="post"
+                        >
+                            <div class="field">
+                                <label>Заголовок блока</label>
+
+                                <input
+                                    name="certificate_info_title"
+                                    value="{{ certificate_settings.get('certificate_info_title') or 'Информация о сертификате' }}"
+                                >
+                            </div>
+
+                            <div class="field">
+                                <label>Срок действия</label>
+
+                                <textarea
+                                    name="certificate_validity_text"
+                                >{{ certificate_settings.get('certificate_validity_text') or 'Срок действия сертификата — 6 месяцев с момента приобретения.' }}</textarea>
+                            </div>
+
+                            <div class="field">
+                                <label>
+                                    Минимальный номинал, ₽
+                                </label>
+
+                                <input
+                                    name="certificate_min_nominal"
+                                    type="number"
+                                    min="1"
+                                    step="1"
+                                    value="{{ certificate_settings.get('certificate_min_nominal') or '5000' }}"
+                                    required
+                                >
+
+                                <div class="hint">
+                                    Одно значение для страницы,
+                                    формы и серверной проверки.
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <label>
+                                    Текст перед суммой
+                                </label>
+
+                                <textarea
+                                    name="certificate_nominal_text"
+                                >{{ certificate_settings.get('certificate_nominal_text') or 'Минимальный номинал равен минимальной стоимости сеанса —' }}</textarea>
+
+                                <div class="hint">
+                                    Сумма и ₽ добавляются автоматически.
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <label>Частичная оплата</label>
+
+                                <textarea
+                                    name="certificate_partial_payment_text"
+                                >{{ certificate_settings.get('certificate_partial_payment_text') or 'Сертификат можно использовать для частичной оплаты сеанса.' }}</textarea>
+                            </div>
+
+                            <div class="field">
+                                <label>
+                                    Однократное использование
+                                </label>
+
+                                <textarea
+                                    name="certificate_single_use_text"
+                                >{{ certificate_settings.get('certificate_single_use_text') or 'Сертификатом можно воспользоваться один раз на протяжении срока его действия.' }}</textarea>
+                            </div>
+
+                            <div class="field">
+                                <label>Текст кнопки</label>
+
+                                <input
+                                    name="certificate_button_text"
+                                    value="{{ certificate_settings.get('certificate_button_text') or 'Приобрести сертификат' }}"
+                                >
+                            </div>
+
+                            <button type="submit">
+                                Сохранить настройки сертификата
+                            </button>
+                        </form>
+                    </article>
+                </div>
+
+            </div>
+        </section>
+        <!-- === /carousel cards text admin === -->
+
+
+        <section class="panel">
+            <h2>Добавить медиа в карусель</h2>
+
+            <form action="/admin/carousel/media/upload" method="post" enctype="multipart/form-data">
+                <div class="form-grid">
+                    <div class="field">
+                        <label>Тип файла</label>
+                        <select name="media_type">
+                            <option value="auto">Определить автоматически</option>
+                            <option value="image">Картинка</option>
+                            <option value="video">Видео</option>
+                            <option value="model">3D-модель</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Карточка карусели</label>
+                        <select name="target_key">
+                                <optgroup label="Авторская художественная татуировка">
+                                    {% set tattoo_keys = ['tattoo', 'free_sketch', 'japanese', 'graphics', 'engraving', 'traditional', 'dotwork'] %}
+                                    {% for key in tattoo_keys %}
+                                        {% for card in carousel_cards %}
+                                            {% if card.target_key == key %}
+                                                <option value="{{ card.target_key }}" {% if file is defined and file.target_key == card.target_key %}selected{% endif %}>
+                                                    {{ card.label }}
+                                                </option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                </optgroup>
+
+                                <optgroup label="Картины">
+                                    {% set painting_keys = ['paintings', 'canvas', 'skateboards', 'plywood'] %}
+                                    {% for key in painting_keys %}
+                                        {% for card in carousel_cards %}
+                                            {% if card.target_key == key %}
+                                                <option value="{{ card.target_key }}" {% if file is defined and file.target_key == card.target_key %}selected{% endif %}>
+                                                    {{ card.label }}
+                                                </option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                </optgroup>
+
+                                <optgroup label="Мерч">
+                                    {% for key in product_keys %}
+                                        {% for card in carousel_cards %}
+                                            {% if card.target_key == key %}
+                                                <option value="{{ card.target_key }}" {% if file is defined and file.target_key == card.target_key %}selected{% endif %}>
+                                                    {{ card.label }}
+                                                </option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                </optgroup>
+                            </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Порядок показа</label>
+                        <input name="sort_order" type="number" value="100">
+                    </div>
+
+                    <div class="field">
+                        <label>Название</label>
+                        <input name="title" placeholder="Например: тату / картины / мерч">
+                    </div>
+
+                    <div class="field">
+                        <label>Файл</label>
+                        <input name="file" type="file" required accept=".jpg,.jpeg,.png,.webp,.gif,.mp4,.webm,.mov,.glb,.gltf,.obj,.stl,.usdz">
+                    </div>
+
+                    <div class="field">
+                        <label>Постер</label>
+                        <input name="poster_file" type="file" accept=".jpg,.jpeg,.png,.webp">
+                    </div>
+
+                    <div class="field full">
+                        <label>Описание</label>
+                        <textarea name="alt_text" placeholder="Описание для админки и будущего SEO"></textarea>
+                    </div>
+
+                    <div class="field full">
+                        <button type="submit">Загрузить в карусель</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <section class="panel">
+            <h2>Медиа карусели</h2>
+
+            {% if not media_files %}
+                <div class="hint">Медиа для карусели пока нет.</div>
+            {% else %}
+                <div class="media-grid">
+                    {% for file in media_files %}
+                        <article class="media-card">
+                            <div class="preview">
+                                {% if file.media_type == "image" %}
+                                    <a href="{{ file.file_path }}" target="_blank">
+                                        <img src="{{ file.file_path }}" alt="{{ file.alt_text or file.title or '' }}">
+                                    </a>
+                                {% elif file.media_type == "video" %}
+                                    <video controls muted preload="metadata" {% if file.poster_path %}poster="{{ file.poster_path }}"{% endif %}>
+                                        <source src="{{ file.file_path }}">
+                                    </video>
+                                {% elif file.media_type == "model" %}
+                                    {% if file.poster_path %}
+                                        <a href="{{ file.file_path }}" target="_blank">
+                                            <img src="{{ file.poster_path }}" alt="{{ file.title or '3D модель' }}">
+                                        </a>
+                                    {% else %}
+                                        <a href="{{ file.file_path }}" target="_blank">3D-модель</a>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+
+                            <div class="title">{{ file.title or file.original_filename or ("Файл #" ~ file.id) }}</div>
+
+                            <div class="meta">
+                                ID: {{ file.id }}<br>
+                                Тип: {{ file.media_type }}<br>
+                                Карточка: {{ file.target_key or "автоматически" }}<br>
+                                Порядок: {{ file.sort_order }}<br>
+                                Статус: {% if file.is_active %}показывается{% else %}скрыт{% endif %}<br>
+                                Путь: <a href="{{ file.file_path }}" target="_blank">{{ file.file_path }}</a>
+                            </div>
+
+                            <form action="/admin/carousel/media/{{ file.id }}/edit" method="post">
+                                <div class="field">
+                                    <label>Карточка карусели</label>
+                                    <select name="target_key">
+                                <optgroup label="Авторская художественная татуировка">
+                                    {% set tattoo_keys = ['tattoo', 'free_sketch', 'japanese', 'graphics', 'engraving', 'traditional', 'dotwork'] %}
+                                    {% for key in tattoo_keys %}
+                                        {% for card in carousel_cards %}
+                                            {% if card.target_key == key %}
+                                                <option value="{{ card.target_key }}" {% if file is defined and file.target_key == card.target_key %}selected{% endif %}>
+                                                    {{ card.label }}
+                                                </option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                </optgroup>
+
+                                <optgroup label="Картины">
+                                    {% set painting_keys = ['paintings', 'canvas', 'skateboards', 'plywood'] %}
+                                    {% for key in painting_keys %}
+                                        {% for card in carousel_cards %}
+                                            {% if card.target_key == key %}
+                                                <option value="{{ card.target_key }}" {% if file is defined and file.target_key == card.target_key %}selected{% endif %}>
+                                                    {{ card.label }}
+                                                </option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                </optgroup>
+
+                                <optgroup label="Мерч">
+                                    {% for key in product_keys %}
+                                        {% for card in carousel_cards %}
+                                            {% if card.target_key == key %}
+                                                <option value="{{ card.target_key }}" {% if file is defined and file.target_key == card.target_key %}selected{% endif %}>
+                                                    {{ card.label }}
+                                                </option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                </optgroup>
+                            </select>
+                                </div>
+
+                                <div class="field">
+                                    <label>Название</label>
+                                    <input name="title" value="{{ file.title or '' }}">
+                                </div>
+
+                                <div class="field">
+                                    <label>Порядок</label>
+                                    <input name="sort_order" type="number" value="{{ file.sort_order or 100 }}">
+                                </div>
+
+                                <div class="field">
+                                    <label>Описание</label>
+                                    <textarea name="alt_text">{{ file.alt_text or '' }}</textarea>
+                                </div>
+
+                                <button type="submit">Сохранить</button>
+                            </form>
+
+                            <div class="actions">
+                                <form action="/admin/carousel/media/{{ file.id }}/toggle" method="post">
+                                    <button type="submit">
+                                        {% if file.is_active %}Скрыть{% else %}Показать{% endif %}
+                                    </button>
+                                </form>
+
+                                <form action="/admin/carousel/media/{{ file.id }}/delete" method="post" onsubmit="return confirm('Удалить файл карусели?');">
+                                    <button class="danger" type="submit">Удалить</button>
+                                </form>
+                            </div>
+                        </article>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </section>
+    </main>
+    <script src="/static/admin_ui.js?v=1"></script>
+
+    <script defer src="/static/js/admin-static-nav.js?v=3"></script>
+</body>
+</html>
