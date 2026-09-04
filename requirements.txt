@@ -1,8 +1,8 @@
-fastapi==0.139.0
-google-api-python-client==2.198.0
-google-auth==2.56.3
+fastapi==0.141.1
+google-api-python-client==2.200.0
+google-auth==2.57.0
 Jinja2==3.1.6
 psycopg2-binary==2.9.12
-python-dotenv==1.2.2
+python-dotenv==1.2.3
 python-multipart==0.0.32
-uvicorn==0.50.0
+uvicorn==0.52.4
