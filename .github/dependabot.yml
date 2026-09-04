@@ -25,6 +25,11 @@ updates:
       time: "06:15"
       timezone: Europe/Moscow
     open-pull-requests-limit: 3
+    ignore:
+      - dependency-name: python
+        update-types:
+          - version-update:semver-major
+          - version-update:semver-minor
 
   - package-ecosystem: github-actions
     directory: /
