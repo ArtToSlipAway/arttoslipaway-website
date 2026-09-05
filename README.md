@@ -1,5 +1,11 @@
 # ArtToSlipAway
 
+<p align="center">
+  <a href="https://arttoslipaway.art">
+    <img src="docs/brand/logo-black.png" alt="Логотип ArtToSlipAway" width="360">
+  </a>
+</p>
+
 [![Verify portfolio demo](https://github.com/ArtToSlipAway/arttoslipaway-website/actions/workflows/verify.yml/badge.svg)](https://github.com/ArtToSlipAway/arttoslipaway-website/actions/workflows/verify.yml)
 
 Сайт-портфолио и CRM для художника и тату-мастера: от просмотра работ и выбора
@@ -8,8 +14,6 @@
 Очищенная версия действующего проекта для GitHub-портфолио. Реальные заявки,
 ключи, пароли и загруженные клиентами файлы не публикуются. Демоверсия содержит
 вымышленные данные и SVG-иллюстрации, **не реальные выполненные работы мастера**.
-
-![Главная страница демоверсии](docs/screenshots/home-desktop.jpg)
 
 **Production:** [arttoslipaway.art](https://arttoslipaway.art)
 
@@ -192,6 +196,8 @@ HTTP-проверки проходят через реальную PostgreSQL: �
 
 Все изображения сняты с локальной демоверсии без персональных данных клиентов,
 административных паролей и действующих клиентских ссылок.
+
+![Главная страница демоверсии](docs/screenshots/home-desktop.jpg)
 
 | Мобильная главная | Страница работы |
 | --- | --- |
