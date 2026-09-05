@@ -2879,12 +2879,12 @@
         };
     }
 
-    function renderFreeSketchesCarousel(media) {
+    function ensureFreeSketchesCarousel() {
         installStyles();
         hideOldExamplesBlock();
 
-        if (!media || !media.length) return;
-        if (document.querySelector('.free-sketches-carousel-section')) return;
+        const existing = document.querySelector('.free-sketches-carousel-section');
+        if (existing) return existing;
 
         const section = document.createElement('section');
         section.className = 'free-sketches-carousel-section';
@@ -2904,10 +2904,31 @@
                 </div>
             </div>
 
-            <div class="free-sketches-carousel-track"></div>
+            <div class="free-sketches-carousel-track" aria-live="polite">
+                <article class="free-sketch-card free-sketch-card--loading" aria-hidden="true">
+                    <div class="free-sketch-preview"></div>
+                    <div class="free-sketch-name">Загрузка эскизов…</div>
+                </article>
+            </div>
         `;
 
+        const insert = findInsertPoint();
+        insert.parent.insertBefore(section, insert.before);
+
+        return section;
+    }
+
+    function renderFreeSketchesCarousel(media) {
+        const section = ensureFreeSketchesCarousel();
         const track = section.querySelector('.free-sketches-carousel-track');
+        track.replaceChildren();
+
+        if (!media || !media.length) {
+            section.hidden = true;
+            return;
+        }
+
+        section.hidden = false;
 
         media.forEach(function (file, index) {
             const card = document.createElement('article');
@@ -2948,20 +2969,20 @@
             track.appendChild(card);
         });
 
-        section.querySelectorAll('.free-sketches-carousel-button').forEach(function (button) {
-            button.addEventListener('click', function () {
-                const direction = Number(button.dataset.direction || 1);
-                const amount = Math.min(track.clientWidth * 0.86, 380);
+        if (!section.dataset.controlsBound) {
+            section.dataset.controlsBound = '1';
+            section.querySelectorAll('.free-sketches-carousel-button').forEach(function (button) {
+                button.addEventListener('click', function () {
+                    const direction = Number(button.dataset.direction || 1);
+                    const amount = Math.min(track.clientWidth * 0.86, 380);
 
-                track.scrollBy({
-                    left: amount * direction,
-                    behavior: 'smooth'
+                    track.scrollBy({
+                        left: amount * direction,
+                        behavior: 'smooth'
+                    });
                 });
             });
-        });
-
-        const insert = findInsertPoint();
-        insert.parent.insertBefore(section, insert.before);
+        }
     }
 
     function renderDefaultMedia(media) {
@@ -3001,6 +3022,10 @@
         main.appendChild(section);
     }
 
+    const initialFreeSketchShell = isFreeSketches
+        ? ensureFreeSketchesCarousel()
+        : null;
+
     fetch('/api/category-media/' + encodeURIComponent(slug))
         .then(function (response) {
             if (!response.ok) throw new Error('category media api error');
@@ -3015,6 +3040,9 @@
         })
         .catch(function () {
             if (isFreeSketches) {
+                if (initialFreeSketchShell) {
+                    initialFreeSketchShell.hidden = true;
+                }
                 hideOldExamplesBlock();
             }
         });

@@ -1,10 +1,12 @@
 // === ArtToSlipAway home premium carousel polish ===
         document.addEventListener('DOMContentLoaded', function () {
-            let cards = Array.from(document.querySelectorAll('.main-card'));
-            if (!cards.length) return;
-
-            const carousel = cards[0].parentElement;
+            const carousel = document.querySelector('main.main-grid.home-card-carousel');
             if (!carousel) return;
+
+            let cards = Array.from(
+                carousel.querySelectorAll(':scope > .main-card')
+            );
+            if (!cards.length) return;
 
             carousel.classList.add('home-card-carousel');
 
@@ -110,9 +112,35 @@
                 const card = cards[index];
                 if (!card) return;
 
-                const left = card.offsetLeft - carousel.clientWidth / 2 + card.offsetWidth / 2;
+                const left =
+                    card.offsetLeft -
+                    carousel.clientWidth / 2 +
+                    card.offsetWidth / 2;
 
+                activeIndex = index;
                 isProgrammaticScroll = true;
+
+                cards.forEach(function (item, itemIndex) {
+                    item.classList.remove(
+                        'is-active',
+                        'is-near',
+                        'is-left',
+                        'is-right'
+                    );
+
+                    if (itemIndex === index) {
+                        item.classList.add('is-active');
+                        return;
+                    }
+
+                    item.classList.add(
+                        itemIndex < index ? 'is-left' : 'is-right'
+                    );
+
+                    if (Math.abs(itemIndex - index) === 1) {
+                        item.classList.add('is-near');
+                    }
+                });
 
                 carousel.scrollTo({
                     left: left,
@@ -120,9 +148,9 @@
                 });
 
                 setTimeout(function () {
-                    updateCards();
                     isProgrammaticScroll = false;
-                }, 420);
+                    updateCards();
+                }, behavior === 'smooth' ? 600 : 0);
             }
 
             function snapNearestCard() {
@@ -130,7 +158,11 @@
                 centerCard(nearest, 'smooth');
             }
 
-            const oldArrows = document.querySelector('.home-carousel-arrows');
+            const oldArrows =
+                carousel.nextElementSibling &&
+                carousel.nextElementSibling.classList.contains('home-carousel-arrows')
+                    ? carousel.nextElementSibling
+                    : null;
             if (oldArrows) oldArrows.remove();
 
             const arrows = document.createElement('div');
@@ -183,15 +215,16 @@
                 );
             });
 
+            let scrollRaf = null;
+
             carousel.addEventListener('scroll', function () {
-                updateCards();
-
                 if (isProgrammaticScroll) return;
+                if (scrollRaf !== null) return;
 
-                clearTimeout(scrollTimer);
-                scrollTimer = setTimeout(function () {
-                    snapNearestCard();
-                }, 180);
+                scrollRaf = window.requestAnimationFrame(function () {
+                    scrollRaf = null;
+                    updateCards();
+                });
             });
 
             // Вертикальный скролл страницы не трогаем.
@@ -220,7 +253,7 @@
                 if (isDown) {
                     isDown = false;
                     carousel.classList.remove('dragging');
-                    setTimeout(snapNearestCard, 80);
+                    updateCards();
                 }
             });
 
