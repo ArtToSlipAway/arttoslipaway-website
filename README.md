@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://arttoslipaway.art">
-    <img src="docs/brand/logo-black.png" alt="Логотип ArtToSlipAway" width="360">
+    <img src="docs/brand/logo-black.png" alt="Логотип ArtToSlipAway" width="180">
   </a>
 </p>
 
