@@ -35,7 +35,7 @@ class ClientPresentationTests(unittest.TestCase):
     @unittest.skipUnless((Path(__file__).resolve().parents[1] / 'docs/screenshots').is_dir(),
                          'Documentation assets are not shipped in the application image')
     def test_portfolio_screenshot_extensions_match_content(self):
-        for stem in ('home-desktop', 'home-mobile', 'project', 'request', 'admin-crm'):
+        for stem in ('home-desktop', 'request-form', 'admin-dashboard'):
             with self.subTest(stem=stem):
                 path = self.root / 'docs/screenshots' / (stem + '.jpg')
                 with path.open('rb') as handle:

@@ -25,7 +25,7 @@
 - временная защищённая страница заявки по токен-ссылке без регистрации клиента;
 - приватные вложения с проверкой прав, срока действия и принадлежности заявке;
 - воспроизводимая Docker-демоверсия с безопасным idempotent seed;
-- 19 unit-тестов и integration-сценарий через реальную PostgreSQL;
+- 20 unit-тестов и integration-сценарий через реальную PostgreSQL;
 - GitHub Actions с отдельной тестовой базой;
 - production-эксплуатация на Linux: systemd, reverse proxy, HTTPS и backups;
 - отдельная sanitized-версия без production secrets и пользовательских данных.
@@ -56,6 +56,9 @@ AI-инструменты использовались как помощник �
 - ручное управление доступными датами и необязательный Google Calendar (read-only);
 - локальная статистика с хешированием IP; клиентские URL с токенами не учитываются;
 - события воронки `cta_click`, `request_view` и `generate_lead` после согласия на аналитику;
+- разметка публичных CTA по месту клика: `hero`, `home-footer`, `projects-nav`,
+  `category-nav`, `category-main`, `project-nav`, `project-main`,
+  `certificate-hero`, `certificate-info` и `free-sketch`;
 - проверки доступности приложения и PostgreSQL;
 - динамический sitemap, robots.txt и редактируемые юридические страницы.
 

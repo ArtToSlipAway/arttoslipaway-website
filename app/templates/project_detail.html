@@ -307,7 +307,7 @@
         <nav>
             <a href="/projects">Проекты</a>
             &nbsp;&nbsp;
-            <a href="/request?project={{ project.slug }}">Обсудить похожий проект</a>
+            <a href="/request?source=project-nav&service={{ project.project_type }}&project={{ project.slug }}">Обсудить похожий проект</a>
         </nav>
     </header>
 
@@ -385,7 +385,7 @@
                     </div>
                 </div>
 
-                <a class="button" href="/request?project={{ project.slug }}">Обсудить этот проект</a>
+                <a class="button" href="/request?source=project-main&service={{ project.project_type }}&project={{ project.slug }}">Обсудить этот проект</a>
                 <a class="secondary" href="/projects">Назад к каталогу</a>
             </section>
         </div>

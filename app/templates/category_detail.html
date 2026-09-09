@@ -154,7 +154,7 @@
             &nbsp;&nbsp;
 
             {% if category.slug != "tattoo-gift-certificate" %}
-                <a href="/request">Обсудить проект</a>
+                <a href="/request?source=category-nav&category={{ category.slug }}">Обсудить проект</a>
             {% endif %}
         </nav>
     </header>
@@ -176,12 +176,12 @@
                 {% if category.slug == "tattoo-gift-certificate" %}
                     <a
                         class="button certificate-buy-button"
-                        href="/request?category={{ category.slug }}"
+                        href="/request?source=certificate-hero&category={{ category.slug }}"
                     >
                         Приобрести сертификат
                     </a>
                 {% else %}
-                    <a class="button" href="/request?category={{ category.slug }}">Обсудить проект в этом направлении</a>
+                    <a class="button" href="/request?source=category-main&category={{ category.slug }}">Обсудить проект в этом направлении</a>
                 {% endif %}
             </div>
 
@@ -310,7 +310,7 @@
 
             <a
                 class="certificate-info-cta"
-                href="/request?category={{ category.slug }}"
+                href="/request?source=certificate-info&category={{ category.slug }}"
             >
                 {{ certificate_settings.get(
                     'certificate_button_text'
