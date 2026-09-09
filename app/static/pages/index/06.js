@@ -25,8 +25,9 @@
         }
 
         function startVideo() {
-            video.play().catch(function () {
-                button.textContent = 'Запустить фон';
+            return video.play().catch(function () {
+                button.setAttribute('aria-label', 'Запустить фон');
+                button.setAttribute('title', 'Запустить фон');
             });
         }
 
@@ -45,7 +46,48 @@
             updateButton();
         });
 
-        startVideo();
+        const connection =
+            navigator.connection ||
+            navigator.mozConnection ||
+            navigator.webkitConnection;
+
+        const prefersReducedMotion = window.matchMedia(
+            '(prefers-reduced-motion: reduce)'
+        ).matches;
+
+        const constrainedConnection = Boolean(
+            connection && (
+                connection.saveData ||
+                /(^|-)2g$/.test(connection.effectiveType || '')
+            )
+        );
+
+        if (prefersReducedMotion || constrainedConnection) {
+            video.preload = 'none';
+        } else {
+            const schedulePlayback = function () {
+                if ('requestIdleCallback' in window) {
+                    window.requestIdleCallback(startVideo, { timeout: 1200 });
+                } else {
+                    window.setTimeout(startVideo, 250);
+                }
+            };
+
+            if (document.readyState === 'complete') {
+                schedulePlayback();
+            } else {
+                window.addEventListener('load', schedulePlayback, { once: true });
+            }
+        }
+
+        document.addEventListener('visibilitychange', function () {
+            if (document.hidden) {
+                video.pause();
+            } else if (!prefersReducedMotion && !constrainedConnection) {
+                startVideo();
+            }
+        });
+
         updateButton();
     });
     // === /site video background ===

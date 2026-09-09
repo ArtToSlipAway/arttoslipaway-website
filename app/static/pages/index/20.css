@@ -14,7 +14,14 @@
         z-index: 60 !important;
         pointer-events: auto !important;
         cursor: pointer !important;
+}
+
+@media (max-width: 360px) {
+    .hero h1 {
+        font-size: clamp(25px, 8.3vw, 30px) !important;
+        letter-spacing: 0.06em !important;
     }
+}
 
     .home-card-carousel
     .main-card:not(.is-active)

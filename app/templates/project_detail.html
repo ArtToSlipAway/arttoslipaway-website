@@ -307,7 +307,7 @@
         <nav>
             <a href="/projects">Проекты</a>
             &nbsp;&nbsp;
-            <a href="/request?project={{ project.slug }}">Обсудить похожий проект</a>
+            <a href="/request?source=project-nav&service={{ project.project_type }}&project={{ project.slug }}">Обсудить похожий проект</a>
         </nav>
     </header>
 
@@ -385,7 +385,7 @@
                     </div>
                 </div>
 
-                <a class="button" href="/request?project={{ project.slug }}">Обсудить этот проект</a>
+                <a class="button" href="/request?source=project-main&service={{ project.project_type }}&project={{ project.slug }}">Обсудить этот проект</a>
                 <a class="secondary" href="/projects">Назад к каталогу</a>
             </section>
         </div>
@@ -396,5 +396,6 @@
     <script src="/static/tattoo_cursor.js?v=20260722_201404" defer></script>
     <script defer src="/static/site_header_logo.js?v=20260815-logo-exact-1to1-v1"></script>
 {% include "partials/demo_banner.html" %}
+<script defer src="/static/js/analytics-funnel.js"></script>
 </body>
 </html>
